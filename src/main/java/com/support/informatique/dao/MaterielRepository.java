@@ -4,13 +4,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.support.informatique.entities.Materiel;
 
 
-@Component
+@Repository
 public interface MaterielRepository extends CrudRepository<Materiel, Integer> {
 	// Pourquoi une repo pour une classe abstraite ?
 	@Transactional

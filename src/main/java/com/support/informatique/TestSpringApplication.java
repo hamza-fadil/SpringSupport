@@ -2,27 +2,22 @@ package com.support.informatique;
 
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.sql.Blob;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
-import com.support.informatique.entities.*;
-import com.support.informatique.metier.ConversationMetierImpl;
-import com.support.informatique.metier.FichierMetierImpl;
-import com.support.informatique.metier.ImprimanteMetierImpl;
-import com.support.informatique.metier.MarqueMetierImpl;
-import com.support.informatique.metier.MaterielMetierImpl;
-import com.support.informatique.metier.OrdinateurMetierImpl;
-import com.support.informatique.metier.PanneMetierImpl;
-import com.support.informatique.metier.ReparationMetierImpl;
-import com.support.informatique.metier.TelephoneMetierImpl;
-import com.support.informatique.metier.TicketMetierImpl;
-import com.support.informatique.metier.UserMetierImpl;
+import com.support.informatique.metier.ConversationService;
+import com.support.informatique.metier.FichierService;
+import com.support.informatique.metier.ImprimanteService;
+import com.support.informatique.metier.MarqueService;
+import com.support.informatique.metier.MaterielService;
+import com.support.informatique.metier.OrdinateurService;
+import com.support.informatique.metier.PanneService;
+import com.support.informatique.metier.ReparationService;
+import com.support.informatique.metier.TelephoneService;
+import com.support.informatique.metier.TicketService;
+import com.support.informatique.metier.UserService;
 
 
 
@@ -31,27 +26,27 @@ import com.support.informatique.metier.UserMetierImpl;
 public class TestSpringApplication implements CommandLineRunner {
 
 	@Autowired
-	private UserMetierImpl userMetierImpl;
+	private UserService userMetierImpl;
 	@Autowired
-	private TicketMetierImpl ticketMetierImpl;
+	private TicketService ticketMetierImpl;
 	@Autowired
-	private ReparationMetierImpl reparationMetierImpl;
+	private ReparationService reparationMetierImpl;
 	@Autowired
-	private PanneMetierImpl panneMetierImpl;
+	private PanneService panneMetierImpl;
 	@Autowired
-	private MaterielMetierImpl materielMetierImpl;
+	private MaterielService materielMetierImpl;
 	@Autowired
-	private MarqueMetierImpl marqueMetierImpl;
+	private MarqueService marqueMetierImpl;
 	@Autowired
-	private FichierMetierImpl fichierMetierImpl;
+	private FichierService fichierMetierImpl;
 	@Autowired
-	private ConversationMetierImpl conversationMetierImpl;
+	private ConversationService conversationMetierImpl;
 	@Autowired
-	private ImprimanteMetierImpl imprimanteMetierImpl;
+	private ImprimanteService imprimanteMetierImpl;
 	@Autowired
-	private TelephoneMetierImpl telephoneMetierImpl;
+	private TelephoneService telephoneMetierImpl;
 	@Autowired
-	private OrdinateurMetierImpl ordinateurMetierImpl;
+	private OrdinateurService ordinateurMetierImpl;
 	
 	
 	public static void main(String[] args) {
