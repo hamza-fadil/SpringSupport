@@ -23,7 +23,7 @@
         </c:forEach>
     </table>
     <br><br>
-	<p><a href="<c:url value='/new' />">Ajouter un nouveau ticket</a></p>
+	<p><a href="<c:url value='/newTicket' />">Ajouter un nouveau ticket</a></p>
 
 </body>
 

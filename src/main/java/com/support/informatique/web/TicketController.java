@@ -21,14 +21,14 @@ import com.support.informatique.metier.TicketService;
 		
 		
 		@RequestMapping("/tickets")
-		public String produits(ModelMap model) {
+		public String tickets(ModelMap model) {
 			
 			model.addAttribute("tickets",ticketService.findAll() );
 			return "tickets";
 		}
 		 
-	    @RequestMapping(value = { "/new" }, method = RequestMethod.GET)
-	    public String newProduit(ModelMap model) {
+	    @RequestMapping(value = { "/newTicket" }, method = RequestMethod.GET)
+	    public String newTicket(ModelMap model) {
 	        Ticket produit = new Ticket();
 	        model.addAttribute("ticket", produit);
 	        model.addAttribute("edit", false);
@@ -36,8 +36,8 @@ import com.support.informatique.metier.TicketService;
 	    }
 	 
 	    
-	    @RequestMapping(value = { "/new" }, method = RequestMethod.POST)
-	    public String saveProduit(@Valid Ticket ticket, BindingResult result,
+	    @RequestMapping(value = { "/newTicket" }, method = RequestMethod.POST)
+	    public String saveTicket(@Valid Ticket ticket, BindingResult result,
 	            ModelMap model) {
 	 
 	        if (result.hasErrors()) {
