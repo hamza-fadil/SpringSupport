@@ -27,19 +27,10 @@ public class OrdinateurController {
 		
 		model.addAttribute("ordinateurs",ordinateurService.findAll() );
 		model.addAttribute("marques",marqueService.findAll() );
-		
-		
-	
 		return "ordinateurs";
 	}
-	@RequestMapping("/view-{idMateriel}-Materiel")
-	public String viewOrdinateurs(@PathVariable int idMateriel,ModelMap model) {
-		
-		model.addAttribute("ordinateurs",ordinateurService.findById(idMateriel) );
-		model.addAttribute("marques",marqueService.findAll() );
-		return "ordinateurs";
-	}
-	 
+
+
     @RequestMapping(value = { "/newOrdinateur" }, method = RequestMethod.GET)
     public String newProduit(ModelMap model) {
         Ordinateur ordinateur = new Ordinateur();
@@ -63,9 +54,7 @@ public class OrdinateurController {
         return "redirect:/ordinateurs";   
     }
     
-    /*
-     * This method will provide the medium to update an existing Ordinateur.
-     */
+
     @RequestMapping(value = { "/edit-{idMateriel}-Ordinateur" }, method = RequestMethod.GET)
     public String editTicket(@PathVariable int idMateriel, ModelMap model) {
         Ordinateur ordinateur = ordinateurService.findOne(idMateriel);
@@ -78,10 +67,6 @@ public class OrdinateurController {
         return "ordinateur";
     }
      
-    /*
-     * This method will be called on form submission, handling POST request for
-     * updating Ordinateur in database. It also validates the ordinateur input
-     */
     @RequestMapping(value = { "/edit-{idMateriel}-Ordinateur" }, method = RequestMethod.POST)
     public String updateTicket(@Valid Ordinateur ordinateur, BindingResult result,
             ModelMap model, @PathVariable int idMateriel) {

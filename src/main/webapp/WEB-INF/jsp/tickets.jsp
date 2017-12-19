@@ -16,7 +16,7 @@
             <tr>
             <td>${p.titreTicket}</td>
             <td>${p.contTicket}</td>
-            <td>${p.user.email}</td>
+            <td>${p.user.username}</td>
           <td><a href="<c:url value='/edit-${p.idTicket}-Ticket' />">edit</a></td>
             <td><a href="<c:url value='/delete-${p.idTicket}-Ticket' />">delete</a></td>
             </tr>

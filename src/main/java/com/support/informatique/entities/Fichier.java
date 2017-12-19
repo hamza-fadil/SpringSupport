@@ -8,9 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.sql.Blob;
 
 
 @SuppressWarnings("serial")
@@ -20,7 +20,7 @@ public class Fichier implements java.io.Serializable {
 
 	private Integer idFichier;
 	private Ticket ticket;
-	private Blob fichierJoint;
+	private byte[] fichierJoint;
 
 	public Fichier() {
 	}
@@ -29,7 +29,7 @@ public class Fichier implements java.io.Serializable {
 		this.ticket = ticket;
 	}
 
-	public Fichier(Ticket ticket, Blob fichierJoint) {
+	public Fichier(Ticket ticket, byte[] fichierJoint) {
 		this.ticket = ticket;
 		this.fichierJoint = fichierJoint;
 	}
@@ -56,12 +56,13 @@ public class Fichier implements java.io.Serializable {
 		this.ticket = ticket;
 	}
 
-	@Column(name = "fichier_joint")
-	public Blob getFichierJoint() {
+	@Column(name = "fichier_joint",columnDefinition="blob")
+	@Lob
+	public byte[] getFichierJoint() {
 		return this.fichierJoint;
 	}
 
-	public void setFichierJoint(Blob fichierJoint) {
+	public void setFichierJoint(byte[] fichierJoint) {
 		this.fichierJoint = fichierJoint;
 	}
 

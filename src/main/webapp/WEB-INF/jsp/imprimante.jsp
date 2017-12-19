@@ -7,7 +7,7 @@
  
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Ajout Ordinateur</title>
+    <title>Ajout imprimante</title>
  
 <style>
  
@@ -19,31 +19,37 @@
 </head>
  
 <body>     
-    <form:form method="POST" modelAttribute="ordinateur">
+    <form:form method="POST" modelAttribute="imprimante">
         <form:input type="hidden" path="idMateriel" id="idMateriel"/>
         <table>
             <tr>
-                <td><label for="espaceDisque">Espace Disque: </label> </td>
-                <td><form:input path="espaceDisque" id="espaceDisque"/></td>
-                <td><form:errors path="espaceDisque" cssClass="error"/></td>
+                <td><label for="fax">Gère le fax: </label> </td>
+                <td><form:checkbox path="fax" id="fax" value="0"/></td>
+                <td><form:errors path="fax" cssClass="error"/></td>
             </tr>
          
             <tr>
-                <td><label for="processeur">Processeur: </label> </td>
-                <td><form:input path="processeur" id="processeur"/></td>
-                <td><form:errors path="processeur" cssClass="error"/></td>
+                <td><label for="scanner">Gère le scanner: </label> </td>
+                <td><form:checkbox path="scanner" id="scanner" value="0"/></td>
+                <td><form:errors path="scanner" cssClass="error"/></td>
             </tr>
             <tr>
-                <td><label for="ram">RAM: </label> </td>
-                <td><form:input path="ram" id="ram"/></td>
-                <td><form:errors path="ram" cssClass="error"/></td>
+                <td><label for="couleurs">Gère les couleurs: </label> </td>
+                <td><form:checkbox path="couleurs" id="couleurs" value="0"/></td>
+                <td><form:errors path="couleurs" cssClass="error"/></td>
             </tr>
                
             <tr>
-                <td><label for="systemeExploitation">Systeme Exploitation: </label> </td>
-                <td><form:input path="systemeExploitation" id="systemeExploitation"/></td>
-                <td><form:errors path="systemeExploitation" cssClass="error"/></td>
+                <td><label for="vitesse_impression">Vitesse d'impression: </label> </td>
+                <td><form:input path="vitesse_impression" id="vitesse_impression" /></td>
+                <td><form:errors path="vitesse_impression" cssClass="error"/></td>
             </tr>
+            <tr>
+                <td><label for="format_papier">Format papier: </label> </td>
+                <td><form:input path="format_papier" id="format_papier"/></td>
+                <td><form:errors path="format_papier" cssClass="error"/></td>
+            </tr>
+
 			<tr>
                 <td><label for="serieMateriel">Numéro de série: </label> </td>
                 <td><form:input path="serieMateriel" id="serieMateriel"/></td>
@@ -51,16 +57,11 @@
             </tr>
             <tr>
                 <td><label for="idMarque">Marque ordinateur : </label> </td>
-<%--                 <c:forEach items="${marques}" var="p">
- --%>          <tr>
-<%--                 	<td>${p.nomMarque}</td>
-					<td><form:radiobutton items="${p.nomMarque}" value="${p.idMarque}" path="marque" /></td>
-					</c:forEach>
-                	<td><form:errors path="marque" cssClass="error"/></td> --%>
-                	<form:select path="marque">
-               <c:forEach items="${marques}" var="p">
-               		<form:option value="${p.idMarque}">${p.nomMarque}</form:option>
-               </c:forEach>
+                <tr>
+               <form:select path="marque">
+	               <c:forEach items="${marques}" var="p">
+	               		<form:option value="${p.idMarque}">${p.nomMarque}</form:option>
+	               </c:forEach>
                </form:select>
             	</tr>
             
@@ -81,7 +82,7 @@
 
     <br/>
     <br/>
-    Revenir <a href="<c:url value='/ordinateurs' />">Liste de tous les ordinateurs</a>
+    Revenir <a href="<c:url value='/imprimantes' />">Liste de toutes les imprimantes</a>
     	<br>
 	<a href="<c:url value='/' />">Index</a>
 </body>

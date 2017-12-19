@@ -7,7 +7,7 @@
  
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Ajout Ordinateur</title>
+    <title>Ajout Téléphone</title>
  
 <style>
  
@@ -19,30 +19,30 @@
 </head>
  
 <body>     
-    <form:form method="POST" modelAttribute="ordinateur">
+    <form:form method="POST" modelAttribute="telephone">
         <form:input type="hidden" path="idMateriel" id="idMateriel"/>
         <table>
             <tr>
-                <td><label for="espaceDisque">Espace Disque: </label> </td>
-                <td><form:input path="espaceDisque" id="espaceDisque"/></td>
-                <td><form:errors path="espaceDisque" cssClass="error"/></td>
+                <td><label for="nbCompte">Nombre de comptes SIP: </label> </td>
+                <td><form:input path="nbCompte" id="nbCompte"/></td>
+                <td><form:errors path="nbCompte" cssClass="error"/></td>
             </tr>
          
             <tr>
-                <td><label for="processeur">Processeur: </label> </td>
-                <td><form:input path="processeur" id="processeur"/></td>
-                <td><form:errors path="processeur" cssClass="error"/></td>
+                <td><label for="nbHotkey">Nombre de Hotkey: </label> </td>
+                <td><form:input path="nbHotkey" id="nbHotkey"/></td>
+                <td><form:errors path="nbHotkey" cssClass="error"/></td>
             </tr>
             <tr>
-                <td><label for="ram">RAM: </label> </td>
-                <td><form:input path="ram" id="ram"/></td>
-                <td><form:errors path="ram" cssClass="error"/></td>
+                <td><label for="sip">Gère le SIP: </label> </td>
+                <td><form:checkbox path="sip" id="sip" value="0"/></td>
+                <td><form:errors path="sip" cssClass="error"/></td>
             </tr>
                
             <tr>
-                <td><label for="systemeExploitation">Systeme Exploitation: </label> </td>
-                <td><form:input path="systemeExploitation" id="systemeExploitation"/></td>
-                <td><form:errors path="systemeExploitation" cssClass="error"/></td>
+                <td><label for="poe">Gère le POE: </label> </td>
+                <td><form:checkbox path="poe" id="poe" value="0"/></td>
+                <td><form:errors path="poe" cssClass="error"/></td>
             </tr>
 			<tr>
                 <td><label for="serieMateriel">Numéro de série: </label> </td>

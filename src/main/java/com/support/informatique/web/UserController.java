@@ -40,6 +40,7 @@ public class UserController {
             ModelMap model) {
  
         if (result.hasErrors()) {
+        	model.addAttribute("emaildupliqué", true);
             return "user";
         }
         userService.save(user);

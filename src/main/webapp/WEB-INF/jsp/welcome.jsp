@@ -22,6 +22,10 @@
 	<br>
 	<a href="<c:url value='/conversations' />">Conversations</a>
 	<br>
+	<a href="<c:url value='/telephones' />">Telephones</a>
+	<br>
+	<a href="<c:url value='/imprimantes' />">Imprimantes</a>
+	<br>
 	<a href="<c:url value='/' />">Index</a>
 	<br>
 	<br>

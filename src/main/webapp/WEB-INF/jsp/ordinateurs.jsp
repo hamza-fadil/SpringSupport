@@ -12,23 +12,42 @@
         <tr>
             <td>ID Ordinateur</td><td>Marque Ordinateur</td><td>Espace disque</td><td>Processeur</td><td>Ram</td><td>Systeme exploitation</td><td>Numéro de série</td> <td>Editer</td><td>Supprimer</td>
         </tr>
-        <c:forEach items="${ordinateurs}" var="p">
-            <tr>
-            <td>${p.idMateriel}</td>
-            <td>${p.marque.nomMarque}</td>
-            <td>${p.espaceDisque}</td>
-            <td>${p.processeur}</td>
-            <td>${p.ram}</td>
-            <td>${p.systemeExploitation}</td>
-            <td>${p.serieMateriel}</td>
-          <td><a href="<c:url value='/edit-${p.idMateriel}-Ordinateur' />">edit</a></td>
-            <td><a href="<c:url value='/delete-${p.idMateriel}-Ordinateur' />">delete</a></td>
-            </tr>
-        </c:forEach>
+        
 
+                    <c:choose>
+                        <c:when test="${ord}">
+					       <tr>
+					            <td>${ordinateur.idMateriel}</td>
+					            <td>${ordinateur.marque.nomMarque}</td>
+					            <td>${ordinateur.espaceDisque}</td>
+					            <td>${ordinateur.processeur}</td>
+					            <td>${ordinateur.ram}</td>
+					            <td>${ordinateur.systemeExploitation}</td>
+					            <td>${ordinateur.serieMateriel}</td>
+          						<td><a href="<c:url value='/edit-${telephone.idMateriel}-Ordinateur' />">edit</a></td>
+            					<td><a href="<c:url value='/delete-${telephone.idMateriel}-Ordinateur' />">delete</a></td>
+           					</tr>
+                        </c:when>
+                        <c:otherwise>
+					        <c:forEach items="${ordinateurs}" var="p">
+					            <tr>
+					            <td>${p.idMateriel}</td>
+					            <td>${p.marque.nomMarque}</td>
+					            <td>${p.espaceDisque}</td>
+					            <td>${p.processeur}</td>
+					            <td>${p.ram}</td>
+					            <td>${p.systemeExploitation}</td>
+					            <td>${p.serieMateriel}</td>
+					          	<td><a href="<c:url value='/edit-${p.idMateriel}-Ordinateur' />">edit</a></td>
+					            <td><a href="<c:url value='/delete-${p.idMateriel}-Ordinateur' />">delete</a></td>
+					            </tr>
+					        </c:forEach>
+					        <br><br>
+								<p><a href="<c:url value='/newOrdinateur' />">Ajouter un nouvel Ordinateur</a></p>
+                        </c:otherwise>
+                    </c:choose>
     </table>
-    <br><br>
-	<p><a href="<c:url value='/newOrdinateur' />">Ajouter un nouvel Ordinateur</a></p>
+
 
 	<br>
 	<a href="<c:url value='/' />">Index</a>

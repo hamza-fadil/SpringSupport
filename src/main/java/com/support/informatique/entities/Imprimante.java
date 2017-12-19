@@ -16,8 +16,6 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "materiel_id", referencedColumnName = "id_materiel")
 public class Imprimante extends Materiel { 
 	 @Column
-	 private String nom_imprimante;
-	 @Column
 	 private Boolean couleurs;
 	 @Column
 	 private Boolean copie;
@@ -29,14 +27,7 @@ public class Imprimante extends Materiel {
 	 private int vitesse_impression;
 	 @Column
 	 private String format_papier;
-	 
-	 
-	public String getNom_imprimante() {
-		return nom_imprimante;
-	}
-	public void setNom_imprimante(String nom_imprimante) {
-		this.nom_imprimante = nom_imprimante;
-	}
+	
 	public Boolean getCouleurs() {
 		return couleurs;
 	}

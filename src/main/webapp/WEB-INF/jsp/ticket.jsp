@@ -40,11 +40,11 @@
                 <td><form:input path="typeTicket" id="typeTicket"/></td>
                 <td><form:errors path="typeTicket" cssClass="error"/></td>
             </tr>
-               
+ <!--               Ajouter un utilisateur par son surnom -->
             <tr>
-                <td><label for="user.username">Nom d'utilisateur: </label> </td>
-                <td><form:input path="user.username" id="user.username"/></td>
-                <td><form:errors path="user.username" cssClass="error"/></td>
+                <td><label for="user.idUser">Nom d'utilisateur: </label> </td>
+                <td><form:input path="user.idUser" id="user.idUser"/></td>
+                <td><form:errors path="user.idUser" cssClass="error"/></td>
             </tr>
             <tr>
 <%--                 <td><label for="conversation.idConversation">Id conversation: </label> </td>

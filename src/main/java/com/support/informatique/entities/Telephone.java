@@ -18,9 +18,9 @@ public class Telephone extends Materiel {
 	@Column
 	private int nbHotkey;
 	@Column
-	private Byte poe;
+	private Boolean poe;
 	@Column
-	private Byte sip;
+	private Boolean sip;
 	
 	public int getNbCompte() {
 		return nbCompte;
@@ -34,16 +34,16 @@ public class Telephone extends Materiel {
 	public void setNbHotkey(int nbHotkey) {
 		this.nbHotkey = nbHotkey;
 	}
-	public Byte getPoe() {
+	public Boolean getPoe() {
 		return poe;
 	}
-	public void setPoe(Byte poe) {
+	public void setPoe(Boolean poe) {
 		this.poe = poe;
 	}
-	public Byte getSip() {
+	public Boolean getSip() {
 		return sip;
 	}
-	public void setSip(Byte sip) {
+	public void setSip(Boolean sip) {
 		this.sip = sip;
 	}
 

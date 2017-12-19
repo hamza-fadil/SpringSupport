@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.support.informatique.entities.Marque;
+import com.support.informatique.entities.Materiel;
 import com.support.informatique.entities.Ordinateur;
 import com.support.informatique.metier.ConversationService;
 import com.support.informatique.metier.FichierService;
@@ -226,7 +227,7 @@ public class TestSpringApplication implements CommandLineRunner {
 //		Boolean bool = ordinateurMetierImpl.exists(2);
 //		System.out.println(bool);
 //		Débogage materiel
-		List<Marque> test =marqueMetierImpl.findName();
-		System.out.println(test.toString());
+//		Iterable<Materiel> test =materielMetierImpl.findAll();
+//		System.out.println(test.toString());
 }
 }
