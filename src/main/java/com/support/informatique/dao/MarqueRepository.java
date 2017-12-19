@@ -1,5 +1,7 @@
 package com.support.informatique.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -15,8 +17,9 @@ import com.support.informatique.entities.Reparation;
 @Repository
 public interface MarqueRepository extends CrudRepository<Marque, Integer> {
 	@Query("Select u from Marque u where u.id=:x")
-	Reparation findById(@Param("x") int id);
-	
+	Marque findById(@Param("x") int id);
+	@Query("Select u.nomMarque from Marque u")
+	List<Marque> findName();
 	@Transactional
 	@Modifying
 	@Query("Delete Marque u where u.idMarque=:x")

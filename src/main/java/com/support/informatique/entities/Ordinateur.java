@@ -44,4 +44,10 @@ public class Ordinateur extends Materiel {
 	public void setSystemeExploitation(String systemeExploitation) {
 		this.systemeExploitation = systemeExploitation;
 	}
+	@Override
+	public String toString() {
+		return "Ordinateur [processeur=" + processeur + ", ram=" + ram + ", espaceDisque=" + espaceDisque
+				+ ", systemeExploitation=" + systemeExploitation + "]";
+	}
+	
 }

@@ -12,10 +12,8 @@ import com.support.informatique.entities.Materiel;
 
 @Repository
 public interface MaterielRepository extends CrudRepository<Materiel, Integer> {
-	// Pourquoi une repo pour une classe abstraite ?
 	@Transactional
 	@Modifying
 	@Query("Delete Materiel u where u.idMateriel=:x")
 	void deletebyId(@Param("x") Integer id);
-	// Bah j'ai trouver pourquoi merci l'héritage
 }

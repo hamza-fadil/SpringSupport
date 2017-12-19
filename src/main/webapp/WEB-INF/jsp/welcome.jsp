@@ -8,9 +8,23 @@
 </head>
 <body>
 
-	<h2>Message: ${hello}</h2>
-	
-
+	<a href="<c:url value='/users' />">Utilisateurs</a>
+	<br>
+	<a href="<c:url value='/tickets' />">Tickets</a>
+	<br>
+	<a href="<c:url value='/fichiers' />">Fichiers</a>
+	<br>	
+	<a href="<c:url value='/ordinateurs' />">Ordinateurs</a>
+	<br>
+	<a href="<c:url value='/materiels' />">Materiels</a>
+	<br>
+	<a href="<c:url value='/marques' />">Marques</a>
+	<br>
+	<a href="<c:url value='/conversations' />">Conversations</a>
+	<br>
+	<a href="<c:url value='/' />">Index</a>
+	<br>
+	<br>
 </body>
 
 </html>

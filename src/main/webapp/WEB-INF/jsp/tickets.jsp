@@ -24,7 +24,8 @@
     </table>
     <br><br>
 	<p><a href="<c:url value='/newTicket' />">Ajouter un nouveau ticket</a></p>
-
+	<br>
+	<a href="<c:url value='/' />">Index</a>
 </body>
 
 </html>

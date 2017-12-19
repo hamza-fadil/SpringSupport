@@ -89,6 +89,12 @@ public abstract class Materiel implements java.io.Serializable {
 		this.pannes = pannes;
 	}
 
+	@Override
+	public String toString() {
+		return "Materiel [idMateriel=" + idMateriel + ", reparationIdReparation=" + reparationIdReparation
+				+ ", serieMateriel=" + serieMateriel + "]";
+	}
+
 	
 
 }

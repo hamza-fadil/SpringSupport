@@ -35,14 +35,22 @@
                 <td><form:input path="contTicket" id="contTicket"/></td>
                 <td><form:errors path="contTicket" cssClass="error"/></td>
             </tr>
-     
+			<tr>
+                <td><label for="typeTicket">Type Ticket: </label> </td>
+                <td><form:input path="typeTicket" id="typeTicket"/></td>
+                <td><form:errors path="typeTicket" cssClass="error"/></td>
+            </tr>
                
             <tr>
-                <td><label for="user.idUser">Id utilisateur: </label> </td>
-                <td><form:input path="user.idUser" id="user.idUser"/></td>
-                <td><form:errors path="user.idUser" cssClass="error"/></td>
+                <td><label for="user.username">Nom d'utilisateur: </label> </td>
+                <td><form:input path="user.username" id="user.username"/></td>
+                <td><form:errors path="user.username" cssClass="error"/></td>
             </tr>
-     
+            <tr>
+<%--                 <td><label for="conversation.idConversation">Id conversation: </label> </td>
+                <td><form:input path="conversation.idConversation" id="conversation.idConversation"/></td>
+                <td><form:errors path="conversation.idConversation" cssClass="error"/></td>
+            </tr> --%>
             <tr>
                 <td colspan="3">
                     <c:choose>

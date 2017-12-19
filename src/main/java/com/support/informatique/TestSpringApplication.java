@@ -2,11 +2,16 @@ package com.support.informatique;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.support.informatique.entities.Marque;
+import com.support.informatique.entities.Ordinateur;
 import com.support.informatique.metier.ConversationService;
 import com.support.informatique.metier.FichierService;
 import com.support.informatique.metier.ImprimanteService;
@@ -167,7 +172,7 @@ public class TestSpringApplication implements CommandLineRunner {
 //		ordinateur.setSystemeExploitation("Windows 10 Professionel 64Bits");
 //		ordinateur.setSerieMateriel("T450S");
 //		ordinateurMetierImpl.save(ordinateur);
-		
+//		
 //		Suppression d'un utilisateur par ID
 //		userMetierImpl.deletebyId(3);
 		
@@ -218,5 +223,10 @@ public class TestSpringApplication implements CommandLineRunner {
 //		System.out.println(test.toString());
 		
 		
+//		Boolean bool = ordinateurMetierImpl.exists(2);
+//		System.out.println(bool);
+//		Débogage materiel
+		List<Marque> test =marqueMetierImpl.findName();
+		System.out.println(test.toString());
 }
 }

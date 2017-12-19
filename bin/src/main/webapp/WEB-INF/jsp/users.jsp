@@ -25,9 +25,6 @@
     <br><br>
 	<p><a href="<c:url value='/newUser' />">Ajouter un nouveau user</a></p>
 
-	<br>
-	<a href="<c:url value='/' />">Index</a>
-	
 </body>
 
 </html>

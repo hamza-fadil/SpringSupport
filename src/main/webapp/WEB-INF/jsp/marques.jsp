@@ -10,24 +10,20 @@
 
 	   <table border=1px>
         <tr>
-            <td>Email</td><td>Nom d'utilisateur</td><td>type Utilisateur</td><td>Editer</td><td>Supprimer</td>
+            <td>Nom marque</td><td>Editer</td><td>Supprimer</td>
         </tr>
-        <c:forEach items="${users}" var="p">
+        <c:forEach items="${marques}" var="p">
             <tr>
-            <td>${p.email}</td>
-            <td>${p.username}</td>
-            <td>${p.typeUser}</td>
-          <td><a href="<c:url value='/edit-${p.idUser}-User' />">edit</a></td>
-            <td><a href="<c:url value='/delete-${p.idUser}-User' />">delete</a></td>
+            <td>${p.nomMarque}</td>
+          <td><a href="<c:url value='/edit-${p.idMarque}-Marque' />">edit</a></td>
+            <td><a href="<c:url value='/delete-${p.idMarque}-Marque' />">delete</a></td>
             </tr>
         </c:forEach>
     </table>
     <br><br>
-	<p><a href="<c:url value='/newUser' />">Ajouter un nouveau user</a></p>
-
+	<p><a href="<c:url value='/newMarque' />">Ajouter une nouvelle marque</a></p>
 	<br>
 	<a href="<c:url value='/' />">Index</a>
-	
 </body>
 
 </html>

@@ -7,27 +7,22 @@
 <head>
 </head>
 <body>
-
 	   <table border=1px>
         <tr>
-            <td>Email</td><td>Nom d'utilisateur</td><td>type Utilisateur</td><td>Editer</td><td>Supprimer</td>
+            <td>ID Materiel</td><td>Num série</td><td>reparationIdReparation</td><td>Afficher</td><td>Supprimer</td>
         </tr>
-        <c:forEach items="${users}" var="p">
+        <c:forEach items="${materiels}" var="p">
             <tr>
-            <td>${p.email}</td>
-            <td>${p.username}</td>
-            <td>${p.typeUser}</td>
-          <td><a href="<c:url value='/edit-${p.idUser}-User' />">edit</a></td>
-            <td><a href="<c:url value='/delete-${p.idUser}-User' />">delete</a></td>
+            <td>${p.idMateriel}</td>
+            <td>${p.serieMateriel }</td>
+            <td>${p.reparationIdReparation}</td>
+          <td><a href="<c:url value='/view-${p.idMateriel}-Materiel' />">Afficher</a></td>
             </tr>
         </c:forEach>
     </table>
     <br><br>
-	<p><a href="<c:url value='/newUser' />">Ajouter un nouveau user</a></p>
-
 	<br>
 	<a href="<c:url value='/' />">Index</a>
-	
 </body>
 
 </html>

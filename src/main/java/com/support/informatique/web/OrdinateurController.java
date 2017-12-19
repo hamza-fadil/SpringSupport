@@ -10,19 +10,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.support.informatique.entities.Marque;
 import com.support.informatique.entities.Ordinateur;
+import com.support.informatique.metier.MarqueService;
 import com.support.informatique.metier.OrdinateurService;
 @Controller
 public class OrdinateurController {
 	@Autowired
 	private OrdinateurService ordinateurService;
-	
+	@Autowired
+	private MarqueService marqueService;
 	
 	
 	@RequestMapping("/ordinateurs")
 	public String ordinateurs(ModelMap model) {
 		
 		model.addAttribute("ordinateurs",ordinateurService.findAll() );
+		model.addAttribute("marques",marqueService.findAll() );
+		
+		
+	
+		return "ordinateurs";
+	}
+	@RequestMapping("/view-{idMateriel}-Materiel")
+	public String viewOrdinateurs(@PathVariable int idMateriel,ModelMap model) {
+		
+		model.addAttribute("ordinateurs",ordinateurService.findById(idMateriel) );
+		model.addAttribute("marques",marqueService.findAll() );
 		return "ordinateurs";
 	}
 	 
@@ -31,6 +45,8 @@ public class OrdinateurController {
         Ordinateur ordinateur = new Ordinateur();
         model.addAttribute("ordinateur", ordinateur);
         model.addAttribute("edit", false);
+        model.addAttribute("marques",marqueService.findAll() );
+        model.addAttribute("marque",marqueService.findName() );
         return "ordinateur";
     }
  
@@ -53,8 +69,12 @@ public class OrdinateurController {
     @RequestMapping(value = { "/edit-{idMateriel}-Ordinateur" }, method = RequestMethod.GET)
     public String editTicket(@PathVariable int idMateriel, ModelMap model) {
         Ordinateur ordinateur = ordinateurService.findOne(idMateriel);
+        Marque selecteMarque = marqueService.findOne(idMateriel);
         model.addAttribute("ordinateur", ordinateur);
         model.addAttribute("edit", true);
+        model.addAttribute("marque", selecteMarque);
+        model.addAttribute("marques",marqueService.findAll() );
+        
         return "ordinateur";
     }
      

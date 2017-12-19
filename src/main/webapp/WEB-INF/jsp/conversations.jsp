@@ -10,24 +10,21 @@
 
 	   <table border=1px>
         <tr>
-            <td>Email</td><td>Nom d'utilisateur</td><td>type Utilisateur</td><td>Editer</td><td>Supprimer</td>
+            <td>Contenu conversation</td><td>id Ticket</td><td>Editer</td><td>Supprimer</td>
         </tr>
-        <c:forEach items="${users}" var="p">
+        <c:forEach items="${conversations}" var="p">
             <tr>
-            <td>${p.email}</td>
-            <td>${p.username}</td>
-            <td>${p.typeUser}</td>
-          <td><a href="<c:url value='/edit-${p.idUser}-User' />">edit</a></td>
-            <td><a href="<c:url value='/delete-${p.idUser}-User' />">delete</a></td>
+            <td>${p.contenuConversation}</td>
+            <td>${p.ticket.idTicket}</td>
+          <td><a href="<c:url value='/edit-${p.idConversation}-Conversation' />">edit</a></td>
+            <td><a href="<c:url value='/delete-${p.idConversation}-Conversation' />">delete</a></td>
             </tr>
         </c:forEach>
     </table>
     <br><br>
-	<p><a href="<c:url value='/newUser' />">Ajouter un nouveau user</a></p>
-
+	<p><a href="<c:url value='/newConversation' />">Ajouter une nouvelle conversation</a></p>
 	<br>
 	<a href="<c:url value='/' />">Index</a>
-	
 </body>
 
 </html>

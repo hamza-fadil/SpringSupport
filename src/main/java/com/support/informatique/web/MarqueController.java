@@ -27,7 +27,7 @@ public class MarqueController {
 	}
 	 
     @RequestMapping(value = { "/newMarque" }, method = RequestMethod.GET)
-    public String newProduit(ModelMap model) {
+    public String marque(ModelMap model) {
         Marque marque = new Marque();
         model.addAttribute("marque", marque);
         model.addAttribute("edit", false);
