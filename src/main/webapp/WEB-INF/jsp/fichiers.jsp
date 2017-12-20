@@ -12,17 +12,17 @@
         <tr>
             <td>Contenu conversation</td><td>id Ticket</td><td>Editer</td><td>Supprimer</td>
         </tr>
-        <c:forEach items="${conversations}" var="p">
+        <c:forEach items="${fichiers}" var="p">
             <tr>
-            <td>${p.contenuConversation}</td>
             <td>${p.ticket.idTicket}</td>
-          <td><a href="<c:url value='/edit-${p.idConversation}-Conversation' />">edit</a></td>
-            <td><a href="<c:url value='/delete-${p.idConversation}-Conversation' />">delete</a></td>
+            <td>${p.fichierJoint}</td>
+          <td><a href="<c:url value='/get-${p.idFichier}-Fichier' />">Get</a></td>
+            <td><a href="<c:url value='/delete-${p.idFichier}-Fichier' />">delete</a></td>
             </tr>
         </c:forEach>
     </table>
     <br><br>
-	<p><a href="<c:url value='/newConversation' />">Ajouter une nouvelle conversation</a></p>
+	<p><a href="<c:url value='/fichier' />">Ajouter une nouvelle image</a></p>
 	<br>
 	<a href="<c:url value='/' />">Index</a>
 </body>

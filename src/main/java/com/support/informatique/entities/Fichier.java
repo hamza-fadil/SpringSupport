@@ -2,6 +2,8 @@ package com.support.informatique.entities;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.sql.ResultSet;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,6 +23,15 @@ public class Fichier implements java.io.Serializable {
 	private Integer idFichier;
 	private Ticket ticket;
 	private byte[] fichierJoint;
+	@Column
+	private String nomOrigine;
+	public String getNomOrigine() {
+		return nomOrigine;
+	}
+
+	public void setNomOrigine(String nomOrigine) {
+		this.nomOrigine = nomOrigine;
+	}
 
 	public Fichier() {
 	}
@@ -56,7 +67,7 @@ public class Fichier implements java.io.Serializable {
 		this.ticket = ticket;
 	}
 
-	@Column(name = "fichier_joint",columnDefinition="blob")
+	@Column(name = "fichier_joint",columnDefinition="longblob")
 	@Lob
 	public byte[] getFichierJoint() {
 		return this.fichierJoint;

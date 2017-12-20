@@ -19,11 +19,17 @@ public class FichierMetierImpl implements FichierService {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.FichierService#save(S)
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#save(S)
+	 */
 	@Override
 	public <S extends Fichier> S save(S entity) {
 		return FichierRepository.save(entity);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#save(java.lang.Iterable)
+	 */
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.FichierService#save(java.lang.Iterable)
 	 */
@@ -41,11 +47,17 @@ public class FichierMetierImpl implements FichierService {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.FichierService#findOne(java.lang.Integer)
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#findOne(java.lang.Integer)
+	 */
 	@Override
 	public Fichier findOne(Integer id) {
 		return FichierRepository.findOne(id);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#exists(java.lang.Integer)
+	 */
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.FichierService#exists(java.lang.Integer)
 	 */
@@ -63,11 +75,17 @@ public class FichierMetierImpl implements FichierService {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.FichierService#findAll()
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#findAll()
+	 */
 	@Override
 	public Iterable<Fichier> findAll() {
 		return FichierRepository.findAll();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#findAll(java.lang.Iterable)
+	 */
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.FichierService#findAll(java.lang.Iterable)
 	 */
@@ -85,11 +103,17 @@ public class FichierMetierImpl implements FichierService {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.FichierService#count()
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#count()
+	 */
 	@Override
 	public long count() {
 		return FichierRepository.count();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#delete(java.lang.Integer)
+	 */
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.FichierService#delete(java.lang.Integer)
 	 */
@@ -107,11 +131,17 @@ public class FichierMetierImpl implements FichierService {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.FichierService#delete(com.support.informatique.entities.Fichier)
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#delete(com.support.informatique.entities.Fichier)
+	 */
 	@Override
 	public void delete(Fichier entity) {
 		FichierRepository.delete(entity);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#delete(java.lang.Iterable)
+	 */
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.FichierService#delete(java.lang.Iterable)
 	 */
@@ -129,6 +159,9 @@ public class FichierMetierImpl implements FichierService {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.FichierService#deleteAll()
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#deleteAll()
+	 */
 	@Override
 	public void deleteAll() {
 		FichierRepository.deleteAll();
@@ -140,9 +173,20 @@ public class FichierMetierImpl implements FichierService {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.FichierService#deletebyId(java.lang.Integer)
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#deletebyId(java.lang.Integer)
+	 */
 	@Override
 	public void deletebyId(Integer id) {
 		FichierRepository.deletebyId(id);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.support.informatique.metier.FichierService#findFichier(int)
+	 */
+	@Override
+	public byte[] findFichier(int idFichier) {
+		return FichierRepository.findFichier(idFichier);
 	}
 
 

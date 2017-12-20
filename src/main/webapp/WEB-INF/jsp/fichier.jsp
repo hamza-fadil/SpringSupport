@@ -20,36 +20,11 @@
  
 <body>
  
-     
-    <form:form method="POST" modelAttribute="conversation">
-        <form:input type="hidden" path="idConversation" id="idConversation"/>
-        <table>
-            <tr>
-                <td><label for="fichierJoint">Fichier joint: </label> </td>
-                <td><form:input path="fichierJoint" id="fichierJoint"/></td>
-                <td><form:errors path="fichierJoint" cssClass="error"/></td>
-            </tr>
-         
-            <tr>
-                <td><label for="ticket.idTicket">Id Ticket: </label> </td>
-                <td><form:input path="ticket.idTicket" id="ticket.idTicket"/></td>
-                <td><form:errors path="ticket.idTicket" cssClass="error"/></td>
-            </tr>
-            <tr>
-            <tr>
-                <td colspan="3">
-                    <c:choose>
-                        <c:when test="${edit}">
-                            <input type="submit" value="Update"/>
-                        </c:when>
-                        <c:otherwise>
-                            <input type="submit" value="Register"/>
-                        </c:otherwise>
-                    </c:choose>
-                </td>
-            </tr>
-        </table>
-    </form:form>
+     <form method="POST" action="${pageContext.request.contextPath}/fichier" enctype="multipart/form-data">
+    <input type="file" name="file" /><br/>
+    <input type="submit" value="Submit" />
+</form>
+
     <br/>
     <br/>
     Revenir <a href="<c:url value='fichiers' />">Liste de tous les fichiers</a>

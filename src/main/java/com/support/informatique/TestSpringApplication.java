@@ -1,7 +1,10 @@
 package com.support.informatique;
 
 
-
+import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +13,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.support.informatique.entities.Fichier;
 import com.support.informatique.entities.Marque;
 import com.support.informatique.entities.Materiel;
 import com.support.informatique.entities.Ordinateur;
+import com.support.informatique.entities.Ticket;
 import com.support.informatique.metier.ConversationService;
 import com.support.informatique.metier.FichierService;
 import com.support.informatique.metier.ImprimanteService;
@@ -229,5 +234,25 @@ public class TestSpringApplication implements CommandLineRunner {
 //		Débogage materiel
 //		Iterable<Materiel> test =materielMetierImpl.findAll();
 //		System.out.println(test.toString());
+		
+//		
+//		File file = new File("/home/siqaos/Documents/Polytechnique/image.jpg");
+//		Ticket ticket = new Ticket();
+//		ticket = ticketMetierImpl.findById(1);
+//		Fichier fichier = new Fichier();
+//		byte[] picInBytes = new byte[(int) file.length()];
+//		FileInputStream fileInputStream = new FileInputStream(file);
+//		fileInputStream.read(picInBytes);
+//		fileInputStream.close();
+//		fichier.setFichierJoint(picInBytes);
+//		fichier.setTicket(ticket);
+//		fichierMetierImpl.save(fichier);
+//		
+//		byte[] fichier = fichierMetierImpl.findFichier(1);
+//		File dest = new File("/home/siqaos/Documents/Polytechnique/test.jpg");
+//		FileOutputStream fileOutputStream = new FileOutputStream(dest);
+//		byte[] imgInBytes = fichier;
+//		fileOutputStream.write(imgInBytes);
+//		fileOutputStream.close();
 }
 }
