@@ -1,63 +1,63 @@
 package com.support.informatique;
 
+//
+//import java.io.*;
+//import java.io.File;
+//import java.io.FileInputStream;
+//import java.io.FileOutputStream;
+//import java.util.List;
 
-import java.io.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.support.informatique.entities.Fichier;
-import com.support.informatique.entities.Marque;
-import com.support.informatique.entities.Materiel;
-import com.support.informatique.entities.Ordinateur;
-import com.support.informatique.entities.Ticket;
-import com.support.informatique.metier.ConversationService;
-import com.support.informatique.metier.FichierService;
-import com.support.informatique.metier.ImprimanteService;
-import com.support.informatique.metier.MarqueService;
-import com.support.informatique.metier.MaterielService;
-import com.support.informatique.metier.OrdinateurService;
-import com.support.informatique.metier.PanneService;
-import com.support.informatique.metier.ReparationService;
-import com.support.informatique.metier.TelephoneService;
-import com.support.informatique.metier.TicketService;
-import com.support.informatique.metier.UserService;
+//import com.support.informatique.entities.Fichier;
+//import com.support.informatique.entities.Marque;
+//import com.support.informatique.entities.Materiel;
+//import com.support.informatique.entities.Ordinateur;
+//import com.support.informatique.entities.Ticket;
+//import com.support.informatique.metier.ConversationService;
+//import com.support.informatique.metier.FichierService;
+//import com.support.informatique.metier.ImprimanteService;
+//import com.support.informatique.metier.MarqueService;
+//import com.support.informatique.metier.MaterielService;
+//import com.support.informatique.metier.OrdinateurService;
+//import com.support.informatique.metier.PanneService;
+//import com.support.informatique.metier.ReparationService;
+//import com.support.informatique.metier.TelephoneService;
+//import com.support.informatique.metier.TicketService;
+//import com.support.informatique.metier.UserService;
 
 
 
 
 @SpringBootApplication
 public class TestSpringApplication implements CommandLineRunner {
-
-	@Autowired
-	private UserService userMetierImpl;
-	@Autowired
-	private TicketService ticketMetierImpl;
-	@Autowired
-	private ReparationService reparationMetierImpl;
-	@Autowired
-	private PanneService panneMetierImpl;
-	@Autowired
-	private MaterielService materielMetierImpl;
-	@Autowired
-	private MarqueService marqueMetierImpl;
-	@Autowired
-	private FichierService fichierMetierImpl;
-	@Autowired
-	private ConversationService conversationMetierImpl;
-	@Autowired
-	private ImprimanteService imprimanteMetierImpl;
-	@Autowired
-	private TelephoneService telephoneMetierImpl;
-	@Autowired
-	private OrdinateurService ordinateurMetierImpl;
+//
+//	@Autowired
+//	private UserService userMetierImpl;
+//	@Autowired
+//	private TicketService ticketMetierImpl;
+//	@Autowired
+//	private ReparationService reparationMetierImpl;
+//	@Autowired
+//	private PanneService panneMetierImpl;
+//	@Autowired
+//	private MaterielService materielMetierImpl;
+//	@Autowired
+//	private MarqueService marqueMetierImpl;
+//	@Autowired
+//	private FichierService fichierMetierImpl;
+//	@Autowired
+//	private ConversationService conversationMetierImpl;
+//	@Autowired
+//	private ImprimanteService imprimanteMetierImpl;
+//	@Autowired
+//	private TelephoneService telephoneMetierImpl;
+//	@Autowired
+//	private OrdinateurService ordinateurMetierImpl;
 	
 	
 	public static void main(String[] args) {

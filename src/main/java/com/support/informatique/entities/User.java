@@ -27,6 +27,8 @@ public class User implements java.io.Serializable {
 	private String password;
 	private String typeUser;
 	private String username;
+	@Column
+	private String enabled;
 	private Set<Ticket> tickets = new HashSet<Ticket>(0);
 	private Set<Reparation> reparations = new HashSet<Reparation>(0);
 	public User() {
@@ -37,6 +39,12 @@ public class User implements java.io.Serializable {
 		this.typeUser = typeUser;
 		this.username = username;
 		this.idUser = idUser;
+	}
+	public String getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
 	}
 	public User(Date createTime, String email, String password, String typeUser, String username, Set<Ticket> tickets,
 			Set<Reparation> reparations) {
@@ -96,7 +104,7 @@ public class User implements java.io.Serializable {
 		this.typeUser = typeUser;
 	}
 
-	@Column(name = "Username", nullable = false, length = 16)
+	@Column(name = "Username", nullable = false, length = 16, unique=true)
 	public String getUsername() {
 		return this.username;
 	}

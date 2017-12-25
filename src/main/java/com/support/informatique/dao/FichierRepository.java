@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.support.informatique.entities.Fichier;
-import com.support.informatique.entities.Reparation;
 
 
 
