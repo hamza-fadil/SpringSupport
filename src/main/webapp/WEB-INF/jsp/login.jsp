@@ -2,44 +2,38 @@
 <%@page session="true"%>
 <html>
 <head>
-<title>Page de connexion</title>
-<style>
-.error {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #a94442;
-	background-color: #f2dede;
-	border-color: #ebccd1;
-}
-
-.msg {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #31708f;
-	background-color: #d9edf7;
-	border-color: #bce8f1;
-}
-
-#login-box {
-	width: 300px;
-	padding: 20px;
-	margin: 100px auto;
-	background: #fff;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border: 1px solid #000;
-}
-</style>
+ 	<title>Page de connexion</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+	<style type="text/css">
+		body {
+	 		 padding-top: 40px;
+			}		li {
+			padding-right : 30px;
+		}
+	</style>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 </head>
-<body onload='document.loginForm.username.focus();'>
 
-	<h1>Connexion</h1>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark nav-tabs nav-justified">
+	<ul class="navbar-nav mr-auto">
+		<li><a href="/" class="nav-link">Index</a></li>
+		<li><a href="faq" class="nav-link">FAQ</a></li>
+		<li><a href="about" class="nav-link">A propos</a></li>
+		<li><a href="howto" class="nav-link">Aide</a></li>
+	</ul>
+	<ul class="nav justify-content-end">
+		<li><a href="login" id="login">Connexion </a></li>
+		<li><a href="inscription" id="inscription">Inscription</a></li>
+	</ul>
+</nav>
 
-	<div id="login-box">
+	<div style="padding-top: 40px;">
 
 		<h2>Veuillez renseigner votre login et mot de passe</h2>
 

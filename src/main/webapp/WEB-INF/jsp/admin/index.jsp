@@ -14,7 +14,9 @@
 	<style type="text/css">
 		body {
 	 		 padding-top: 40px;
-			}
+			}		li {
+			padding-right : 30px;
+		}
 	</style>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
@@ -27,7 +29,6 @@
 		<li><a href="/admin/ticket" class="nav-link">Tickets</a></li>
 		<li><a href="/admin/users" class="nav-link">Utilisateurs</a></li>
 		<li><a href="/admin/taches" class="nav-link">Taches</a></li>
-		<li><a href="/admin/faq" class="nav-link">FAQ</a></li>
 		<li><a href="/admin/parc" class="nav-link">Parc informatique</a></li>
 		<li><a href="/admin/newsletter" class="nav-link">Newsletter</a></li>
 		<li><a href="/admin/report" class="nav-link">Rapports</a></li>

@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
   <head>
- 	<title>Administration d'utilisateurs</title>
+ 	<title>Administration de tickets</title>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content=""/>
@@ -13,7 +13,8 @@
 	<style type="text/css">
 		body {
 	 		 padding-top: 40px;
-			}		li {
+			}
+		li {
 			padding-right : 30px;
 		}
 	</style>
@@ -35,8 +36,8 @@
 	<c:choose >
 		<c:when test="${not empty username}">
     		<ul class="nav justify-content-end">
-        		<li class="navbar-text" style="color:white; padding-right: 30px;">${username }  </li>
-        		<li style="padding-right: 30px;"><a href="logout" class="btn btn-primary btn-danger">Se déconnecter</a></li>
+        		<li class="navbar-text" style="color:white;">${username }  </li>
+        		<li><a href="logout" class="btn btn-primary btn-danger">Se déconnecter</a></li>
         	</ul>
 	    </c:when>
 		<c:otherwise>
@@ -50,27 +51,22 @@
 <br>
 	   <table class="table-hover table-dark table-striped mx-2" style="width:100%">
         <tr>
-            <td>Email</td><td>Nom d'utilisateur</td><td>type Utilisateur</td><td>Actif</td><td>Date de création</td><td>Editer</td><td>Supprimer</td>
+            <td>Titre</td><td>Contenu</td><td>Utilisateur</td><td>Editer</td><td>Supprimer</td>
         </tr>
-        <c:forEach items="${users}" var="p">
+        <c:forEach items="${tickets}" var="p">
             <tr>
-            <td>${p.email}</td>
-            <td>${p.username}</td>
-            <td>${p.typeUser}</td>
-            <td><c:if test="${p.enabled ==1}">Oui</c:if><c:if test="${p.enabled ==0}">Non</c:if></td>
-            <td>${p.createTime}</td>
-          <td><a href="<c:url value='/edit-${p.idUser}-User' />">edit</a></td>
-            <td><a href="<c:url value='/delete-${p.idUser}-User' />">delete</a></td>
+            <td>${p.titreTicket}</td>
+            <td>${p.contTicket}</td>
+            <td>${p.user.username}</td>
+          <td><a href="<c:url value='/edit-${p.idTicket}-Ticket' />">edit</a></td>
+            <td><a href="<c:url value='/delete-${p.idTicket}-Ticket' />">delete</a></td>
             </tr>
         </c:forEach>
     </table>
-
     <br><br>
-	<p><a href="<c:url value='/newUser' />">Ajouter un nouveau user</a></p>
-
+	<p><a href="<c:url value='/newTicket' />">Ajouter un nouveau ticket</a></p>
 	<br>
 	<a href="<c:url value='/' />">Index</a>
-	
 </body>
 
 </html>

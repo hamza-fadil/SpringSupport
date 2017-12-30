@@ -110,6 +110,10 @@ public class UserMetierImpl implements UserService {
 	public void deletebyId(Integer id) {
 		userRepository.deletebyId(id);
 	}
+	
+	public String findName(String name) {
+		return userRepository.findName(name);
+	}
 
 
 }

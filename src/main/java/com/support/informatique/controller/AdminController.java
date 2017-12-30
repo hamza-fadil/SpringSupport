@@ -28,6 +28,7 @@ public class AdminController {
 	private UserService userService;
 	@Autowired
 	private TicketService ticketService;
+	
 	@RequestMapping("/admin/index")
 	public String users(ModelMap model) {
 		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -91,11 +92,6 @@ public class AdminController {
 			model.addAttribute("username", userDetail.getUsername());	  
 		return "/admin/tickets";
 	}
-	@RequestMapping("/admin/parc")
-	public String materiel(ModelMap model) {
-		  
-		return "/admin/materiels";
-	}
     /*
      * This method will provide the medium to update an existing Produit.
      */
@@ -134,4 +130,33 @@ public class AdminController {
     	ticketService.deletebyId(idTicket);
     	return "redirect:admin/tickets";
     }
+    
+	@RequestMapping("/admin/taches")
+	public String taches(ModelMap model) {
+		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			model.addAttribute("username", userDetail.getUsername());	
+		return "/admin/taches";
+	}
+	@RequestMapping("/admin/parc")
+	public String parc(ModelMap model) {
+		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			model.addAttribute("username", userDetail.getUsername());	
+		return "/admin/parc";
+	}
+	@RequestMapping("/admin/newsletter")
+	public String newsletter(ModelMap model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		model.addAttribute("username", userDetail.getUsername());	
+		return "/admin/newsletter";
+	}
+	@RequestMapping("/admin/report")
+	public String report(ModelMap model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		model.addAttribute("username", userDetail.getUsername());	
+		return "/admin/report";
+	}
 }

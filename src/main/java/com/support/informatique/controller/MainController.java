@@ -17,11 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.support.informatique.entities.User;
+
 @Controller
 public class MainController {
 	@RequestMapping("/")
 	public String users(ModelMap model,HttpServletRequest request) {
 		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		  User user=(User)auth.getPrincipal(); caster le auth sur User
+//		  user.getTypeUser(); prendre le type user
 		  if (request.isUserInRole("USER")) {
 			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
 				model.addAttribute("username", userDetail.getUsername());
@@ -31,8 +35,7 @@ public class MainController {
 		  {	
 			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
 				model.addAttribute("username", userDetail.getUsername());	
-			  return "redirect:/admin/index"; 
-			  
+			  return "redirect:/admin/index"; 		  
 		  }
 		  else if (request.isUserInRole("TECH"))
 		  {
@@ -96,6 +99,18 @@ public class MainController {
 	  }
 	  return "403";
 
+	}
+	@RequestMapping("/about")
+	public String about(ModelMap model) {
+		return "about";
+	}
+	@RequestMapping("/faq")
+	public String faq(ModelMap model) {
+		return "faq";
+	}
+	@RequestMapping("/howto")
+	public String howto(ModelMap model) {
+		return "howto";
 	}
 
 }

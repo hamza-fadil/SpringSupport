@@ -7,22 +7,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.support.informatique.entities.User;
+import com.support.informatique.entities.Taches;
 
 
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
-	@Query("Select u.email from User u where u.email=:x")
-	String findByEmail(@Param("x") String name);
-	@Query("Select u.username from User u where u.username=:x")
-	String findName(@Param("x") String name);
-	@Query("Select u from User u where u.idUser=:x")
-	User findById(@Param("x") Integer id);
-	
+public interface TachesRepository extends CrudRepository<Taches, Integer> {
+
 	@Transactional
 	@Modifying
-	@Query("Delete User u where u.idUser=:x")
+	@Query("Delete Taches u where u.idTaches=:x")
 	void deletebyId(@Param("x") Integer id);
 	
 

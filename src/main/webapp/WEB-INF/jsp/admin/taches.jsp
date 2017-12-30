@@ -35,8 +35,8 @@
 	<c:choose >
 		<c:when test="${not empty username}">
     		<ul class="nav justify-content-end">
-        		<li class="navbar-text" style="color:white; padding-right: 30px;">${username }  </li>
-        		<li style="padding-right: 30px;"><a href="logout" class="btn btn-primary btn-danger">Se déconnecter</a></li>
+        		<li class="navbar-text" style="color:white;">${username }  </li>
+        		<li><a href="logout" class="btn btn-primary btn-danger">Se déconnecter</a></li>
         	</ul>
 	    </c:when>
 		<c:otherwise>

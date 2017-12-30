@@ -30,6 +30,7 @@ public class User implements java.io.Serializable {
 	@Column
 	private String enabled;
 	private Set<Ticket> tickets = new HashSet<Ticket>(0);
+	private Set<Taches> taches = new HashSet<Taches>(0);
 	private Set<Reparation> reparations = new HashSet<Reparation>(0);
 	public User() {
 	}
@@ -47,7 +48,7 @@ public class User implements java.io.Serializable {
 		this.enabled = enabled;
 	}
 	public User(Date createTime, String email, String password, String typeUser, String username, Set<Ticket> tickets,
-			Set<Reparation> reparations) {
+			Set<Reparation> reparations,Set<Taches> taches) {
 		this.createTime = createTime;
 		this.email = email;
 		this.password = password;
@@ -55,6 +56,7 @@ public class User implements java.io.Serializable {
 		this.username = username;
 		this.tickets = tickets;
 		this.reparations = reparations;
+		this.taches = taches;
 	}
 	@Id
 	@GeneratedValue(strategy=IDENTITY)
@@ -122,11 +124,19 @@ public class User implements java.io.Serializable {
 		this.tickets = tickets;
 	}
 
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<Taches> getTaches() {
+		return this.taches;
+	}
+	public void setTaches(Set<Taches> taches) {
+		this.taches = taches;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	public Set<Reparation> getReparations() {
 		return this.reparations;
 	}
-
 	public void setReparations(Set<Reparation> reparations) {
 		this.reparations = reparations;
 	}

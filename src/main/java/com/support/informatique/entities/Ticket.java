@@ -25,6 +25,7 @@ public class Ticket implements java.io.Serializable {
 	private String typeTicket;
 	private Set<Fichier> fichiers = new HashSet<Fichier>(0);
 	private Set<Conversation> conversations = new HashSet<Conversation>(0);
+	private Set<Rapport> rapport = new HashSet<Rapport>(0);
 
 	public Ticket() {
 	}
@@ -34,13 +35,14 @@ public class Ticket implements java.io.Serializable {
 	}
 
 	public Ticket(User user, String contTicket, String titreTicket, String typeTicket, Set<Fichier> fichiers,
-			Set<Conversation> conversations) {
+			Set<Conversation> conversations,Set<Rapport> rapport) {
 		this.user = user;
 		this.contTicket = contTicket;
 		this.titreTicket = titreTicket;
 		this.typeTicket = typeTicket;
 		this.fichiers = fichiers;
 		this.conversations = conversations;
+		this.rapport = rapport;
 	}
 
 
@@ -118,7 +120,13 @@ public class Ticket implements java.io.Serializable {
 		this.conversations = conversations;
 	}
 
-
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ticket")
+	public Set<Rapport> getRapport() {
+		return this.rapport;
+	}
+	public void setRapport(Set<Rapport> rapport) {
+		this.rapport = rapport;
+	}
 	
 
 }

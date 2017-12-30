@@ -13,15 +13,15 @@
 	<style type="text/css">
 		body {
 	 		 padding-top: 40px;
-			}
+			}		li {
+			padding-right : 30px;
+		}
 	</style>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<div align="right"><a href="login" id="login">Connexion </a> / <a href="inscription" id="inscription">Inscription</a></div>
-		<br>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark nav-tabs nav-justified">
 	<ul class="navbar-nav mr-auto">
 		<li><a href="/" class="nav-link">Index</a></li>

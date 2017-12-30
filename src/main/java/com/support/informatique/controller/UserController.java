@@ -46,23 +46,40 @@ public class UserController {
 	@RequestMapping(value = { "/inscription" }, method = RequestMethod.POST)
     public String newUser(@Valid User user, ModelMap model) {
 		EmailValidator validator = EmailValidator.getInstance();
-		Boolean present = userService.findByEmail(user.getEmail()).equals(user.getEmail());
+		String EmailDonne =user.getEmail();
+		String EmailTrouv = userService.findByEmail(user.getEmail());
+		String UserDonne = user.getUsername();
+		String UserTrouv = userService.findName(user.getUsername());
+		Boolean presentName = UserDonne.equals(UserTrouv);
+		Boolean presentMail = EmailDonne.equals(EmailTrouv);	
 		Boolean validEmail = validator.isValid(user.getEmail());
 		user.setEnabled("1");
         user.setTypeUser("ROLE_USER");
 		System.out.println("test");
 		System.out.println(user.toString());
         if (!validEmail) {
+        	if (presentName) {
+        		model.addAttribute("emailInv",true);
+        		model.addAttribute("userTrouv",true);
+            	System.out.println("test1");
+            	return "inscription";
+			}
         	model.addAttribute("emailInv",true);
         	System.out.println("test1");
         	return "inscription";
         }
-        if (present) {     	
+        else if (presentMail) {  
+        	if (presentName) {
+        		model.addAttribute("emailInv",true);
+        		model.addAttribute("userTrouv",true);
+            	System.out.println("test1");
+            	return "inscription";
+			}
         	model.addAttribute("emailDup",true);
         	System.out.println("test2");
         	return "inscription";
         }
-        if (!present && validEmail) {
+        else if (!presentMail && validEmail && !presentName) {
         	System.out.println("test3");
         	System.out.println(user.toString());
             userService.save(user);  
@@ -79,7 +96,7 @@ public class UserController {
 //    	model.addAttribute("emailTrou", userService.findByEmail(user.getEmail()));
 //    	model.addAttribute("emailDonne",user.getEmail());
 	}
-		return "redirect:/index";
+        return "/";
 	}
     @RequestMapping(value = { "/newUser" }, method = RequestMethod.POST)
     public String saveProduit(@Valid User user, BindingResult result,

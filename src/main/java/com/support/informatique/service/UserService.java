@@ -48,5 +48,7 @@ public interface UserService {
 	 * @see com.support.informatique.metier.UserService#deletebyId(java.lang.Integer)
 	 */
 	void deletebyId(Integer id);
+	
+	String findName(String name);
 
 }

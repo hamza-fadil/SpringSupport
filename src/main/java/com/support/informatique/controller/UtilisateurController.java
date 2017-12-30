@@ -2,8 +2,6 @@ package com.support.informatique.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UtilisateurController {
 	@RequestMapping("/user/index")
 	public String users(ModelMap model) {
-		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		  if (!(auth instanceof AnonymousAuthenticationToken)) {
-			UserDetails userDetail = (UserDetails) auth.getPrincipal();
-			model.addAttribute("username", userDetail.getUsername());
-		  }
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		model.addAttribute("username", userDetail.getUsername());	
 		return "/user/index";
 	}
 	
@@ -36,22 +32,30 @@ public class UtilisateurController {
 		
 	@RequestMapping("/user/tests")
 	public String tests(ModelMap model) {
-		  
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		model.addAttribute("username", userDetail.getUsername());	
 		return "/tests/welcome";
 	}
 	@RequestMapping("/user/users")
 	public String Users(ModelMap model) {
-		  
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		model.addAttribute("username", userDetail.getUsername());	
 		return "/user/users";
 	}
 	@RequestMapping("/user/ticket")
 	public String Tickets(ModelMap model) {
-		  
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		model.addAttribute("username", userDetail.getUsername());	
 		return "/user/tickets";
 	}
 	@RequestMapping("/user/parc")
 	public String materiel(ModelMap model) {
-		  
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		model.addAttribute("username", userDetail.getUsername());	
 		return "/user/materiels";
 	}
 }

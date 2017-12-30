@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 
 <head>
-	<title>Page d'acceuil</title>
-	<link rel="stylesheet" type="text/css" href="/style.css">
+ 	<title>Index</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+	<style type="text/css">
+		body {
+	 		 padding-top: 40px;
+	 		 
+			}		li {
+			padding-right : 30px;
+		}
+	</style>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 </head>
 <c:choose >
 <c:when test="${not empty username}">
@@ -20,28 +33,19 @@
 </c:choose>
 
 <body>
-	
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark nav-tabs nav-justified">
+	<ul class="navbar-nav mr-auto">
+		<li><a href="/" class="nav-link">Index</a></li>
+		<li><a href="faq" class="nav-link">FAQ</a></li>
+		<li><a href="about" class="nav-link">A propos</a></li>
+		<li><a href="howto" class="nav-link">Aide</a></li>
+	</ul>
+	<ul class="nav justify-content-end">
+		<li style="padding-right: 30px;"><a href="login" id="login" >Connexion </a></li>
+		<li><a href="inscription" id="inscription">Inscription</a></li>
+	</ul>
+</nav>
 	<br><br>
-	<table width="100%" border="1">
-				<tr>
-					<td>
-						<a href="/">Index</a>
-					</td>
-					<td>
-						<a href="faq.html">FAQ</a>
-					</td>
-					<td>
-						<a href="news.html">Nouveautés</a>
-					</td>
-					<td>
-						<a href="about.html">A propos</a>
-					</td>
-					<td>
-						<a href="howto.html"> Comment utiliser l'interface ?</a>
-					</td>
-				</tr>		
-	</table>
-<br><br>
 <table width="100%" border="1">
   <tbody>
     <tr>
