@@ -23,11 +23,9 @@ public class TechController {
 	@RequestMapping("/tech/index")
 	public String users(ModelMap model) {
 		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		  if (!(auth instanceof AnonymousAuthenticationToken)) {
 			UserDetails userDetail = (UserDetails) auth.getPrincipal();
 			model.addAttribute("username", userDetail.getUsername());
-		  }
-		return "/tech/index";
+		return "tech/index";
 	}
 	
 	@RequestMapping(value="/tech/logout", method = RequestMethod.GET)
@@ -38,25 +36,21 @@ public class TechController {
 		    }
 		    return "redirect:/";
 		}
-		
-	@RequestMapping("/tech/tests")
-	public String tests(ModelMap model) {
-		  
-		return "/tests/welcome";
-	}
-	@RequestMapping("/tech/users")
-	public String Users(ModelMap model) {
-		  
-		return "/tech/users";
-	}
+
 	@RequestMapping("/tech/ticket")
 	public String Tickets(ModelMap model) {
 		model.addAttribute("tickets",ticketService.findAll() );
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		model.addAttribute("username", userDetail.getUsername());
 		return "tech/tickets";
+		
 	}
 	@RequestMapping("/tech/parc")
 	public String materiel(ModelMap model) {
-		  
-		return "/tech/materiels";
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		model.addAttribute("username", userDetail.getUsername());
+		return "tech/materiels";
 	}
 }

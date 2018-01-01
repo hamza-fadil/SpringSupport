@@ -5,13 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder; 
 	@Autowired
 	DataSource dataSource;
 	@Autowired
@@ -21,7 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.usersByUsernameQuery(
 			"select username,password, enabled from user where username=?")
 		.authoritiesByUsernameQuery(
-			"select username, type_user from user where username=?");
+			"select username, type_user from user where username=?")
+		.passwordEncoder(bCryptPasswordEncoder);
 	}
 
 	@Override
@@ -44,4 +48,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		  .csrf();
 	 
 	}
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+	    web
+	       .ignoring()
+	       .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+	}
+
 }

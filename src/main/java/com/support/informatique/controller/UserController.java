@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -21,7 +22,8 @@ import com.support.informatique.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	
     @RequestMapping(value = { "/newUser" }, method = RequestMethod.GET)
@@ -46,58 +48,32 @@ public class UserController {
 	@RequestMapping(value = { "/inscription" }, method = RequestMethod.POST)
     public String newUser(@Valid User user, ModelMap model) {
 		EmailValidator validator = EmailValidator.getInstance();
-		String EmailDonne =user.getEmail();
 		String EmailTrouv = userService.findByEmail(user.getEmail());
-		String UserDonne = user.getUsername();
 		String UserTrouv = userService.findName(user.getUsername());
-		Boolean presentName = UserDonne.equals(UserTrouv);
-		Boolean presentMail = EmailDonne.equals(EmailTrouv);	
 		Boolean validEmail = validator.isValid(user.getEmail());
 		user.setEnabled("1");
         user.setTypeUser("ROLE_USER");
-		System.out.println("test");
-		System.out.println(user.toString());
-        if (!validEmail) {
-        	if (presentName) {
-        		model.addAttribute("emailInv",true);
-        		model.addAttribute("userTrouv",true);
-            	System.out.println("test1");
-            	return "inscription";
-			}
-        	model.addAttribute("emailInv",true);
-        	System.out.println("test1");
-        	return "inscription";
-        }
-        else if (presentMail) {  
-        	if (presentName) {
-        		model.addAttribute("emailInv",true);
-        		model.addAttribute("userTrouv",true);
-            	System.out.println("test1");
-            	return "inscription";
-			}
-        	model.addAttribute("emailDup",true);
-        	System.out.println("test2");
-        	return "inscription";
-        }
-        else if (!presentMail && validEmail && !presentName) {
-        	System.out.println("test3");
-        	System.out.println(user.toString());
-            userService.save(user);  
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        
+	    if(!validEmail) {
+	    	model.addAttribute("emailInv",true);
+	    	return "inscription";
+	    }
+	    else if (EmailTrouv != null) {
+	    	model.addAttribute("emailDup",true);
+	    	return "inscription";
+	    }
+	    else if (UserTrouv != null) {
+	    	model.addAttribute("userTrouv",true);
+	    	return "inscription";
+	    }
+	    else {
+	    	userService.save(user);  
             return "redirect:/"; 
-//        }
-//		return "redirect:/index";
-//        
-//        }
-//		Boolean test2 = validEmail;
-//		model.addAttribute("tout",user.toString());
-//        Boolean test = userService.findByEmail(user.getEmail()).equals(user.getEmail());
-//    	model.addAttribute("present",test);
-//    	model.addAttribute("valide",test2);
-//    	model.addAttribute("emailTrou", userService.findByEmail(user.getEmail()));
-//    	model.addAttribute("emailDonne",user.getEmail());
+	    }
 	}
-        return "/";
-	}
+	
+	
     @RequestMapping(value = { "/newUser" }, method = RequestMethod.POST)
     public String saveProduit(@Valid User user, BindingResult result,
             ModelMap model) {

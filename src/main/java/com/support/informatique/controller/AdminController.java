@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,7 +29,8 @@ public class AdminController {
 	private UserService userService;
 	@Autowired
 	private TicketService ticketService;
-	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	@RequestMapping("/admin/index")
 	public String users(ModelMap model) {
 		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -51,7 +53,10 @@ public class AdminController {
 		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			UserDetails userDetail = (UserDetails) auth.getPrincipal();
 			model.addAttribute("username", userDetail.getUsername());	
+			
         User user = userService.findOne(idUser);
+        System.out.println(user.getCreateTime());
+        model.addAttribute("pass", userDetail.getPassword() );
         model.addAttribute("user", user);
         model.addAttribute("edit", true);
         return "/admin/user";
@@ -61,7 +66,15 @@ public class AdminController {
     @RequestMapping(value = { "/edit-{idUser}-User" }, method = RequestMethod.POST)
     public String updateUser(@Valid User user, BindingResult result,
             ModelMap model, @PathVariable int idUser) {
+    	User oldUser = userService.findById(idUser);
+    	user.setCreateTime(oldUser.getCreateTime());
     	
+    	if (user.getPassword()!= oldUser.getPassword()) {
+    		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		}
+    	else {
+    		user.setPassword(oldUser.getPassword());
+    	}
         if (result.hasErrors()) {
             return "/admin/user";
         }
@@ -92,9 +105,8 @@ public class AdminController {
 			model.addAttribute("username", userDetail.getUsername());	  
 		return "/admin/tickets";
 	}
-    /*
-     * This method will provide the medium to update an existing Produit.
-     */
+
+	
     @RequestMapping(value = { "/edit-{idTicket}-Ticket" }, method = RequestMethod.GET)
     public String editTicket(@PathVariable int idTicket, ModelMap model) {
         Ticket ticket = ticketService.findOne(idTicket);

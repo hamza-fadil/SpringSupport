@@ -1,5 +1,7 @@
 package com.support.informatique.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,10 +19,12 @@ import com.support.informatique.entities.User;
 @Repository
 public interface TicketRepository extends CrudRepository<Ticket, Integer> {
 	@Query("Select u from Ticket u where u.user=:x")
-	Ticket findByuserId(@Param("x") User user);
+	List<Ticket> findByuserId(@Param("x") User user);
+	
 	@Query("Select u from Ticket u where u.idTicket=:x")
 	Ticket findById(@Param("x") Integer id);
-	
+	@Query("Select u from Ticket u where u.user=:x")
+	Ticket findByUser(@Param("x") User user);
 	@Transactional
 	@Modifying
 	@Query("Delete Ticket u where u.idTicket=:x")

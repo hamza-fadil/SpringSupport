@@ -2,8 +2,14 @@ package com.support.informatique.controller;
 
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -20,20 +26,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.support.informatique.entities.Fichier;
-import com.support.informatique.entities.Ticket;
 import com.support.informatique.service.FichierService;
-import com.support.informatique.service.TicketService;
 
 @Controller
 public class FichierController {
 	@Autowired
 	private FichierService fichierService;
 	@Autowired
-	private TicketService ticketService;
+	ServletContext servletContext;
 	
 	
-	
-	@RequestMapping(method = RequestMethod.POST) // Laisse tomber les nouveautés.
+	@RequestMapping(method = RequestMethod.POST)
     public String singleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
 
@@ -44,18 +47,26 @@ public class FichierController {
 
         try {
 
-            // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            
+        	
+        	String webappRoot = servletContext.getRealPath("/");
+    	    String relativeFolder = File.separator  + "upload-dir" + File.separator;
+    	    String filename = webappRoot + relativeFolder
+                    + file.getOriginalFilename(); 
+            Files.copy(file.getInputStream(), Paths.get(filename),StandardCopyOption.REPLACE_EXISTING);
             Fichier fichier = new Fichier();
-            fichier.setNomOrigine(file.getOriginalFilename()); 
-            fichier.setFichierJoint(bytes);
-    		Ticket ticket = new Ticket();
-    		ticket = ticketService.findById(1);
-            fichier.setTicket(ticket);
+            fichier.setNomOrigine(file.getOriginalFilename());
             fichierService.save(fichier);
-            redirectAttributes.addFlashAttribute("message",
-                        "You successfully uploaded '" + file.getOriginalFilename() + "'");
+            // Get the file and save it somewhere
+//            byte[] bytes = file.getBytes();
+//            Fichier fichier = new Fichier();
+//            fichier.setNomOrigine(file.getOriginalFilename()); 
+//            fichier.setFichierJoint(bytes);
+//    		Ticket ticket = new Ticket();
+//    		ticket = ticketService.findById(1);
+//            fichier.setTicket(ticket);
+//            fichierService.save(fichier);
+//            redirectAttributes.addFlashAttribute("message",
+//                        "You successfully uploaded '" + file.getOriginalFilename() + "'");
 
         } catch (IOException e) {
             e.printStackTrace();

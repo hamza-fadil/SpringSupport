@@ -1,5 +1,7 @@
 package com.support.informatique.service;
 
+import java.util.List;
+
 import com.support.informatique.entities.Ticket;
 import com.support.informatique.entities.User;
 
@@ -38,7 +40,7 @@ public interface TicketService {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.TicketService#findByuserId(com.support.informatique.entities.User)
 	 */
-	Ticket findByuserId(User user);
+	List<Ticket> findByuserId(User user);
 
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.TicketService#findById(java.lang.Integer)
@@ -50,4 +52,5 @@ public interface TicketService {
 	 */
 	void deletebyId(Integer id);
 
+	Ticket findByUser(User user);
 }

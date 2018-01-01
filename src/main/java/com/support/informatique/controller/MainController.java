@@ -17,15 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.support.informatique.entities.User;
+
 
 @Controller
 public class MainController {
+
 	@RequestMapping("/")
 	public String users(ModelMap model,HttpServletRequest request) {
 		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		  User user=(User)auth.getPrincipal(); caster le auth sur User
-//		  user.getTypeUser(); prendre le type user
+//		  User user=(User)auth.getPrincipal(); 
+//		  String role = user.getTypeUser();
 		  if (request.isUserInRole("USER")) {
 			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
 				model.addAttribute("username", userDetail.getUsername());
@@ -61,23 +62,7 @@ public class MainController {
 	  return "login";
 	}
 	
-// Redirection selon role utilisateur
-//	@RequestMapping(value = "/test", method = RequestMethod.GET)
-//	public String indexchoose(ModelMap model,HttpServletRequest request) {
-//		  if (request.isUserInRole("USER")) {
-//			  return "redirect:/user/index";   
-//		  } else if (request.isUserInRole("ADMIN"))
-//		  {
-//			  return "redirect:/admin/index"; 
-//		  }
-//		  else if (request.isUserInRole("TECH"))
-//		  {
-//			  return "redirect:/tech/index"; 
-//		  }
-//	  return "test";
-//	}
-	
-	// Deconnexion
+
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();

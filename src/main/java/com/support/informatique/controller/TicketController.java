@@ -14,14 +14,17 @@ import org.springframework.stereotype.Controller;
 	import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.support.informatique.entities.Ticket;
+import com.support.informatique.entities.User;
 import com.support.informatique.service.TicketService;
+import com.support.informatique.service.UserService;
 
 	@Controller
 	public class TicketController {
 
 		@Autowired
 		private TicketService ticketService;
-		
+		@Autowired
+		private UserService userService;
 		
 		
 		@RequestMapping("/tickets")
@@ -64,37 +67,53 @@ import com.support.informatique.service.TicketService;
 	    @RequestMapping(value = { "/newTicket" }, method = RequestMethod.POST)
 	    public String saveTicket(@Valid Ticket ticket, BindingResult result,
 	            ModelMap model,HttpServletRequest request) {
-	    if (request.isUserInRole("USER")) {
-	        if (result.hasErrors()) {
-	            return "user/ticket";
-	        }
-	        ticketService.save(ticket);	        
-	        return "redirect:user/ticket";   
-
-			  	
-		  } else if (request.isUserInRole("ADMIN"))
-		  {	
-
+	    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		    if (request.isUserInRole("USER")) {
 		        if (result.hasErrors()) {
-		            return "admin/ticket";
+		            return "user/ticket";
 		        }
-		        ticketService.save(ticket);
-		        
-		        return "redirect:admin/ticket";   
-			  
-		  }
-		  else if (request.isUserInRole("TECH"))
-		  {		  
-		        if (result.hasErrors()) {
-		            return "admin/ticket";
-		        }
-		        ticketService.save(ticket);
-		        
-		        return "redirect:tech/ticket";   
-
-			  	
-		  }
-		return "/403";
+		        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				User user = new User();
+				user = userService.findByUsername(userDetail.getUsername());
+				ticket.setUser(user);
+		        ticketService.save(ticket);	        
+		        return "redirect:user/ticket";   
+	
+				  	
+			  } 
+		    else if (request.isUserInRole("ADMIN"))
+			  {	
+	
+			        if (result.hasErrors()) {
+			            return "admin/ticket";
+			        }
+			        
+			        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+					User user = new User();
+					user = userService.findByUsername(userDetail.getUsername());
+					ticket.setUser(user);
+			        ticketService.save(ticket);
+			        
+			        return "redirect:admin/ticket";   
+				  
+			  }
+			  else if (request.isUserInRole("TECH"))
+			  {		  
+			        if (result.hasErrors()) {
+			            return "tech/ticket";
+			        }
+			        
+			        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+					User user = new User();
+					user = userService.findByUsername(userDetail.getUsername());
+					ticket.setUser(user);
+			        ticketService.save(ticket);
+			        
+			        return "redirect:tech/ticket";   
+	
+				  	
+			  }
+			return "/403";
 
 		
 	}

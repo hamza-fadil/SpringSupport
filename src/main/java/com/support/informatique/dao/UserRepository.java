@@ -19,7 +19,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	String findName(@Param("x") String name);
 	@Query("Select u from User u where u.idUser=:x")
 	User findById(@Param("x") Integer id);
-	
+	@Query("Select u from User u where u.username=:x")
+	User findByUsername(@Param("x") String username);
 	@Transactional
 	@Modifying
 	@Query("Delete User u where u.idUser=:x")

@@ -1,5 +1,7 @@
 package com.support.informatique.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,10 +87,7 @@ public class TicketMetierImpl implements TicketService {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.TicketService#findByuserId(com.support.informatique.entities.User)
 	 */
-	@Override
-	public Ticket findByuserId(User user) {
-		return TicketRepository.findByuserId(user);
-	}
+
 
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.TicketService#findById(java.lang.Integer)
@@ -99,6 +98,10 @@ public class TicketMetierImpl implements TicketService {
 	@Override
 	public Ticket findById(Integer id) {
 		return TicketRepository.findById(id);
+	}
+
+	public List<Ticket> findByuserId(User integer) {
+		return TicketRepository.findByuserId(integer);
 	}
 
 	/* (non-Javadoc)
@@ -112,7 +115,9 @@ public class TicketMetierImpl implements TicketService {
 		TicketRepository.deletebyId(id);
 	}
 
+	public Ticket findByUser(User username) {
+		return TicketRepository.findByUser(username);
+	}
 
-
-
+	
 }

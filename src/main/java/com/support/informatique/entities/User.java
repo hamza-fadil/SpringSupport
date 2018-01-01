@@ -88,7 +88,7 @@ public class User implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "Password", nullable = false, length = 32)
+	@Column(name = "Password", nullable = false)
 	public String getPassword() {
 		return this.password;
 	}

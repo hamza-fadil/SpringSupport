@@ -50,5 +50,7 @@ public interface UserService {
 	void deletebyId(Integer id);
 	
 	String findName(String name);
+	
+	User findByUsername(String username);
 
 }

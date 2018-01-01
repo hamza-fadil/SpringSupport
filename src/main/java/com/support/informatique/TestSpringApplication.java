@@ -1,5 +1,7 @@
 package com.support.informatique;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 //
 //import java.io.*;
 //import java.io.File;
@@ -12,6 +14,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.support.informatique.service.TicketService;
 
 //import com.support.informatique.entities.Fichier;
 //import com.support.informatique.entities.Marque;
@@ -58,7 +62,8 @@ public class TestSpringApplication implements CommandLineRunner {
 //	private TelephoneService telephoneMetierImpl;
 //	@Autowired
 //	private OrdinateurService ordinateurMetierImpl;
-	
+	@Autowired
+	private TicketService ticketService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(TestSpringApplication.class, args);
@@ -254,5 +259,6 @@ public class TestSpringApplication implements CommandLineRunner {
 //		byte[] imgInBytes = fichier;
 //		fileOutputStream.write(imgInBytes);
 //		fileOutputStream.close();
+
 }
 }
