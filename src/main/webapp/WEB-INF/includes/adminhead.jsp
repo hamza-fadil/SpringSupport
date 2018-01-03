@@ -5,7 +5,7 @@
     <base href="/"/>
 	<style type="text/css">
 		body {
-	 		 padding-top: 40px;
+	 		 padding-top: 80px;
 			}		li {
 			padding-right : 30px;
 		}

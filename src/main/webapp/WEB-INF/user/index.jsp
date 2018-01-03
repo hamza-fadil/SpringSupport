@@ -18,9 +18,8 @@
       <td><p>&nbsp;</p>
         <h1>Site de support informatique pour la société X.</h1>
         <p class="description">L'application permet de remonter l'information vers le département informatique le plus rapidement possible, en permettant à l'utilisateurs d'avoir accès a un suivi des tickets.</p>
-        <p>Plus de détails pour l'utilisation du site <a href="howto.html">ici</a>.</p>
-      <p>Pour s'inscrire cliquez <a href="inscription">ici</a>, la connexion c'est par <a href="/login">ici</a>.</p>
-      <p>Cordialement, le département informatique.</p></td>
+        
+              <p>Cordialement, le département informatique.</p></td>
     </tr>
   </tbody>
 </table>

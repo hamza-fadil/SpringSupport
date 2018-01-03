@@ -23,6 +23,8 @@ public class Ticket implements java.io.Serializable {
 	private String contTicket;
 	private String titreTicket;
 	private String typeTicket;
+	@Column
+	private String etatTicket;
 	private Set<Fichier> fichiers = new HashSet<Fichier>(0);
 	private Set<Conversation> conversations = new HashSet<Conversation>(0);
 	private Set<Rapport> rapport = new HashSet<Rapport>(0);
@@ -47,10 +49,12 @@ public class Ticket implements java.io.Serializable {
 
 
 
+
+
 	@Override
 	public String toString() {
 		return "Ticket [idTicket=" + idTicket + ", contTicket=" + contTicket + ", titreTicket=" + titreTicket
-				+ ", typeTicket=" + typeTicket + "]";
+				+ ", typeTicket=" + typeTicket + ", etatTicket=" + etatTicket + "]";
 	}
 
 	@Id
@@ -126,6 +130,14 @@ public class Ticket implements java.io.Serializable {
 	}
 	public void setRapport(Set<Rapport> rapport) {
 		this.rapport = rapport;
+	}
+
+	public String getEtatTicket() {
+		return etatTicket;
+	}
+
+	public void setEtatTicket(String etatTicket) {
+		this.etatTicket = etatTicket;
 	}
 	
 

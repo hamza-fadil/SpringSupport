@@ -25,8 +25,6 @@ public class MainController {
 	@RequestMapping("/")
 	public String users(ModelMap model,HttpServletRequest request) {
 		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		  User user=(User)auth.getPrincipal(); 
-//		  String role = user.getTypeUser();
 		  if (request.isUserInRole("USER")) {
 			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
 				model.addAttribute("username", userDetail.getUsername());
