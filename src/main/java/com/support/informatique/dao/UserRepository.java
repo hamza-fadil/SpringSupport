@@ -21,10 +21,11 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	User findById(@Param("x") Integer id);
 	@Query("Select u from User u where u.username=:x")
 	User findByUsername(@Param("x") String username);
+	@Query("Select u from User u where u.typeUser=:x")
+	Iterable<User> findTech(@Param("x") String type);
 	@Transactional
 	@Modifying
 	@Query("Delete User u where u.idUser=:x")
 	void deletebyId(@Param("x") Integer id);
-	
 
 }

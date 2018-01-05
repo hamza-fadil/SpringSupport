@@ -1,8 +1,12 @@
 package com.support.informatique.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -34,25 +38,55 @@ public class TelephoneController {
 	}
 
     @RequestMapping(value = { "/newTelephone" }, method = RequestMethod.GET)
-    public String newProduit(ModelMap model) {
+    public String newProduit(ModelMap model,HttpServletRequest request) {
         Telephone telephone = new Telephone();
         model.addAttribute("telephone", telephone);
         model.addAttribute("edit", false);
         model.addAttribute("marques",marqueService.findAll() );
         model.addAttribute("marque",marqueService.findName() );
-        return "telephone";
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	if (request.isUserInRole("ADMIN"))
+		  {	
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());	
+			  return "admin/telephone"; 
+			  
+		  }
+		  else if (request.isUserInRole("TECH"))
+		  {
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());
+			  return "tech/telephone"; 
+			  	
+		  }
+		return "/403";
     }
  
     
     @RequestMapping(value = { "/newTelephone" }, method = RequestMethod.POST)
     public String saveProduit(@Valid Telephone telephone, BindingResult result,
-            ModelMap model) {
+            ModelMap model,HttpServletRequest request) {
     	if (result.hasErrors()) {
             return "telephone";
         }
         telephoneService.save(telephone);
         
-        return "redirect:/telephones";   
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	if (request.isUserInRole("ADMIN"))
+		  {	
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());	
+			  return "redirect:/admin/parcs"; 
+			  
+		  }
+		  else if (request.isUserInRole("TECH"))
+		  {
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());
+			  return "redirect:/tech/parcs"; 
+			  	
+		  }
+		return "/403";  
     }
     
 

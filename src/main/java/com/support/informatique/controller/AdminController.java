@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.support.informatique.entities.Ticket;
 import com.support.informatique.entities.User;
+import com.support.informatique.service.ImprimanteService;
+import com.support.informatique.service.MaterielService;
+import com.support.informatique.service.OrdinateurService;
+import com.support.informatique.service.TachesService;
 import com.support.informatique.service.TicketService;
 import com.support.informatique.service.UserService;
 
@@ -29,6 +33,14 @@ public class AdminController {
 	private UserService userService;
 	@Autowired
 	private TicketService ticketService;
+	@Autowired
+	private TachesService tachesService;
+	@Autowired
+	private MaterielService materielService;
+	@Autowired
+	private OrdinateurService ordinateurService;
+	@Autowired
+	private ImprimanteService imprimanteService;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	@RequestMapping("/admin/index")
@@ -55,7 +67,6 @@ public class AdminController {
 			model.addAttribute("username", userDetail.getUsername());	
 			
         User user = userService.findOne(idUser);
-        System.out.println(user.getCreateTime());
         model.addAttribute("pass", userDetail.getPassword() );
         model.addAttribute("user", user);
         model.addAttribute("edit", true);
@@ -68,12 +79,12 @@ public class AdminController {
             ModelMap model, @PathVariable int idUser) {
     	User oldUser = userService.findById(idUser);
     	user.setCreateTime(oldUser.getCreateTime());
-    	
-    	if (user.getPassword()!= oldUser.getPassword()) {
-    		user.setPassword(passwordEncoder.encode(user.getPassword()));
+    	if (user.getPassword().equals(oldUser.getPassword())) {
+    		user.setPassword(oldUser.getPassword());
 		}
     	else {
-    		user.setPassword(oldUser.getPassword());
+    		System.out.println("changer");
+    		user.setPassword(passwordEncoder.encode(user.getPassword()));
     	}
         if (result.hasErrors()) {
             return "/admin/user";
@@ -148,14 +159,32 @@ public class AdminController {
 		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			UserDetails userDetail = (UserDetails) auth.getPrincipal();
 			model.addAttribute("username", userDetail.getUsername());	
+			model.addAttribute("taches", tachesService.findAll());
 		return "/admin/taches";
 	}
-	@RequestMapping("/admin/parc")
+	@RequestMapping("/admin/parcs")
 	public String parc(ModelMap model) {
 		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			UserDetails userDetail = (UserDetails) auth.getPrincipal();
 			model.addAttribute("username", userDetail.getUsername());	
-		return "/admin/parc";
+			model.addAttribute("materiels",materielService.findAll());
+		return "/admin/parcs";
+	}
+	@RequestMapping("/admin/ordinateurs")
+	public String ordinateurs(ModelMap model) {
+		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			model.addAttribute("username", userDetail.getUsername());	
+			model.addAttribute("ordinateurs",ordinateurService.findAll());
+		return "/admin/ordinateurs";
+	}
+	@RequestMapping("/admin/imprimantes")
+	public String imprimantes(ModelMap model) {
+		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			model.addAttribute("username", userDetail.getUsername());	
+			model.addAttribute("imprimantes",imprimanteService.findAll());
+		return "/admin/ordinateurs";
 	}
 	@RequestMapping("/admin/newsletter")
 	public String newsletter(ModelMap model) {

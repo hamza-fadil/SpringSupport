@@ -45,6 +45,10 @@ public class UserMetierImpl implements UserService {
 		return userRepository.exists(id);
 	}
 
+	public Iterable<User> findTech(String type) {
+		return userRepository.findTech(type);
+	}
+
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.UserService#findAll()
 	 */

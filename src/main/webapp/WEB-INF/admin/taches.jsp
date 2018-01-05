@@ -13,26 +13,24 @@
 <br>
 	   <table class="table-hover table-dark table-striped mx-2" style="width:100%">
         <tr>
-            <td>Email</td><td>Nom d'utilisateur</td><td>type Utilisateur</td><td>Actif</td><td>Date de création</td><td>Editer</td><td>Supprimer</td>
+            <td>Nom Taches</td><td>Attribué à</td><td>Description</td><td>Fait</td><td>Editer</td><td>Supprimer</td>
         </tr>
-        <c:forEach items="${users}" var="p">
+        <c:forEach items="${taches}" var="p">
             <tr>
-            <td>${p.email}</td>
-            <td>${p.username}</td>
-            <td>${p.typeUser}</td>
-            <td><c:if test="${p.enabled ==1}">Oui</c:if><c:if test="${p.enabled ==0}">Non</c:if></td>
-            <td>${p.createTime}</td>
-          <td><a href="<c:url value='/edit-${p.idUser}-User' />">edit</a></td>
-            <td><a href="<c:url value='/delete-${p.idUser}-User' />">delete</a></td>
+            <td>${p.nomTaches}</td>
+            <td>${p.user.username}</td>
+            <td>${p.descTaches}</td>
+            <td><c:if test="${p.faitTaches ==1}">Oui</c:if><c:if test="${p.faitTaches ==0}">Non</c:if></td>
+          <td><a href="<c:url value='/edit-${p.idTaches}-Tache' />">edit</a></td>
+            <td><a href="<c:url value='/delete-${p.idTaches}-Tache' />">delete</a></td>
             </tr>
         </c:forEach>
     </table>
 
     <br><br>
-	<p><a href="<c:url value='/newUser' />">Ajouter un nouveau user</a></p>
+	<p><a href="<c:url value='/newTaches' />">Ajouter une nouvelle tache</a></p>
 
 	<br>
-	<a href="<c:url value='/' />">Index</a>
 	
 </body>
 

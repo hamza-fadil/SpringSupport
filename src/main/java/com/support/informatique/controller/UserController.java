@@ -80,8 +80,9 @@ public class UserController {
  
         if (result.hasErrors()) {
         	model.addAttribute("emaildupliqué", true);
-            return "tests/user";
+            return "admin/user";
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
         
         return "redirect:/admin/users";   

@@ -23,7 +23,7 @@ public class Taches implements java.io.Serializable {
 	@Column
 	private String descTaches;
 	@Column
-	private Boolean faitTaches;
+	private String faitTaches;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id_user", nullable = false) 
 	private User user;
@@ -32,7 +32,7 @@ public class Taches implements java.io.Serializable {
 	public Taches(User user) {
 		this.user = user;
 	}
-	public Taches(User user, String nomTaches, String descTaches, Boolean faitTaches) {
+	public Taches(User user, String nomTaches, String descTaches, String faitTaches) {
 		this.user = user;
 		this.descTaches = descTaches;
 		this.nomTaches = nomTaches;
@@ -56,10 +56,10 @@ public class Taches implements java.io.Serializable {
 	public void setDescTaches(String descTaches) {
 		this.descTaches = descTaches;
 	}
-	public Boolean getFaitTaches() {
+	public String getFaitTaches() {
 		return faitTaches;
 	}
-	public void setFaitTaches(Boolean faitTaches) {
+	public void setFaitTaches(String faitTaches) {
 		this.faitTaches = faitTaches;
 	}
 	public User getUser() {

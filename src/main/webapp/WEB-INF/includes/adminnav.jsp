@@ -6,7 +6,7 @@
 		<li><a href="/admin/ticket" class="nav-link">Tickets</a></li>
 		<li><a href="/admin/users" class="nav-link">Utilisateurs</a></li>
 		<li><a href="/admin/taches" class="nav-link">Taches</a></li>
-		<li><a href="/admin/parc" class="nav-link">Parc informatique</a></li>
+		<li><a href="/admin/parcs" class="nav-link">Parc informatique</a></li>
 		<li><a href="/admin/newsletter" class="nav-link">Newsletter</a></li>
 		<li><a href="/admin/report" class="nav-link">Rapports</a></li>
 		<li><a href="/admin/tests" class="nav-link">Tests</a></li>

@@ -21,7 +21,7 @@
             <td>${p.idMateriel}</td>
             <td>${p.serieMateriel }</td>
             <td>${p.reparationIdReparation}</td>
-          <td><a href="<c:url value='/view-${p.idMateriel}-Materiel' />">Afficher</a></td>
+          	<td><a href="<c:url value='/view-${p.idMateriel}-Materiel' />">Afficher</a></td>
             </tr>
         </c:forEach>
     </table>

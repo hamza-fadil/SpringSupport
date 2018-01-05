@@ -52,5 +52,6 @@ public interface UserService {
 	String findName(String name);
 	
 	User findByUsername(String username);
+	Iterable<User> findTech(String type);
 
 }
