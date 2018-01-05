@@ -19,17 +19,20 @@
 			<div class="bg-danger">${msg}</div>
 		</c:if>
 		<br>
-		<form name='loginForm' action="<c:url value='/login' />" method='POST'>
-				<div class="form-group">
+		
+		<form name='loginForm' action="<c:url value='/login' />" method='POST' class="form-signin">
+		<div class="form-row">
+				<div class="form-group col">
 				<input type='text' name='username' class="form-control" placeholder="Utilisateur" />
 				</div>
-				<div class="form-group">
+				<div class="form-group col">
 				<input type='password' name='password' class="form-control" placeholder="Mot de passe" />
 				</div>
-				<div class="form-group">
+				<div class="form-group col">
 				<input name="submit" type="submit" value="Se connecter" class="btn btn-success" />
 				</div>
 		  		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		</div>
 	</form>
 	</div>
 
