@@ -6,6 +6,7 @@
 <head>
  	<title>Page d'acceuil</title>
 	<jsp:include page="includes/head.jsp" />
+	
 </head>
 <body>
 <jsp:include page="includes/nav.jsp" />
@@ -26,25 +27,32 @@
   		<strong>Erreur!</strong> Utilisateur dupliqué.
 	</div>
 </c:if>
-
+<c:if test="${confirmPassword }">
+	<div class="alert alert-danger">
+  		<strong>Erreur!</strong> Les mots de passe ne sont pas indentique.
+	</div>
+</c:if>
 
     <form:form method="POST" modelAttribute="user">      
 			<div class="form-group">
-                <form:input path="email" id="email" placeholder="Email" class="form-control"/>
+                <form:input path="email" type="email" id="email" placeholder="Email" class="form-control" required="true"/>
                 <form:errors path="email" cssClass="has-error has-feedback"/>
             </div>
             
 			<div class="form-group">	
-                <form:input path="username" id="username" placeholder="Nom d'utilisateur" class="form-control"/>
+                <form:input path="username" id="username" placeholder="Nom d'utilisateur" class="form-control" required="true"/>
                 <form:errors path="username" cssClass="has-error has-feedback"/>
             </div>
             
 			<div class="form-group">
-			
-                <form:password path="password" id="password" placeholder="Mot de passe" class="form-control"/>
+                <form:password path="password" id="password" placeholder="Mot de passe" class="form-control" required="true"/>
+                <%--  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" Pattern pour validation--%> 
                 <form:errors path="password" cssClass="has-error "/>
             </div>   
-
+			<div class="form-group">
+                <form:password path="confirmPassword" id="confirmPassword" placeholder="Confirmer Mot de passe" class="form-control" required="true"/>
+                <form:errors path="confirmPassword" cssClass="has-error "/>
+            </div>   
            	<div class="form-group">
             <input type="submit" value="S'enregistrer" class="btn btn-success"/>
             </div>
@@ -54,13 +62,5 @@
     <br/>
     <br/>
 
-
-<table width="100%" border="1" class="footer">
-  <tbody>
-    
-      <td class="foot"> © 2017 Département des Systèmes de l'Information
-    
-  </tbody>
-</table>
 </body>
 </html>

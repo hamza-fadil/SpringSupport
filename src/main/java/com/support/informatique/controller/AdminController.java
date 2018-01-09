@@ -23,7 +23,9 @@ import com.support.informatique.entities.User;
 import com.support.informatique.service.ImprimanteService;
 import com.support.informatique.service.MaterielService;
 import com.support.informatique.service.OrdinateurService;
+import com.support.informatique.service.RapportService;
 import com.support.informatique.service.TachesService;
+import com.support.informatique.service.TelephoneService;
 import com.support.informatique.service.TicketService;
 import com.support.informatique.service.UserService;
 
@@ -40,7 +42,11 @@ public class AdminController {
 	@Autowired
 	private OrdinateurService ordinateurService;
 	@Autowired
+	private TelephoneService telephoneService;
+	@Autowired
 	private ImprimanteService imprimanteService;
+	@Autowired
+	private RapportService rapportService;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	@RequestMapping("/admin/index")
@@ -178,13 +184,21 @@ public class AdminController {
 			model.addAttribute("ordinateurs",ordinateurService.findAll());
 		return "/admin/ordinateurs";
 	}
+	@RequestMapping("/admin/telephones")
+	public String telephones(ModelMap model) {
+		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			model.addAttribute("username", userDetail.getUsername());	
+			model.addAttribute("telephones",telephoneService.findAll());
+		return "/admin/telephones";
+	}
 	@RequestMapping("/admin/imprimantes")
 	public String imprimantes(ModelMap model) {
 		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			UserDetails userDetail = (UserDetails) auth.getPrincipal();
 			model.addAttribute("username", userDetail.getUsername());	
 			model.addAttribute("imprimantes",imprimanteService.findAll());
-		return "/admin/ordinateurs";
+		return "/admin/imprimantes";
 	}
 	@RequestMapping("/admin/newsletter")
 	public String newsletter(ModelMap model) {
@@ -198,6 +212,8 @@ public class AdminController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetail = (UserDetails) auth.getPrincipal();
 		model.addAttribute("username", userDetail.getUsername());	
+		model.addAttribute("rapports",rapportService.findAll());
 		return "/admin/report";
 	}
+	
 }

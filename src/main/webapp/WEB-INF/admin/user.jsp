@@ -19,18 +19,18 @@
         <form:input type="hidden" path="idUser" id="idUser"/>
 		
             	<div class="form-group mx-5">
-                <form:input class="form-control" placeholder="Email" path="email" id="email"/>
+                <form:input class="form-control" placeholder="Email" path="email" id="email" type="email" required="true"/>
                 <form:errors path="email" cssClass="error"/>
 				</div>
          
             
             	<div class="form-group mx-5">
-                <form:input class="form-control" placeholder="Nom d'utilisateur" path="username" id="username"/>
+                <form:input class="form-control" placeholder="Nom d'utilisateur" path="username" id="username" required="true"/>
                 <form:errors path="username" cssClass="error"/>
             	</div>
             
             	<div class="form-group mx-5">
-                <form:password class="form-control" placeholder="Mot de passe" path="password" id="password" value="${user.password }"/>
+                <form:password class="form-control" placeholder="Mot de passe" path="password" id="password" value="${user.password }" required="true"/>
                 <form:errors path="password" cssClass="error"/>
             	</div>
                	

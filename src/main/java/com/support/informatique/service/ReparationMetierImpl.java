@@ -19,6 +19,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#save(S)
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#save(S)
+	 */
 	@Override
 	public <S extends Reparation> S save(S entity) {
 		return ReparationRepository.save(entity);
@@ -29,6 +32,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	 */
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#save(java.lang.Iterable)
+	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#save(java.lang.Iterable)
 	 */
 	@Override
 	public <S extends Reparation> Iterable<S> save(Iterable<S> entities) {
@@ -41,6 +47,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#findOne(java.lang.Integer)
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#findOne(java.lang.Integer)
+	 */
 	@Override
 	public Reparation findOne(Integer id) {
 		return ReparationRepository.findOne(id);
@@ -51,6 +60,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	 */
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#exists(java.lang.Integer)
+	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#exists(java.lang.Integer)
 	 */
 	@Override
 	public boolean exists(Integer id) {
@@ -63,6 +75,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#deletebyId(java.lang.Integer)
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#deletebyId(java.lang.Integer)
+	 */
 	@Override
 	public void deletebyId(Integer id) {
 		ReparationRepository.deletebyId(id);
@@ -73,6 +88,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	 */
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#findById(int)
+	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#findById(int)
 	 */
 	@Override
 	public Reparation findById(int id) {
@@ -85,6 +103,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#findAll()
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#findAll()
+	 */
 	@Override
 	public Iterable<Reparation> findAll() {
 		return ReparationRepository.findAll();
@@ -95,6 +116,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	 */
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#findAll(java.lang.Iterable)
+	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#findAll(java.lang.Iterable)
 	 */
 	@Override
 	public Iterable<Reparation> findAll(Iterable<Integer> ids) {
@@ -107,6 +131,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#count()
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#count()
+	 */
 	@Override
 	public long count() {
 		return ReparationRepository.count();
@@ -117,6 +144,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	 */
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#delete(java.lang.Integer)
+	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#delete(java.lang.Integer)
 	 */
 	@Override
 	public void delete(Integer id) {
@@ -129,6 +159,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#delete(com.support.informatique.entities.Reparation)
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#delete(com.support.informatique.entities.Reparation)
+	 */
 	@Override
 	public void delete(Reparation entity) {
 		ReparationRepository.delete(entity);
@@ -140,6 +173,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#delete(java.lang.Iterable)
 	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#delete(java.lang.Iterable)
+	 */
 	@Override
 	public void delete(Iterable<? extends Reparation> entities) {
 		ReparationRepository.delete(entities);
@@ -150,6 +186,9 @@ public class ReparationMetierImpl implements ReparationService  {
 	 */
 	/* (non-Javadoc)
 	 * @see com.support.informatique.metier.ReparationService#deleteAll()
+	 */
+	/* (non-Javadoc)
+	 * @see com.support.informatique.service.RapportService#deleteAll()
 	 */
 	@Override
 	public void deleteAll() {

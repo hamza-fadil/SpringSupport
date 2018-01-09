@@ -16,7 +16,7 @@
 <div class="form-group">
     	<form:form method="POST" modelAttribute="ticket">
     		<div class="form-control">
-			<form:input path="titreTicket" id="titreTicket" class="form-control" placeholder="Titre" />
+			<form:input path="titreTicket" id="titreTicket" class="form-control" placeholder="Titre" required="true" />
 	        <form:errors path="titreTicket" cssClass="error"/>
 	        </div>
 	        
@@ -29,7 +29,7 @@
             </div>
             
 			<div class="form-control">
-	        <form:textarea path="contTicket" id="contTicket" rows="5" class="form-control" placeholder="Contenu du ticket"/>
+	        <form:textarea path="contTicket" id="contTicket" rows="5" class="form-control" placeholder="Contenu du ticket" required="true"/>
 	        <form:errors path="contTicket" cssClass="error"/>
 	        </div>
 	        <div class="form-control ">

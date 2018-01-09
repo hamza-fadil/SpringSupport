@@ -27,10 +27,13 @@ public class User implements java.io.Serializable {
 	private String password;
 	private String typeUser;
 	private String username;
+	private String confirmPassword;
 	@Column
 	private String enabled;
 	private Set<Ticket> tickets = new HashSet<Ticket>(0);
 	private Set<Taches> taches = new HashSet<Taches>(0);
+	private Set<Rapport> rapports = new HashSet<Rapport>(0);
+
 	private Set<Reparation> reparations = new HashSet<Reparation>(0);
 	public User() {
 	}
@@ -48,7 +51,7 @@ public class User implements java.io.Serializable {
 		this.enabled = enabled;
 	}
 	public User(Date createTime, String email, String password, String typeUser, String username, Set<Ticket> tickets,
-			Set<Reparation> reparations,Set<Taches> taches) {
+			Set<Reparation> reparations,Set<Taches> taches,Set<Rapport> rapports) {
 		this.createTime = createTime;
 		this.email = email;
 		this.password = password;
@@ -57,6 +60,7 @@ public class User implements java.io.Serializable {
 		this.tickets = tickets;
 		this.reparations = reparations;
 		this.taches = taches;
+		this.rapports = rapports;
 	}
 	@Id
 	@GeneratedValue(strategy=IDENTITY)
@@ -132,6 +136,13 @@ public class User implements java.io.Serializable {
 	public void setTaches(Set<Taches> taches) {
 		this.taches = taches;
 	}
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<Rapport> getRapport() {
+		return this.rapports;
+	}
+	public void setRapport(Set<Rapport> rapports) {
+		this.rapports = rapports;
+	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	public Set<Reparation> getReparations() {
@@ -145,5 +156,12 @@ public class User implements java.io.Serializable {
 		return "User [idUser=" + idUser + ", createTime=" + createTime + ", email=" + email + ", password=" + password
 				+ ", typeUser=" + typeUser + ", username=" + username + "]";
 	}
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+	
 
 	}

@@ -13,7 +13,7 @@
 
 	   <table>
         <tr>
-            <td>ID Ordinateur</td><td>Marque Ordinateur</td><td>Espace disque</td><td>Processeur</td><td>Ram</td><td>Systeme exploitation</td><td>Numéro de série</td> <td>Editer</td><td>Supprimer</td>
+            <td>ID Materiel</td><td>Marque Imprimante</td><td>Gère couleurs</td><td>Gère le fax</td><td>Gère le scanner</td><td>Format papier</td><td>Vitesse d'impression</td><td>Numéro de série</td> <td>Editer</td><td>Supprimer</td>
         </tr>
                <c:forEach items="${imprimantes}" var="p">
 							<tr>

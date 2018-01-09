@@ -50,11 +50,11 @@ public class UserController {
 		EmailValidator validator = EmailValidator.getInstance();
 		String EmailTrouv = userService.findByEmail(user.getEmail());
 		String UserTrouv = userService.findName(user.getUsername());
+		boolean confirmPassword = user.getConfirmPassword().equals(user.getPassword());
 		Boolean validEmail = validator.isValid(user.getEmail());
 		user.setEnabled("1");
         user.setTypeUser("ROLE_USER");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        
 	    if(!validEmail) {
 	    	model.addAttribute("emailInv",true);
 	    	return "inscription";
@@ -65,6 +65,10 @@ public class UserController {
 	    }
 	    else if (UserTrouv != null) {
 	    	model.addAttribute("userTrouv",true);
+	    	return "inscription";
+	    }
+	    else if (!confirmPassword) {
+	    	model.addAttribute("confirmPassword",true);
 	    	return "inscription";
 	    }
 	    else {

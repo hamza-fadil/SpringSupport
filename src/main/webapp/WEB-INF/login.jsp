@@ -23,10 +23,10 @@
 		<form name='loginForm' action="<c:url value='/login' />" method='POST' class="form-signin">
 		<div class="form-row">
 				<div class="form-group col">
-				<input type='text' name='username' class="form-control" placeholder="Utilisateur" />
+				<input type='text' name='username' class="form-control" placeholder="Utilisateur"  required="true"/>
 				</div>
 				<div class="form-group col">
-				<input type='password' name='password' class="form-control" placeholder="Mot de passe" />
+				<input type='password' name='password' class="form-control" placeholder="Mot de passe" required="true" />
 				</div>
 				<div class="form-group col">
 				<input name="submit" type="submit" value="Se connecter" class="btn btn-success" />
