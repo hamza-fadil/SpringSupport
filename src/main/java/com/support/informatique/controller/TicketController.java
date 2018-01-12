@@ -1,20 +1,24 @@
 package com.support.informatique.controller;
 
-	import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
-	import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-	import org.springframework.ui.ModelMap;
-	import org.springframework.validation.BindingResult;
-	import org.springframework.web.bind.annotation.RequestMapping;
-	import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.support.informatique.entities.Ticket;
 import com.support.informatique.entities.User;
+import com.support.informatique.service.HibernateSearchService;
 import com.support.informatique.service.TicketService;
 import com.support.informatique.service.UserService;
 
@@ -25,14 +29,24 @@ import com.support.informatique.service.UserService;
 		private TicketService ticketService;
 		@Autowired
 		private UserService userService;
+	    @Autowired
+	    private HibernateSearchService searchservice;
 		
-		
-		@RequestMapping("/tickets")
-		public String tickets(ModelMap model) {
-			
-			model.addAttribute("tickets",ticketService.findAll() );
-			return "tests/tickets";
-		}
+	    @RequestMapping(value = { "/search" }, method = RequestMethod.GET)
+	    public String search(@RequestParam(value = "search", required = false) String q, Model model) {
+	        List<Ticket> searchResults = null;
+	        try {
+	            searchResults = searchservice.fuzzySearch(q);
+
+	        } catch (Exception ex) {
+	            // here you should handle unexpected errors
+	            // ...
+	            // throw ex;
+	        }
+	        model.addAttribute("search", searchResults);
+	        return "/admin/searchticket";
+
+	    }
 		 
 	    @RequestMapping(value = { "/newTicket" }, method = RequestMethod.GET)
 	    public String newTicket(ModelMap model,HttpServletRequest request) {
@@ -114,7 +128,6 @@ import com.support.informatique.service.UserService;
 				  	
 			  }
 			return "/403";
-
-		
-	}
+	    }
+	    
 	}

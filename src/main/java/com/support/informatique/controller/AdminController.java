@@ -134,24 +134,13 @@ public class AdminController {
 			model.addAttribute("username", userDetail.getUsername());	
         return "tests/ticket";
     }
-     
-    /*
-     * This method will be called on form submission, handling POST request for
-     * updating Produit in database. It also validates the user input
-     */
     @RequestMapping(value = { "/edit-{idTicket}-Ticket" }, method = RequestMethod.POST)
     public String updateTicket(@Valid Ticket ticket, BindingResult result,
             ModelMap model, @PathVariable int idTicket) {
- 
         if (result.hasErrors()) {
             return "/admin/ticket";
         }
- 
-       
- 
         ticketService.save(ticket);
- 
-        
         return "redirect:admin/tickets";
     }
     @RequestMapping(value = {"delete-{idTicket}-Ticket"}, method = RequestMethod.GET)
@@ -159,7 +148,6 @@ public class AdminController {
     	ticketService.deletebyId(idTicket);
     	return "redirect:admin/tickets";
     }
-    
 	@RequestMapping("/admin/taches")
 	public String taches(ModelMap model) {
 		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
