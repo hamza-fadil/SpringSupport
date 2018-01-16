@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.apache.commons.validator.routines.EmailValidator;
-
 import com.support.informatique.entities.User;
 import com.support.informatique.service.UserService;
 @Controller
@@ -24,7 +23,6 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
 	
     @RequestMapping(value = { "/newUser" }, method = RequestMethod.GET)
     public String newProduit(ModelMap model) {
@@ -44,7 +42,6 @@ public class UserController {
     	model.addAttribute(user);
         return "inscription";
     }
- 
 	@RequestMapping(value = { "/inscription" }, method = RequestMethod.POST)
     public String newUser(@Valid User user, ModelMap model) {
 		EmailValidator validator = EmailValidator.getInstance();
@@ -98,4 +95,37 @@ public class UserController {
     	userService.deletebyId(idUser);
     	return "redirect:/admin/users";
     }
+    @RequestMapping(value = { "/edit-{idUser}-User" }, method = RequestMethod.POST)
+    public String updateUser(@Valid User user, BindingResult result,
+            ModelMap model, @PathVariable int idUser) {
+    	User oldUser = userService.findById(idUser);
+    	user.setCreateTime(oldUser.getCreateTime());
+    	if (user.getPassword().equals(oldUser.getPassword())) {
+    		user.setPassword(oldUser.getPassword());
+		}
+    	else {
+    		System.out.println("changer");
+    		user.setPassword(passwordEncoder.encode(user.getPassword()));
+    	}
+        if (result.hasErrors()) {
+            return "/admin/user";
+        }
+        userService.save(user);        
+        return "redirect:admin/users";
+ }
+    @RequestMapping(value = { "/edit-{idUser}-User" }, method = RequestMethod.GET)
+    public String editUsers(@PathVariable int idUser, ModelMap model) {
+		  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			model.addAttribute("username", userDetail.getUsername());	
+			
+        User user = userService.findOne(idUser);
+        model.addAttribute("pass", userDetail.getPassword() );
+        model.addAttribute("user", user);
+        model.addAttribute("edit", true);
+        return "/admin/user";
+    }
+    
 }
+
+

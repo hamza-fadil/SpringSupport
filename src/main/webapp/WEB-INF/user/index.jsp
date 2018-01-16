@@ -6,31 +6,23 @@
 <head>
 <title>Index utilisateur</title>
 <jsp:include page="../includes/userhead.jsp" />
+
 </head>
      
 
 <body>
 <jsp:include page="../includes/usernav.jsp" />
 	<br><br>
-<table width="100%" border="1">
-  <tbody>
-    <tr>
-      <td><p>&nbsp;</p>
+<div class="container">
         <h1>Site de support informatique pour la société X.</h1>
-        <p class="description">L'application permet de remonter l'information vers le département informatique le plus rapidement possible, en permettant à l'utilisateurs d'avoir accès a un suivi des tickets.</p>
-        
-              <p>Cordialement, le département informatique.</p></td>
-    </tr>
-  </tbody>
-</table>
+        <br>
+        <p>L'application permet de remonter l'information vers le département informatique le plus rapidement possible, en permettant à l'utilisateurs d'avoir accès a un suivi des tickets.</p>
+      	<p>Pour ajouter un ticket cliquez <a href="/newTicket">ici</a>.</p>
+      	<p>Cordialement, le département informatique.</p>
+</div>
 
-<table width="100%" border="1">
-  <tbody>
-    <tr>
-      <td> © 2017 Département des Systèmes de l'Information</td>
-    </tr>
-  </tbody>
-</table>
+
+<jsp:include page="../includes/footer.jsp" />
 
 </body>
 </html>

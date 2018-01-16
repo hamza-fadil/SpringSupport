@@ -4,31 +4,74 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
   <head>
- 	<title>NewsLetter</title>
+ 	<title>Tickets</title>
 	<jsp:include page="../includes/adminhead.jsp" />
 </head>
 <body>
 <jsp:include page="../includes/adminnav.jsp" />
 <br>
-	   <table class="table-hover table-dark table-striped mx-2" style="width:100%">
-        <tr>
-            <td>Titre</td><td>Contenu</td><td>Utilisateur</td><td>Type ticket</td><td>Editer</td><td>Rapport</td><td>Supprimer</td>
+	<div class="container">
+	   <table id="page" class="table table-hover table-dark table-striped " >
+	   <thead>
+        <tr class="font-weight-bold">
+            <th>Titre</th><th>Contenu</th><th>Utilisateur</th><th>Type ticket</th><th class="no-sort">Editer</th><th class="no-sort">Rapport</th><th class="no-sort">Fermer/Ouvrir</th>
         </tr>
+        </thead>
+        <tbody id="myTable">
         <c:forEach items="${tickets}" var="p">
-            <tr class='clickable-row' data-href='#'>
+        <tr>
             <td>${p.titreTicket}</td>
             <td>${p.contTicket}</td>
             <td>${p.user.username}</td>
             <td>${p.typeTicket}</td>
-          <td><a href="<c:url value='/edit-${p.idTicket}-Ticket' />">Modifier</a></td>
-          <td><a href="<c:url value='/add-${p.idTicket}-Rapport' />">Ajouter</a></td>
-            <td><a href="<c:url value='/delete-${p.idTicket}-Ticket' />">Supprimer</a></td>
-            </tr>
+			<td>
+          	<c:choose>
+    			<c:when test="${not empty p.rapport}">
+        			<a class="btn btn-success" href="<c:url  value='/add-${p.idTicket}-Rapport' />">Ajouter</a> 
+    			</c:when>    
+    			<c:otherwise>
+    				Present
+    			</c:otherwise>
+			</c:choose>
+          </td>
+          <td><a class="btn btn-warning" href="<c:url  value='/edit-${p.idTicket}-Ticket' />">Modifier</a></td>
+          
+          <td>
+          	<c:if test = "${p.etatTicket== 'close'}">
+          		<a class="btn btn-success" href="<c:url  value='/open-${p.idTicket}-Ticket' />">Ouvrir</a>
+          	</c:if>
+          	<c:if test = "${p.etatTicket== 'open'}">
+          		<a class="btn btn-danger" href="<c:url  value='/close-${p.idTicket}-Ticket' />">Fermer</a>
+          	</c:if>
+          </td>
+         </tr>
         </c:forEach>
+        </tbody>
     </table>
-    <br><br>
-	<p><a href="<c:url value='/newTicket' />">Ajouter un nouveau ticket</a></p>
+    </div>
+	<p><a class="btn btn-success float-right mx-5" href="<c:url value='/newTicket' />">Ajouter un nouveau ticket</a></p>
 	<br>
+		<script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+		</script>
+		<script>
+		$.noConflict();
+		$(document).ready(function () {
+		    $('#page').DataTable({
+		    	"language": {
+		    		"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+		        }
+		    });
+	        
+		});
+		</script>
 </body>
 
 </html>

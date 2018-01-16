@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-
 @Controller
 public class MainController {
+	
+
 
 	@RequestMapping("/")
 	public String users(ModelMap model,HttpServletRequest request) {
@@ -95,5 +96,6 @@ public class MainController {
 	public String howto(ModelMap model) {
 		return "howto";
 	}
+
 
 }

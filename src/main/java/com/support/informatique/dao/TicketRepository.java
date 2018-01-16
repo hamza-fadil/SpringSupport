@@ -18,11 +18,13 @@ import com.support.informatique.entities.User;
 
 @Repository
 public interface TicketRepository extends CrudRepository<Ticket, Integer> {
+	@Transactional
 	@Query("Select u from Ticket u where u.user=:x")
 	List<Ticket> findByuserId(@Param("x") User user);
-	
+	@Transactional
 	@Query("Select u from Ticket u where u.idTicket=:x")
 	Ticket findById(@Param("x") Integer id);
+	@Transactional
 	@Query("Select u from Ticket u where u.user=:x")
 	Ticket findByUser(@Param("x") User user);
 	@Transactional

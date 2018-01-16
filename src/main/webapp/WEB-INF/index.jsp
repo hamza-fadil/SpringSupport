@@ -11,26 +11,15 @@
 <body>
 <jsp:include page="includes/nav.jsp" />
 	<br><br>
-<table >
-  <tbody>
-    <tr>
-      <td><p>&nbsp;</p>
+<div class="container">
         <h1>Site de support informatique pour la société X.</h1>
-        <p class="description">L'application permet de remonter l'information vers le département informatique le plus rapidement possible, en permettant à l'utilisateurs d'avoir accès a un suivi des tickets.</p>
+        <br>
+        <p>L'application permet de remonter l'information vers le département informatique le plus rapidement possible, en permettant à l'utilisateurs d'avoir accès a un suivi des tickets.</p>
         <p>Plus de détails pour l'utilisation du site <a href="howto.html">ici</a>.</p>
       <p>Pour s'inscrire cliquez <a href="inscription">ici</a>, la connexion c'est par <a href="/login">ici</a>.</p>
-      <p>Cordialement, le département informatique.</p></td>
-    </tr>
-  </tbody>
-</table>
+      <p>Cordialement, le département informatique.</p>
+</div>
 
-<table>
-  <tbody>
-    <tr>
-      <td> © 2017 Département des Systèmes de l'Information</td>
-    </tr>
-  </tbody>
-</table>
 
 </body>
 </html>

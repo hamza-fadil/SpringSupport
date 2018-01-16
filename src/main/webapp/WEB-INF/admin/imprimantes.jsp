@@ -5,16 +5,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
     <head>
- 	<title>NewsLetter</title>
+ 	<title>Imprimantes ${imp.serieMateriel}</title>
 	<jsp:include page="../includes/adminhead.jsp" />
 </head>
 <body>
 <jsp:include page="../includes/adminnav.jsp" />
-
-	   <table>
-        <tr>
-            <td>ID Materiel</td><td>Marque Imprimante</td><td>Gère couleurs</td><td>Gère le fax</td><td>Gère le scanner</td><td>Format papier</td><td>Vitesse d'impression</td><td>Numéro de série</td> <td>Editer</td><td>Supprimer</td>
+<h2 class=mx-5>Imprimantes :</h2><br>
+		<div class="container ">
+	   <table id="page" class="table table-hover table-dark table-striped " >
+	   <thead>
+        <tr class="font-weight-bold">
+            <th>ID Materiel</th><th>Marque Imprimante</th><th>Gère couleurs</th><th>Gère le fax</th><th>Gère le scanner</th><th>Format papier</th><th>Vitesse d'impression</th><th>Numéro de série</th> <th class="no-sort">Editer</th><th class="no-sort">Supprimer</th>
         </tr>
+        <tbody id="myTable">
                <c:forEach items="${imprimantes}" var="p">
 							<tr>
 					            <td>${p.idMateriel}</td>
@@ -25,14 +28,36 @@
 					            <td>${p.format_papier}</td>
 					            <td>${p.vitesse_impression}</td>
 					            <td>${p.serieMateriel}</td>
-					          	<td><a href="<c:url value='/edit-${p.idMateriel}-Imprimante' />">edit</a></td>
-					            <td><a href="<c:url value='/delete-${p.idMateriel}-Imprimante' />">delete</a></td>
+					          	<td><a class="btn btn-warning " href="<c:url value='/edit-${p.idMateriel}-Imprimante' />">Modifier</a></td>
+					            <td><a class="btn btn-danger" href="<c:url value='/delete-${p.idMateriel}-Imprimante' />">Supprimer</a></td>
 					         </tr>
 				</c:forEach>
+				</tbody>
   </table>
-	<p><a href="<c:url value='/newImprimante' />">Ajouter une nouvelle imprimante</a></p>
+  	<p><a class="btn btn-success float-right mx-5" href="<c:url value='/newImprimante' />">Ajouter une nouvelle imprimante</a></p>
+  </div>
 	<br>
-	
+		<script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+		</script>
+		<script>
+		$.noConflict();
+		$(document).ready(function () {
+		    $('#page').DataTable({
+		    	"language": {
+		    		"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+		        }
+		    });
+	        
+		});
+		</script>
 </body>
 
 </html>

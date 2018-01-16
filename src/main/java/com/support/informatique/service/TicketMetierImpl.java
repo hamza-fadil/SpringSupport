@@ -100,6 +100,7 @@ public class TicketMetierImpl implements TicketService {
 		return TicketRepository.findById(id);
 	}
 
+	@Override
 	public List<Ticket> findByuserId(User integer) {
 		return TicketRepository.findByuserId(integer);
 	}
@@ -115,6 +116,7 @@ public class TicketMetierImpl implements TicketService {
 		TicketRepository.deletebyId(id);
 	}
 
+	@Override
 	public Ticket findByUser(User username) {
 		return TicketRepository.findByUser(username);
 	}

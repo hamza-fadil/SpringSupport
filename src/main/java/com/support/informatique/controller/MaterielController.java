@@ -4,35 +4,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.support.informatique.entities.Imprimante;
-import com.support.informatique.entities.Materiel;
 import com.support.informatique.entities.Ordinateur;
-import com.support.informatique.entities.Taches;
 import com.support.informatique.entities.Telephone;
-import com.support.informatique.entities.Ticket;
-import com.support.informatique.entities.User;
 import com.support.informatique.service.ImprimanteService;
 import com.support.informatique.service.MaterielService;
 import com.support.informatique.service.OrdinateurService;
 import com.support.informatique.service.TelephoneService;
-import com.support.informatique.service.UserService;
 
 @Controller
 public class MaterielController {
 	@Autowired
 	private MaterielService materielService;
-	@Autowired
-	private UserService userService;
 	@Autowired
 	private OrdinateurService ordinateurService;
 	@Autowired

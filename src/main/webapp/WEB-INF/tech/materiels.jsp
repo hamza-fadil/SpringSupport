@@ -12,7 +12,7 @@
 <body>
 <jsp:include page="../includes/technav.jsp" />
 				
-	   <table border=1px>
+	   <table class="table table-hover table-dark table-striped ">
         <tr>
             <td>ID Materiel</td><td>Num série</td><td>reparationIdReparation</td><td>Afficher</td><td>Supprimer</td>
         </tr>
@@ -25,7 +25,7 @@
             </tr>
         </c:forEach>
     </table>
-    <a href="<c:url value='/tech/newMateriel' />">Ajouter du materiel</a>
+    <a class="btn btn-success float-right mx-5" href="<c:url value='/tech/newMateriel' />">Ajouter du materiel</a>
     <br><br>
 	<br>
 	<a href="<c:url value='/' />">Index</a>

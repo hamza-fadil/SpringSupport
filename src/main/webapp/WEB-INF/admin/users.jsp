@@ -4,17 +4,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
   <head>
- 	<title>NewsLetter</title>
+ 	<title>Utilisateurs</title>
 	<jsp:include page="../includes/adminhead.jsp" />
 </head>
 <body>
 <jsp:include page="../includes/adminnav.jsp" />
-
+<br>  
 <br>
-	   <table class="table-hover table-dark table-striped mx-2" style="width:100%">
-        <tr>
-            <td>Email</td><td>Nom d'utilisateur</td><td>type Utilisateur</td><td>Actif</td><td>Date de création</td><td>Editer</td><td>Supprimer</td>
+		<div class="container ">
+		  
+	   <table id="page" class="table table-hover table-dark table-striped " >
+	   <thead>
+        <tr class="font-weight-bold">
+        
+            <th>Email</th><th>Nom d'utilisateur</th><th>Type d'utilisateur</th><th>Actif</th><th>Date de création</th><th class="no-sort">Editer</th><th class="no-sort">Supprimer</th>
         </tr>
+        </thead>
+        <tbody id="myTable">
         <c:forEach items="${users}" var="p">
             <tr>
             <td>${p.email}</td>
@@ -22,17 +28,37 @@
             <td>${p.typeUser}</td>
             <td><c:if test="${p.enabled ==1}">Oui</c:if><c:if test="${p.enabled ==0}">Non</c:if></td>
             <td>${p.createTime}</td>
-          <td><a href="<c:url value='/edit-${p.idUser}-User' />">edit</a></td>
-            <td><a href="<c:url value='/delete-${p.idUser}-User' />">delete</a></td>
+          <td><a class="btn btn-warning" href="<c:url value='/edit-${p.idUser}-User' />">Modifier</a></td>
+            <td><a class="btn btn-danger" href="<c:url value='/delete-${p.idUser}-User' />">Supprimer</a></td>
             </tr>
         </c:forEach>
+        </tbody>
     </table>
-
-    <br><br>
-	<p><a href="<c:url value='/newUser' />">Ajouter un nouveau user</a></p>
-
-	<br>
-	
+    <br>
+    	<p><a class="btn btn-success float-right mx-5" href="<c:url value='/newUser' />">Ajouter un nouveau user</a></p>
+    
+</div>
+		<script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+		</script>
+		<script>
+		$.noConflict();
+		$(document).ready(function () {
+		    $('#page').DataTable({
+		    	"language": {
+		    		"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+		        }
+		    });
+	        
+		});
+		</script>
 </body>
 
 </html>

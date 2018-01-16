@@ -39,5 +39,6 @@
     </div>
     <br/>
     Revenir <a href="<c:url value='/user/ticket' />">Liste de tous les tickets</a>
+    <jsp:include page="../includes/footer.jsp" />
 </body>
 </html>

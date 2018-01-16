@@ -27,7 +27,11 @@
 	           		<form:option value="L">Logiciel</form:option>
             </form:select>
             </div>
-            
+			<div class="form-control" >
+	        <form:select path="etatTicket" class="form-control" required="true">
+	           		<form:option value="open" selected="true" >Ouvert</form:option>
+            </form:select>
+            </div>
 			<div class="form-control">
 	        <form:textarea path="contTicket" id="contTicket" rows="5" class="form-control" placeholder="Contenu du ticket" required="true"/>
 	        <form:errors path="contTicket" cssClass="error"/>
@@ -35,7 +39,6 @@
 	        <div class="form-control ">
 	        <input type="submit" value="Envoyer" class="btn btn-success"/>
 	        </div>
-	        
         </form:form>
     </div>
     <br/>

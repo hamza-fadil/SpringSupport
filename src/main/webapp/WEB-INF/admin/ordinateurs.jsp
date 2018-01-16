@@ -5,17 +5,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
     <head>
- 	<title>NewsLetter</title>
+ 	<title>Ordinateurs ${ordinateur.serieMateriel}</title>
 	<jsp:include page="../includes/adminhead.jsp" />
 </head>
 <body>
 <jsp:include page="../includes/adminnav.jsp" />
+<h2 class=mx-5>Ordinateurs :</h2><br>
+		<div class="container ">
 
-	   <table>
-        <tr>
-            <td>ID Ordinateur</td><td>Marque Ordinateur</td><td>Espace disque</td><td>Processeur</td><td>Ram</td><td>Systeme exploitation</td><td>Numéro de série</td> <td>Editer</td><td>Supprimer</td>
+	   <table id="page" class="table table-hover table-dark table-striped " >
+	   <thead>
+        <tr class="font-weight-bold">
+            <th>ID Ordinateur</th><th>Marque Ordinateur</th><th>Espace disque</th><th>Processeur</th><th>Ram</th><th>Systeme exploitation</th><th>Numéro de série</th> <th class="no-sort">Editer</th><th class="no-sort">Supprimer</th>
         </tr>
+        <tbody id="myTable">
                <c:forEach items="${ordinateurs}" var="p">
+					            <tr>
 					            <td>${p.idMateriel}</td>
 					            <td>${p.marque.nomMarque}</td>
 					            <td>${p.espaceDisque}</td>
@@ -23,13 +28,36 @@
 					            <td>${p.ram}</td>
 					            <td>${p.systemeExploitation}</td>
 					            <td>${p.serieMateriel}</td>
-					          	<td><a href="<c:url value='/edit-${p.idMateriel}-Ordinateur' />">edit</a></td>
-					            <td><a href="<c:url value='/delete-${p.idMateriel}-Ordinateur' />">delete</a></td>
+					          	<td><a class="btn btn-success" href="<c:url value='/edit-${p.idMateriel}-Ordinateur' />">Modifier</a></td>
+					            <td><a class="btn btn-danger" href="<c:url value='/delete-${p.idMateriel}-Ordinateur' />">Supprimer</a></td>
+					            </tr>
 				</c:forEach>
+		</tbody>
   </table>
-	<p><a href="<c:url value='/newOrdinateur' />">Ajouter un nouvel Ordinateur</a></p>
+  </div>
+	<p><a class="btn btn-success float-right mx-5" href="<c:url value='/newOrdinateur' />">Ajouter un nouvel Ordinateur</a></p>
 	<br>
-	
+		<script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+		</script>
+		<script>
+		$.noConflict();
+		$(document).ready(function () {
+		    $('#page').DataTable({
+		    	"language": {
+		    		"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+		        }
+		    });
+	        
+		});
+		</script>
 </body>
 
 </html>

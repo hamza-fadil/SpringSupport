@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.support.informatique.entities.Imprimante;
-import com.support.informatique.entities.Ordinateur;
-import com.support.informatique.entities.Telephone;
 import com.support.informatique.entities.Ticket;
 import com.support.informatique.entities.User;
 import com.support.informatique.service.TicketService;

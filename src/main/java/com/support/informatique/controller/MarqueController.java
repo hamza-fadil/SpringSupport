@@ -1,5 +1,6 @@
 package com.support.informatique.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class MarqueController {
  
     
     @RequestMapping(value = { "/newMarque" }, method = RequestMethod.POST)
-    public String saveProduit(@Valid Marque marque, BindingResult result,
+    public String saveMarque(@Valid Marque marque, BindingResult result,
             ModelMap model) {
  
         if (result.hasErrors()) {
@@ -51,35 +52,38 @@ public class MarqueController {
      * This method will provide the medium to update an existing Marque.
      */
     @RequestMapping(value = { "/edit-{idMarque}-Marque" }, method = RequestMethod.GET)
-    public String editTicket(@PathVariable int idMarque, ModelMap model) {
+    public String editMarque(@PathVariable int idMarque, ModelMap model) {
         Marque marque = marqueService.findOne(idMarque);
         model.addAttribute("marque", marque);
         model.addAttribute("edit", true);
         return "tests/marque";
     }
      
-    /*
-     * This method will be called on form submission, handling POST request for
-     * updating Marque in database. It also validates the marque input
-     */
     @RequestMapping(value = { "/edit-{idMarque}-Marque" }, method = RequestMethod.POST)
-    public String updateTicket(@Valid Marque marque, BindingResult result,
+    public String updateMarque(@Valid Marque marque, BindingResult result,
             ModelMap model, @PathVariable int idMarque) {
  
         if (result.hasErrors()) {
             return "tests/marque";
         }
- 
-       
- 
         marqueService.save(marque);
- 
-        
         return "redirect:/tests/marques";
     }
     @RequestMapping(value = {"delete-{idMarque}-Marque"}, method = RequestMethod.GET)
-    public String deleteTicket(@Valid Marque marque,@PathVariable int idMarque) {
+    public String deleteTicket(@Valid Marque marque,@PathVariable int idMarque,HttpServletRequest request) {
     	marqueService.deletebyId(idMarque);
-    	return "redirect:/tests/marques";
+	    if (request.isUserInRole("USER")) {
+	        return "redirect:user/tickets";
+	  } 
+	    else if (request.isUserInRole("ADMIN"))
+	  {	
+        return "redirect:admin/tickets";
+	  }
+	  else if (request.isUserInRole("TECH"))
+	  {		  
+		  return "redirect:tech/tickets";
+	  }
+	    return "/403";
     }
-}
+    }
+
