@@ -78,16 +78,26 @@ public class RapportController {
 			return "/403";
 	 }
 	    @RequestMapping(value = { "/add-{idTicket}-Rapport" }, method = RequestMethod.GET)
-	    public String addRapport(@PathVariable int idTicket, ModelMap model) {
+	    public String addRapport(@PathVariable int idTicket, ModelMap model,HttpServletRequest request) {
 	    	Rapport rapport = new Rapport();
 	    	model.addAttribute("rapport", rapport);
 	        model.addAttribute("idTicket", idTicket);
-	        
-	        return "/admin/rapport"; // ajouter la redirection par role
-	    }
+	        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    	UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			model.addAttribute("username", userDetail.getUsername());
+	    	if (request.isUserInRole("ADMIN"))
+			  {	
+			        return "redirect:admin/rapport";   
+			  }
+			  else if (request.isUserInRole("TECH"))
+			  {		  
+			        return "redirect:tech/rapport";   
+			  }
+			return "/403";
+			}
 	    @RequestMapping(value = { "/add-{idTicket}-Rapport" }, method = RequestMethod.POST)
 	    public String updateUser(@Valid Rapport rapport, BindingResult result,
-	            ModelMap model, @PathVariable int idTicket) {
+	            ModelMap model, @PathVariable int idTicket,HttpServletRequest request) {
 	    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    	UserDetails userDetail = (UserDetails) auth.getPrincipal();
 	    	User user = userService.findByUsername(userDetail.getUsername());
@@ -95,6 +105,23 @@ public class RapportController {
 	    	rapport.setTicket(ticket);
 	    	rapport.setUser(user);
 	        rapportService.save(rapport);        
-	        return "redirect:admin/report";
-	 }
+	    	if (request.isUserInRole("ADMIN"))
+			  {	
+			        if (result.hasErrors()) {
+			            return "admin/rapport";
+			        }
+			        return "redirect:admin/rapport";   
+				  
+			  }
+			  else if (request.isUserInRole("TECH"))
+			  {		  
+			        if (result.hasErrors()) {
+			            return "tech/rapport";
+			        }
+			        return "redirect:tech/rapport";   
+	
+				  	
+			  }
+			return "/403";
+			}
 }

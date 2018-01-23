@@ -27,5 +27,6 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	@Modifying
 	@Query("Delete User u where u.idUser=:x")
 	void deletebyId(@Param("x") Integer id);
-
+	//  @Query("Select d from User d where d.confirmationToken=:x")
+	   User findByConfirmationToken (String confirmationToken );
 }

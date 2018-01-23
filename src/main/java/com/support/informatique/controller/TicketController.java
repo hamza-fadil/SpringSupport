@@ -124,6 +124,7 @@ import com.support.informatique.service.UserService;
 		        if (result.hasErrors()) {
 		            return "/user/ticket";
 		        }
+		        ticket.setUser(ticket.getUser());
 		        ticketService.save(ticket);
 		        return "redirect:user/tickets";
 			  } 
@@ -183,4 +184,27 @@ import com.support.informatique.service.UserService;
 		  }
 		    return "/403";
 	    }
+	//Lire
+	    @RequestMapping(value = { "/read-{idTicket}-Ticket" }, method = RequestMethod.GET)
+	    public String readTicket(@PathVariable int idTicket,
+	            ModelMap model,HttpServletRequest request) {
+	        Ticket ticket = ticketService.findOne(idTicket);
+	        model.addAttribute("ticket", ticket);
+			  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+				UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());	
+			    if (request.isUserInRole("USER")) {
+			            return "user/ticket";
+				  } 
+			    else if (request.isUserInRole("ADMIN"))
+				  {	
+				            return "admin/rticket";
+				  }
+				  else if (request.isUserInRole("TECH"))
+				  {		  
+				            return "tech/rticket";
+				  }
+				return "/403";
+	    }
+	
 	}

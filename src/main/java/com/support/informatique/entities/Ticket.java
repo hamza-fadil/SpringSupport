@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -59,7 +60,6 @@ public class Ticket implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id_ticket", unique = true, nullable = false)
 	public Integer getIdTicket() {
 		return this.idTicket;
@@ -79,7 +79,8 @@ public class Ticket implements java.io.Serializable {
 		this.user = user;
 	}
 
-	@Column(name = "cont_ticket", length = 45)
+	@Column(name = "contTicket",columnDefinition="TEXT")
+	@Lob
 	public String getContTicket() {
 		return this.contTicket;
 	}

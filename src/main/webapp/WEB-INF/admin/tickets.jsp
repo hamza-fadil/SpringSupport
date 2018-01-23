@@ -14,19 +14,19 @@
 	   <table id="page" class="table table-hover table-dark table-striped " >
 	   <thead>
         <tr class="font-weight-bold">
-            <th>Titre</th><th>Contenu</th><th>Utilisateur</th><th>Type ticket</th><th class="no-sort">Editer</th><th class="no-sort">Rapport</th><th class="no-sort">Fermer/Ouvrir</th>
+            <th>Titre</th><th>Utilisateur</th><th>Type ticket</th><th class="no-sort">Afficher</th><th class="no-sort">Rapport</th><th class="no-sort">Editer</th><th class="no-sort">Fermer/Ouvrir</th>
         </tr>
         </thead>
         <tbody id="myTable">
         <c:forEach items="${tickets}" var="p">
         <tr>
             <td>${p.titreTicket}</td>
-            <td>${p.contTicket}</td>
             <td>${p.user.username}</td>
             <td>${p.typeTicket}</td>
+            <td><a class="btn btn-info" href="<c:url  value='/read-${p.idTicket}-Ticket' />">Afficher</a> </td>
 			<td>
           	<c:choose>
-    			<c:when test="${not empty p.rapport}">
+    			<c:when test="${empty p.rapport}">
         			<a class="btn btn-success" href="<c:url  value='/add-${p.idTicket}-Rapport' />">Ajouter</a> 
     			</c:when>    
     			<c:otherwise>

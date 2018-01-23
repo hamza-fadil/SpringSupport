@@ -5,60 +5,48 @@
  
 <html>
  
-  <head>
- 	<title>Page d'acceuil</title>
+   <head>
+ 	<title>NewsLetter</title>
 	<jsp:include page="../includes/techhead.jsp" />
 </head>
-	
+ 
 <body>
-<jsp:include page="../includes/technav.jsp" />
-     
-    <form:form method="POST" modelAttribute="ticket">
-        <form:input type="hidden" path="idTicket" id="idTicket"/>
-        <table>
-            <tr>
-                <td><label for="titreTicket">Titre: </label> </td>
-                <td><form:input path="titreTicket" id="titreTicket"/></td>
-                <td><form:errors path="titreTicket" cssClass="error"/></td>
-            </tr>
-         
-            <tr>
-                <td><label for="contTicket">Contenu Ticket: </label> </td>
-                <td><form:input path="contTicket" id="contTicket"/></td>
-                <td><form:errors path="contTicket" cssClass="error"/></td>
-            </tr>
-			<tr>
-                <td><label for="typeTicket">Type Ticket: </label> </td>
-                <td><form:input path="typeTicket" id="typeTicket"/></td>
-                <td><form:errors path="typeTicket" cssClass="error"/></td>
-            </tr>
- <!--               Ajouter un utilisateur par son surnom -->
-            <tr>
-                <td><label for="user.idUser">Nom d'utilisateur: </label> </td>
-                <td><form:input path="user.idUser" id="user.idUser"/></td>
-                <td><form:errors path="user.idUser" cssClass="error"/></td>
-            </tr>
-            <tr>
-<%--                 <td><label for="conversation.idConversation">Id conversation: </label> </td>
-                <td><form:input path="conversation.idConversation" id="conversation.idConversation"/></td>
-                <td><form:errors path="conversation.idConversation" cssClass="error"/></td>
-            </tr> --%>
-            <tr>
-                <td colspan="3">
-                    <c:choose>
-                        <c:when test="${edit}">
-                            <input type="submit" value="Update"/>
-                        </c:when>
-                        <c:otherwise>
-                            <input type="submit" value="Register"/>
-                        </c:otherwise>
-                    </c:choose>
-                </td>
-            </tr>
-        </table>
-    </form:form>
+ <jsp:include page="../includes/technav.jsp" />
+     ${ticket.user.username}
+<div class="form-group">
+    	<form:form method="POST" modelAttribute="ticket">
+    		<div class="form-control">
+			<form:input path="titreTicket" id="titreTicket" class="form-control" placeholder="Titre" required="true" />
+	        <form:errors path="titreTicket" cssClass="error"/>
+	        </div>
+	        <div class="form-control">
+	        <form:input path="user" disabled="true" value="${ticket.user}"/>
+	        </div>
+	        <div class="form-control" >
+	        <form:select path="typeTicket" class="form-control" required="true">
+	        		<option value="" disabled="true" selected="true">Type de ticket</option>      
+	           		<form:option value="M" >Materiel</form:option>
+	           		<form:option value="L">Logiciel</form:option>
+            </form:select>
+            </div>
+			<div class="form-control" >
+	        <form:select path="etatTicket" class="form-control" required="true">
+	           		<form:option value="open" selected="true" >Ouvert</form:option>
+            </form:select>
+            </div>
+			<div class="form-control">
+	        <form:textarea path="contTicket" id="contTicket" rows="5" class="form-control" placeholder="Contenu du ticket" required="true"/>
+	        <form:errors path="contTicket" cssClass="error"/>
+	        </div>
+	        <div class="form-control ">
+	        <input type="submit" value="Envoyer" class="btn btn-success"/>
+	        </div>
+        </form:form>
+    </div>
     <br/>
     <br/>
-    Revenir <a href="<c:url value='/tickets' />">Liste de tous les tickets</a>
+         ${ticket.user}
+    
+    Revenir <a href="<c:url value='/tech/tickets' />">Liste de tous les tickets</a>
 </body>
 </html>

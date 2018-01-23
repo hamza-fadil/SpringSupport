@@ -35,6 +35,10 @@ public class UserMetierImpl implements UserService {
 		return userRepository.findAll();
 	}
 
+	public User findByConfirmationToken(String confirmationToken) {
+		return userRepository.findByConfirmationToken(confirmationToken);
+	}
+
 	@Override
 	public long count() {
 		return userRepository.count();

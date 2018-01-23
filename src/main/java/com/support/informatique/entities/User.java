@@ -162,6 +162,15 @@ public class User implements java.io.Serializable {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-	
+	@Column(name = "confirmation_token")
+	private String confirmationToken;
+
+	public String getConfirmationToken() {
+		return confirmationToken;
+	}
+
+	public void setConfirmationToken(String confirmationToken) {
+		this.confirmationToken = confirmationToken;
+	}
 
 	}

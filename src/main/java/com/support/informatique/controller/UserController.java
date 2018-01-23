@@ -1,5 +1,17 @@
 package com.support.informatique.controller;
 
+import java.util.Map;
+import java.util.Properties;
+import java.util.UUID;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +26,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.apache.commons.validator.routines.EmailValidator;
 import com.support.informatique.entities.User;
 import com.support.informatique.service.UserService;
@@ -43,7 +58,7 @@ public class UserController {
         return "inscription";
     }
 	@RequestMapping(value = { "/inscription" }, method = RequestMethod.POST)
-    public String newUser(@Valid User user, ModelMap model) {
+    public String newUser(@Valid User user, ModelMap model,HttpServletRequest request) {
 		EmailValidator validator = EmailValidator.getInstance();
 		String EmailTrouv = userService.findByEmail(user.getEmail());
 		String UserTrouv = userService.findName(user.getUsername());
@@ -52,6 +67,7 @@ public class UserController {
 		user.setEnabled("1");
         user.setTypeUser("ROLE_USER");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setConfirmPassword(passwordEncoder.encode(user.getConfirmPassword()));
 	    if(!validEmail) {
 	    	model.addAttribute("emailInv",true);
 	    	return "inscription";
@@ -69,11 +85,115 @@ public class UserController {
 	    	return "inscription";
 	    }
 	    else {
-	    	userService.save(user);  
-            return "redirect:/"; 
+			//userService.saveUser(user);
+			
+			user.setEnabled("0");
+		    
+		    // Generate random 36-character string token for confirmation link
+		    user.setConfirmationToken(UUID.randomUUID().toString());
+		        
+		   // userService.saveUser(user);
+		    
+				
+			String appUrl = request.getScheme() + "://" + request.getServerName()+":8080";
+			
+			final String username = "amatosami3@gmail.com";
+			final String password = "poly2016";
+			
+			Properties props = new Properties();
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.host", "smtp.gmail.com");
+			props.put("mail.smtp.port", "587");
+			
+			
+			Session session = Session.getInstance(props,
+					  new javax.mail.Authenticator() {
+						protected PasswordAuthentication getPasswordAuthentication() {
+							return new PasswordAuthentication(username, password);
+						}
+					  });
+
+					try {
+
+						Message message = new MimeMessage(session);
+						message.setFrom(new InternetAddress("amatosami3@gmail.com"));
+						message.setRecipients(Message.RecipientType.TO,
+							InternetAddress.parse(user.getEmail()));
+						message.setSubject("confirmation d'adresse mail");
+					 
+						message.setText("To confirm your e-mail address, please click the link below:\n"
+								+ appUrl + "/confirm?token=" + user.getConfirmationToken());
+
+						Transport.send(message);
+
+						System.out.println("Done");
+
+					} catch (MessagingException e) {
+						throw new RuntimeException(e);
+					}
+				
+			 
+			userService.save(user);
+			model.addAttribute("successMessage", "A confirmation e-mail has been sent to \" + user.getEmail())");
+			model.addAttribute("user", new User());
+			return "login";
+			}
 	    }
+	
+	@RequestMapping(value="/confirm", method = RequestMethod.GET)
+	public ModelAndView showConfirmationPage(ModelAndView modelAndView, @RequestParam("token") String token) {
+			
+		User user = userService.findByConfirmationToken(token);
+			
+		if (user == null) { // No token found in DB
+			modelAndView.addObject("invalidToken", "Oops!  This is an invalid confirmation link.");
+		} else { // Token found
+			modelAndView.addObject("confirmationToken", user.getConfirmationToken());
+		}
+			
+		modelAndView.setViewName("confirm");
+		return modelAndView;		
 	}
 	
+	
+	// Process confirmation link
+	@RequestMapping(value="/confirm", method = RequestMethod.POST)
+	public String processConfirmationForm(ModelAndView modelAndView, BindingResult bindingResult, @RequestParam Map requestParams, RedirectAttributes redir) {
+				
+	//	modelAndView.setViewName("confirm");
+		
+	//	Zxcvbn passwordCheck = new Zxcvbn(
+		
+		 
+	
+		// Find the user associated with the reset token
+	//String s=requestParams.get("key");
+		
+		User user = userService.findByConfirmationToken((String)requestParams.get("token"));
+		System.out.println((String)requestParams.get("token"));
+		System.out.println(requestParams.get("token"));
+
+		// Set new password
+		//user.setPassword(bCryptPasswordEncoder.encode(requestParams.get("password")));
+
+		// Set user to enabled
+		user.setEnabled("1");
+		
+		// Save user
+		userService.save(user);
+		
+		modelAndView.addObject("successMessage", "confirmation reussite ");
+		return "redirect:/conReussite";		
+	}
+	
+	
+	@RequestMapping("/conReussite")
+	public String prodits(ModelMap model) {
+		 
+		model.addAttribute("message", "confirmation reussite " );
+		return "conReussite";
+	}
 	
     @RequestMapping(value = { "/newUser" }, method = RequestMethod.POST)
     public String saveProduit(@Valid User user, BindingResult result,

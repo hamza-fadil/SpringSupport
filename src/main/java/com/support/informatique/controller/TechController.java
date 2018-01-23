@@ -42,7 +42,7 @@ public class TechController {
 		    return "redirect:/";
 		}
 
-	@RequestMapping("/tech/tickets")
+	@RequestMapping("/tech/ticket")
 	public String Tickets(ModelMap model) {
 		model.addAttribute("tickets",ticketService.findAll() );
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

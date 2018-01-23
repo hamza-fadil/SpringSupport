@@ -26,6 +26,6 @@ public interface UserService {
 	
 	User findByUsername(String username);
 	Iterable<User> findTech(String type);
-
+	User findByConfirmationToken(String confirmationToken);
 
 }
