@@ -13,23 +13,20 @@
 	   <table id="page" class="table table-hover table-dark table-striped " >
 	   <thead>
         <tr class="font-weight-bold">
-            <th>Nom Taches</th><th>Attribué à</th><th>Description</th><th>Fait</th><th class="no-sort">Editer</th><th class="no-sort">Supprimer</th>
+            <th>Marques</th><th class="no-sort">Editer</th><th class="no-sort">Supprimer</th>
         </tr>
         <tbody id="myTable">
-        <c:forEach items="${taches}" var="p">
+        <c:forEach items="${marques}" var="p">
             <tr>
-            <td>${p.nomTaches}</td>
-            <td>${p.user.username}</td>
-            <td>${p.descTaches}</td>
-            <td><c:if test="${p.faitTaches ==1}">Oui</c:if><c:if test="${p.faitTaches ==0}">Non</c:if></td>
-          <td><a class="btn btn-warning" href="<c:url value='/edit-${p.idTaches}-Tache' />">Modifier</a></td>
-            <td><a class="btn btn-danger" href="<c:url value='/delete-${p.idTaches}-Tache' />">delete</a></td>
+            <td>${p.nomMarque}</td>
+          <td><a class="btn btn-warning" href="<c:url value='/edit-${p.idMarque}-Marque' />">Modifier</a></td>
+            <td><a class="btn btn-danger" href="<c:url value='/delete-${p.idMarque}-Marque' />">delete</a></td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
-	<p><a class="btn btn-success float-right mx-5" href="<c:url value='/newTaches' />">Ajouter une nouvelle tache</a></p>
+	<p><a class="btn btn-success float-right mx-5" href="<c:url value='/newMarque' />">Ajouter une nouvelle marque</a></p>
 
 	<script>
 		$(document).ready(function(){

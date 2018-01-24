@@ -2,7 +2,7 @@
 <%@page session="true"%>
 <html>
 <head>
- 	<title>Page d'acceuil</title>
+ 	<title>Connexion</title>
 	<jsp:include page="includes/head.jsp" />
 </head>
 <body>
@@ -21,7 +21,7 @@
 		<br>
 		
 		<form name='loginForm' action="<c:url value='/login' />" method='POST' class="form-signin">
-		<div class="form-row">
+		<div class="container">
 				<div class="form-group col">
 				<input type='text' name='username' class="form-control" placeholder="Utilisateur"  required="true"/>
 				</div>

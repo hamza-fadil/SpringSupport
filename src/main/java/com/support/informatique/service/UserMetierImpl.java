@@ -50,8 +50,12 @@ public class UserMetierImpl implements UserService {
 	}
 
 	@Override
-	public String findByEmail(String name) {
+	public User findByEmail(String name) {
 		return userRepository.findByEmail(name);
+	}
+
+	public String getEmail(String email) {
+		return userRepository.getEmail(email);
 	}
 
 	@Override

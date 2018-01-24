@@ -13,8 +13,10 @@ import com.support.informatique.entities.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
+	@Query("Select u from User u where u.email=:x")
+	User findByEmail(@Param("x") String email);
 	@Query("Select u.email from User u where u.email=:x")
-	String findByEmail(@Param("x") String name);
+	String getEmail(@Param("x") String email);
 	@Query("Select u.username from User u where u.username=:x")
 	String findName(@Param("x") String name);
 	@Query("Select u from User u where u.idUser=:x")

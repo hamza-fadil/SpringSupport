@@ -4,6 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.support.informatique.entities.Imprimante;
 import com.support.informatique.entities.Marque;
 import com.support.informatique.service.MarqueService;
 @Controller
@@ -18,36 +22,52 @@ public class MarqueController {
 	@Autowired
 	private MarqueService marqueService;
 	
-	
-	
-	@RequestMapping("/marques")
-	public String marques(ModelMap model) {
-		
-		model.addAttribute("marques",marqueService.findAll() );
-		return "tests/marques";
-	}
 	 
     @RequestMapping(value = { "/newMarque" }, method = RequestMethod.GET)
-    public String marque(ModelMap model) {
+    public String marque(ModelMap model,HttpServletRequest request) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Marque marque = new Marque();
         model.addAttribute("marque", marque);
         model.addAttribute("edit", false);
-        return "tests/marque";
+        if (request.isUserInRole("ADMIN"))
+		  {	
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());	
+			  return "/admin/marque"; 
+			  
+		  }
+		  else if (request.isUserInRole("TECH"))
+		  {
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());
+			  return "/tech/marque"; 
+			  	
+		  }
+		return "/403";
     }
  
-    
     @RequestMapping(value = { "/newMarque" }, method = RequestMethod.POST)
-    public String saveMarque(@Valid Marque marque, BindingResult result,
-            ModelMap model) {
+    public String saveTicket(@Valid Marque marque, BindingResult result, ModelMap model,HttpServletRequest request) {
+	    if (request.isUserInRole("ADMIN"))
+		  {
+		        if (result.hasErrors()) {
+		            return "admin/marque";
+		        }     
+		        marqueService.save(marque);
+		        return "redirect:admin/marques";   
+		  }
+		  else if (request.isUserInRole("TECH"))
+		  {		  
+		        if (result.hasErrors()) {
+		            return "tech/marque";
+		        }
+		        marqueService.save(marque);
+		        return "redirect:tech/marques";   
+		  }
+		return "/403";	
+}
+
  
-        if (result.hasErrors()) {
-            return "marque";
-        }
-        marqueService.save(marque);
-        
-        return "redirect:/tests/marques";   
-    }
-    
     /*
      * This method will provide the medium to update an existing Marque.
      */

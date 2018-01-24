@@ -60,7 +60,7 @@ public class UserController {
 	@RequestMapping(value = { "/inscription" }, method = RequestMethod.POST)
     public String newUser(@Valid User user, ModelMap model,HttpServletRequest request) {
 		EmailValidator validator = EmailValidator.getInstance();
-		String EmailTrouv = userService.findByEmail(user.getEmail());
+		String EmailTrouv = userService.getEmail(user.getEmail());
 		String UserTrouv = userService.findName(user.getUsername());
 		boolean confirmPassword = user.getConfirmPassword().equals(user.getPassword());
 		Boolean validEmail = validator.isValid(user.getEmail());
@@ -141,51 +141,69 @@ public class UserController {
 			}
 	    }
 	
-	@RequestMapping(value="/confirm", method = RequestMethod.GET)
-	public ModelAndView showConfirmationPage(ModelAndView modelAndView, @RequestParam("token") String token) {
-			
-		User user = userService.findByConfirmationToken(token);
-			
-		if (user == null) { // No token found in DB
-			modelAndView.addObject("invalidToken", "Oops!  This is an invalid confirmation link.");
-		} else { // Token found
-			modelAndView.addObject("confirmationToken", user.getConfirmationToken());
-		}
-			
-		modelAndView.setViewName("confirm");
-		return modelAndView;		
-	}
-	
-	
 	// Process confirmation link
-	@RequestMapping(value="/confirm", method = RequestMethod.POST)
-	public String processConfirmationForm(ModelAndView modelAndView, BindingResult bindingResult, @RequestParam Map requestParams, RedirectAttributes redir) {
-				
-	//	modelAndView.setViewName("confirm");
-		
-	//	Zxcvbn passwordCheck = new Zxcvbn(
-		
-		 
-	
-		// Find the user associated with the reset token
-	//String s=requestParams.get("key");
-		
-		User user = userService.findByConfirmationToken((String)requestParams.get("token"));
-		System.out.println((String)requestParams.get("token"));
-		System.out.println(requestParams.get("token"));
+			@RequestMapping(value="/confirmPassword", method = RequestMethod.GET)
+			public ModelAndView showConfirmationPage(ModelAndView modelAndView, @RequestParam("token") String token) {
+					
+				User user = userService.findByConfirmationToken(token);
+					
+				if (user == null) { // No token found in DB
+					modelAndView.addObject("invalidToken", "Oops!  This is an invalid confirmation link.");
+				} else { // Token found
+					modelAndView.addObject("confirmationToken", user.getConfirmationToken());
+				}
+					
+				modelAndView.setViewName("confirmpassword");
+				return modelAndView;		
+			}
 
-		// Set new password
-		//user.setPassword(bCryptPasswordEncoder.encode(requestParams.get("password")));
+		    
+		 // Process confirmation link
+		 		@RequestMapping(value="/confirmPassword", method = RequestMethod.POST)
+		 		public String processConfirmationForm(ModelMap model,ModelAndView modelAndView, BindingResult bindingResult, @RequestParam Map requestParams, RedirectAttributes redir,@RequestParam("password") String password,@RequestParam("confirm_password") String confirm_password,RedirectAttributes attributes) {
+		 						 			 
+		 		
+		 			// Find the user associated with the reset token
+		 		//String s=requestParams.get("key");
+		 			
+		 			User user = userService.findByConfirmationToken((String)requestParams.get("token"));
+		 			
+		 			System.out.println((String)requestParams.get("token"));
+		 			System.out.println(requestParams.get("token"));
 
-		// Set user to enabled
-		user.setEnabled("1");
-		
-		// Save user
-		userService.save(user);
-		
-		modelAndView.addObject("successMessage", "confirmation reussite ");
-		return "redirect:/conReussite";		
-	}
+		 			// Set new password
+		 			//user.setPassword(bCryptPasswordEncoder.encode(requestParams.get("password")));
+
+		 			// Set user to enabled
+		 			user.setEnabled(1);
+		 			
+		 			// Save user
+		 			userService.saveUserSecond(user);
+		 			
+		 			if(password.isEmpty()) {
+						model.addAttribute("errorMessage", "Please enter a valid password");
+						return "confirmpassword";
+		 			}
+					
+					if(password.equals(confirm_password)) {
+						user.setPassword(passwordEncoder.encode(password));
+						userService.save(user);
+						System.out.println("Password has been changed successfully");
+//						model.addAttribute("success", "Password has been changed successfully");
+						attributes.addFlashAttribute("success","Password has been changed successfully");
+			 			modelAndView.addObject("successMessage", "confirmation reussite ");
+						return "redirect:/login";
+						}
+					else {
+						model.addAttribute("errorMessage", "The entered password don't match");
+						return "confirmpassword";
+					}
+		 			
+		 			
+//		 			modelAndView.addObject("successMessage", "confirmation reussite ");
+//		 			return "redirect:/conReussite";		
+		 		}
+		 		
 	
 	
 	@RequestMapping("/conReussite")
@@ -245,7 +263,66 @@ public class UserController {
         model.addAttribute("edit", true);
         return "/admin/user";
     }
-    
+
+		@RequestMapping(value="/forgotPassword", method = RequestMethod.GET)
+	public String changePassword( ModelMap model) {                 
+		
+		return "forgotPassword";
+	    }
+	
+
+	@RequestMapping(value="/forgotPassword", method = RequestMethod.POST)
+	public String changePassword(ModelMap model,@RequestParam("email") String email,HttpServletRequest request,RedirectAttributes attributes) {                 
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findByEmail(email);
+
+		user.setConfirmationToken(UUID.randomUUID().toString());
+		String appUrl = request.getScheme() + "://" + request.getServerName()+":8084";
+		
+		final String username = "amatosami3@gmail.com";
+		final String password = "poly2016";
+		
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		
+		
+		Session session = Session.getInstance(props,
+				  new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(username, password);
+					}
+				  });
+
+				try {
+
+					Message message = new MimeMessage(session);
+					message.setFrom(new InternetAddress("amatosami3@gmail.com"));
+					message.setRecipients(Message.RecipientType.TO,
+						InternetAddress.parse(user.getEmail()));
+					message.setSubject("Change your password");
+				 
+					message.setText("To change your passaword, please click the link below:\n"
+							+ appUrl + "/confirmPassword?token=" + user.getConfirmationToken());
+
+					Transport.send(message);
+
+					System.out.println("Done");
+					attributes.addFlashAttribute("success","Link to change your password sent to your email address");
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+			
+		 
+		userService.save(user);
+		model.addAttribute("successMessage", "A confirmation e-mail has been sent to \" + user.getEmail())");
+		model.addAttribute("user", new User());
+		return "login";
+
+}
+	
 }
 
 

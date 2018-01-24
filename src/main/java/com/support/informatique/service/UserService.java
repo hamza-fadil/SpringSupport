@@ -16,7 +16,7 @@ public interface UserService {
 
 	void delete(User entity);
 
-	String findByEmail(String name);
+	User findByEmail(String name);
 
 	User findById(Integer id);
 
@@ -27,5 +27,6 @@ public interface UserService {
 	User findByUsername(String username);
 	Iterable<User> findTech(String type);
 	User findByConfirmationToken(String confirmationToken);
+	String getEmail(String email);
 
 }
