@@ -34,14 +34,11 @@ public class Fichier implements java.io.Serializable {
 	public Fichier() {
 	}
 
-	public Fichier(Ticket ticket) {
-		this.ticket = ticket;
-	}
-
 	public Fichier(Ticket ticket, byte[] fichierJoint) {
 		this.ticket = ticket;
 		this.fichierJoint = fichierJoint;
 	}
+
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -64,7 +61,7 @@ public class Fichier implements java.io.Serializable {
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
 	}
-
+	
 	@Column(name = "fichier_joint",columnDefinition="longblob")
 	@Lob
 	public byte[] getFichierJoint() {
@@ -74,5 +71,4 @@ public class Fichier implements java.io.Serializable {
 	public void setFichierJoint(byte[] fichierJoint) {
 		this.fichierJoint = fichierJoint;
 	}
-
 }

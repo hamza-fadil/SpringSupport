@@ -1,6 +1,9 @@
 package com.support.informatique.entities;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +16,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @SuppressWarnings("serial")
 @Entity
@@ -26,9 +33,10 @@ public class Ticket implements java.io.Serializable {
 	private String typeTicket;
 	@Column
 	private String etatTicket;
-	private Set<Fichier> fichiers = new HashSet<Fichier>(0);
+	private List<Fichier> fichiers = new ArrayList<Fichier>();
 	private Set<Conversation> conversations = new HashSet<Conversation>(0);
 	private Set<Rapport> rapport = new HashSet<Rapport>(0);
+	private Date createTime;
 
 	public Ticket() {
 	}
@@ -37,8 +45,8 @@ public class Ticket implements java.io.Serializable {
 		this.user = user;
 	}
 
-	public Ticket(User user, String contTicket, String titreTicket, String typeTicket, Set<Fichier> fichiers,
-			Set<Conversation> conversations,Set<Rapport> rapport) {
+	public Ticket(User user, String contTicket, String titreTicket, String typeTicket, List<Fichier> fichiers,
+			Set<Conversation> conversations,Set<Rapport> rapport,Date createTime) {
 		this.user = user;
 		this.contTicket = contTicket;
 		this.titreTicket = titreTicket;
@@ -46,6 +54,7 @@ public class Ticket implements java.io.Serializable {
 		this.fichiers = fichiers;
 		this.conversations = conversations;
 		this.rapport = rapport;
+		this.createTime = createTime;
 	}
 
 
@@ -78,7 +87,16 @@ public class Ticket implements java.io.Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "create_time", length = 19)
+	public Date getCreateTime() {
+		return this.createTime;
+	}
 
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 	@Column(name = "contTicket",columnDefinition="TEXT")
 	@Lob
 	public String getContTicket() {
@@ -108,11 +126,11 @@ public class Ticket implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ticket")
-	public Set<Fichier> getFichiers() {
+	public List<Fichier> getFichiers() {
 		return this.fichiers;
 	}
 
-	public void setFichiers(Set<Fichier> fichiers) {
+	public void setFichiers(List<Fichier> fichiers) {
 		this.fichiers = fichiers;
 	}
 

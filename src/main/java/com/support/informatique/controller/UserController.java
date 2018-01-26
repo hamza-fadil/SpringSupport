@@ -175,10 +175,10 @@ public class UserController {
 		 			//user.setPassword(bCryptPasswordEncoder.encode(requestParams.get("password")));
 
 		 			// Set user to enabled
-		 			user.setEnabled(1);
+		 			user.setEnabled("1");
 		 			
 		 			// Save user
-		 			userService.saveUserSecond(user);
+		 			userService.save(user);
 		 			
 		 			if(password.isEmpty()) {
 						model.addAttribute("errorMessage", "Please enter a valid password");

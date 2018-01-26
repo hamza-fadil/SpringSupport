@@ -1,4 +1,9 @@
 package com.support.informatique.controller;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +16,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.support.informatique.entities.Conversation;
+import com.support.informatique.entities.Fichier;
 import com.support.informatique.entities.Ticket;
 import com.support.informatique.entities.User;
 import com.support.informatique.service.TicketService;
 import com.support.informatique.service.UserService;
 
+
 	@Controller
 	public class TicketController {
-
+		@Autowired
+		ServletContext servletContext;
 		@Autowired
 		private TicketService ticketService;
 		@Autowired
@@ -189,10 +201,12 @@ import com.support.informatique.service.UserService;
 	    public String readTicket(@PathVariable int idTicket,
 	            ModelMap model,HttpServletRequest request) {
 	        Ticket ticket = ticketService.findOne(idTicket);
+	        Conversation conversation = new Conversation();
 	        model.addAttribute("ticket", ticket);
 			  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 				UserDetails userDetail = (UserDetails) auth.getPrincipal();
-				model.addAttribute("username", userDetail.getUsername());	
+				model.addAttribute("username", userDetail.getUsername());
+				model.addAttribute("conversation",conversation);
 			    if (request.isUserInRole("USER")) {
 			            return "user/ticket";
 				  } 
@@ -206,5 +220,8 @@ import com.support.informatique.service.UserService;
 				  }
 				return "/403";
 	    }
-	
+	    @RequestMapping(value = { "read-{idTicket}-Ticket" }, method = RequestMethod.POST)
+		public void addFichier(@RequestParam("file") MultipartFile file,HttpServletRequest request,@PathVariable int idTicket) throws IOException {
+			return;
+	}
 	}
