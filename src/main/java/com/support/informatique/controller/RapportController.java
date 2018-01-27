@@ -87,11 +87,11 @@ public class RapportController {
 			model.addAttribute("username", userDetail.getUsername());
 	    	if (request.isUserInRole("ADMIN"))
 			  {	
-			        return "redirect:admin/rapport";   
+			        return "/admin/rapport";   
 			  }
 			  else if (request.isUserInRole("TECH"))
 			  {		  
-			        return "redirect:tech/rapport";   
+			        return "/tech/rapport";   
 			  }
 			return "/403";
 			}
@@ -110,7 +110,7 @@ public class RapportController {
 			        if (result.hasErrors()) {
 			            return "admin/rapport";
 			        }
-			        return "redirect:admin/rapport";   
+			        return "redirect:admin/ticket";   
 				  
 			  }
 			  else if (request.isUserInRole("TECH"))
@@ -118,7 +118,7 @@ public class RapportController {
 			        if (result.hasErrors()) {
 			            return "tech/rapport";
 			        }
-			        return "redirect:tech/rapport";   
+			        return "redirect:tech/ticket";   
 	
 				  	
 			  }

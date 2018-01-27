@@ -72,7 +72,7 @@
         </div>
         <div class="card bg-faded col-sm-12">
         	<form:form method="POST" action="/com-${ticket.idTicket }">
-			<textarea id="contenuConversation" name="contenuConversation" rows="5"  placeholder="Ajouter un commentaire" required="true"></textarea>
+			<textarea id="contenuConversation" name="contenuConversation" rows="5"  placeholder="Ajouter un commentaire" required></textarea>
 			<input type="submit" value="Envoyer" class="btn btn-success"/>
     	</form:form>
         </div>

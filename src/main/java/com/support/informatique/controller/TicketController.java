@@ -138,23 +138,28 @@ import com.support.informatique.service.UserService;
 		        }
 		        ticket.setUser(ticket.getUser());
 		        ticketService.save(ticket);
-		        return "redirect:user/tickets";
+		        return "/edit-{idTicket}-Ticket";
 			  } 
 		    else if (request.isUserInRole("ADMIN"))
 			  {	
 		        if (result.hasErrors()) {
 		            return "/admin/ticket";
 		        }
+		        Ticket oldTicket = ticketService.findOne(idTicket);
+		        ticket.setUser(oldTicket.getUser());
+		        ticket.setCreateTime(oldTicket.getCreateTime());
 		        ticketService.save(ticket);
-		        return "redirect:admin/tickets";
+		        return "redirect:admin/ticket";
 			  }
 			  else if (request.isUserInRole("TECH"))
 			  {		  
 			        if (result.hasErrors()) {
-			            return "/tech/ticket";
+			            return "/edit-{idTicket}-Ticket";
 			        }
+			        
+			        ticket.setUser(ticket.getUser());
 			        ticketService.save(ticket);
-			        return "redirect:tech/tickets";
+			        return "redirect:tech/ticket";
 			  }
 			return "/403";
 	    }
