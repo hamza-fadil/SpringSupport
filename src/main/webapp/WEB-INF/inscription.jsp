@@ -12,6 +12,7 @@
 <jsp:include page="includes/nav.jsp" />
 <br>
 <br><br>
+<div class="container">
 <c:if test="${emailDup }">
 	<div class="alert alert-danger">
   		<strong>Erreur!</strong> Email dupliqué.
@@ -61,6 +62,6 @@
     </form:form>
     <br/>
     <br/>
-
+</div>
 </body>
 </html>

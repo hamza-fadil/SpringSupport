@@ -55,13 +55,18 @@ public class FichierController {
 	
 
 	@RequestMapping(value = { "add-{idTicket}" }, method = RequestMethod.POST)
-	public String addFichier(@RequestParam("file") MultipartFile file,HttpServletRequest request,@PathVariable int idTicket) throws IOException {
+	public String addFichier(@RequestParam("file") MultipartFile file,HttpServletRequest request,@PathVariable int idTicket, RedirectAttributes redirectAttrs) throws IOException {
+		if(file.getSize() > 2000000) {
+			redirectAttrs.addFlashAttribute("tooFAT", "La taille du fichier est trop élevée, 2Mo Maximum");
+			return "redirect:/read-{idTicket}-Ticket";
+		}else {
 		Fichier fichier = new Fichier();
 		fichier.setTicket(ticketService.findOne(idTicket));
 		fichier.setNomOrigine(file.getOriginalFilename());
 		fichier.setFichierJoint(file.getBytes());
 		fichierService.save(fichier);
 		return "redirect:/read-{idTicket}-Ticket";
+		}
     }
 
 	@RequestMapping(value = { "image/{idFichier}" }, method = RequestMethod.GET)

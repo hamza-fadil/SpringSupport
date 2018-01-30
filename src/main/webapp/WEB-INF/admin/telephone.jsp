@@ -8,6 +8,14 @@
    <head>
  	<title>Imprimante ${imprimante.serieMateriel}</title>
 	<jsp:include page="../includes/adminhead.jsp" />
+	<style>
+#myInput{
+display:none;
+}
+.justify-content-end{
+margin-right:2%;
+}
+</style>
 </head>
  
 <body>

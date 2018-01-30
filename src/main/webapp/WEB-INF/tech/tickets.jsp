@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
   <head>
- 	<title>Page d'acceuil</title>
-	<jsp:include page="../includes/techhead.jsp" />
+ 	<title>Tickets</title>
+	<jsp:include page="../includes/adminhead.jsp" />
 </head>
-	
 <body>
 <jsp:include page="../includes/technav.jsp" />
+<br>
 	<div class="container">
 	   <table id="page" class="table table-hover table-dark table-striped " >
 	   <thead>
@@ -31,7 +30,9 @@
         			<a class="btn btn-success" href="<c:url  value='/add-${p.idTicket}-Rapport' />">Ajouter</a> 
     			</c:when>    
     			<c:otherwise>
-    				Present
+    				<c:forEach items="${p.rapport}" var="r">
+    					<c:if test="${r.ticket==p}"><a class="btn btn-primary" href="<c:url  value='/read-${r.idRapport}-Rapport' />">Afficher</a></c:if>
+    				</c:forEach>
     			</c:otherwise>
 			</c:choose>
           </td>
@@ -73,6 +74,7 @@
 	        
 		});
 		</script>
+		<jsp:include page="../includes/footer.jsp" />
 </body>
 
 </html>

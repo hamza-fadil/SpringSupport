@@ -5,32 +5,27 @@
 
 
 <head>
- 	<title>Page d'acceuil</title>
+ 	<title>Aide d'utilisation</title>
 	<jsp:include page="includes/head.jsp" />
 </head>
 <body>
 <jsp:include page="includes/nav.jsp" />
 	<br><br>
-<table>
-  <tbody>
-    <tr>
-      <td><p>&nbsp;</p>
-        <h1>Aide</h1>
-        <p class="description">L'application permet de remonter l'information vers le département informatique le plus rapidement possible, en permettant à l'utilisateurs d'avoir accès a un suivi des tickets.</p>
-        <p>Plus de détails pour l'utilisation du site <a href="howto.html">ici</a>.</p>
-      <p>Pour s'inscrire cliquez <a href="inscription">ici</a>, la connexion c'est par <a href="/login">ici</a>.</p>
-      <p>Cordialement, le département informatique.</p></td>
-    </tr>
-  </tbody>
-</table>
 
-<table>
-  <tbody>
-    <tr>
-      <td> © 2017 Département des Systèmes de l'Information</td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+	<h1>Support informatique</h1><br>
+	<h2>Description</h2>
+		<p>L'application permet de remonter l'information vers le département informatique le plus rapidement possible, en permettant à l'utilisateurs d'avoir accès a un suivi des tickets.</p>
+	<h2>Inscription</h2>
+		<p>En suivant le lien suivant : <a href="/inscription">/Inscription</a> vous vous retrouverez dans l'interface d'inscription, renseignez votre email ainsi que votre mot de passe</p>
+		<p>Vous allez recevoir un email vous demandant de confirmer votre email.</p>
+		<p>Après confirmation vous pouvez vous connecter.</p>
+	<h2>Connexion</h2>
+		<p>Après inscription, la prochaine étape est l'identification pour commencer à utiliser le site.
+		<p>En suivant le lien suivant : <a href="/login">/Connexion</a> vous vous retrouverez dans l'interface de connexion, renseignez votre email ainsi que votre mot de passe pour être rediriger à l'index</p>
+	<h2></h2>
+</div>
 
+<jsp:include page="includes/footer.jsp" />
 </body>
 </html>

@@ -20,8 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.support.informatique.entities.Conversation;
 import com.support.informatique.entities.Fichier;
+import com.support.informatique.entities.User;
 import com.support.informatique.service.ConversationService;
 import com.support.informatique.service.TicketService;
+import com.support.informatique.service.UserService;
 @Controller
 public class ConversationController {
 
@@ -29,13 +31,17 @@ public class ConversationController {
 	private ConversationService conversationService;
 	@Autowired
 	private TicketService ticketService;
-
-	
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = { "com-{idTicket}" }, method = RequestMethod.POST)
     public String newConversation2(@RequestParam("contenuConversation") String cont, @PathVariable int idTicket,ModelMap model,HttpServletRequest request) {
 		Conversation conversation = new Conversation();
-		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		User user = new User();
+		user = userService.findByUsername(userDetail.getUsername());
+		conversation.setUser(user);
 		conversation.setTicket(ticketService.findOne(idTicket));
 		conversation.setContenuConversation(cont);
         conversationService.save(conversation);
@@ -84,16 +90,10 @@ public class ConversationController {
     @RequestMapping(value = { "/edit-{idConversation}-Conversation" }, method = RequestMethod.POST)
     public String updateTicket(@Valid Conversation conversation, BindingResult result,
             ModelMap model, @PathVariable int idConversation) {
- 
         if (result.hasErrors()) {
             return "tests/conversation";
         }
- 
-       
- 
         conversationService.save(conversation);
- 
-        
         return "redirect:/tests/conversations";
     }
     @RequestMapping(value = {"delete-{idConversation}-Conversation"}, method = RequestMethod.GET)

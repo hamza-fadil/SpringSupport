@@ -8,33 +8,36 @@
    <head>
  	<title>Imprimante ${imprimante.serieMateriel}</title>
 	<jsp:include page="../includes/adminhead.jsp" />
+	<style>
+#myInput{
+display:none;
+}
+.justify-content-end{
+margin-right:2%;
+}
+</style>
 </head>
  
 <body>
- <jsp:include page="../includes/adminnav.jsp" />   
+ <jsp:include page="../includes/technav.jsp" />   
  <div class="form-group">
-    <form:form method="POST" modelAttribute="imprimante">
+    <form:form method="POST" modelAttribute="telephone">
         <form:input type="hidden" path="idMateriel" id="idMateriel" class="form-control"/>
+        		<div class="form-control">   
+                <form:input class="form-control" path="nbCompte" id="nbCompte" placeholder="Nombre de comptes"/>
+                <form:errors path="nbCompte" cssClass="error"/>
+                </div>
 				<div class="form-control">
-				<label for="fax">Gère le fax</label>
-                <form:checkbox class="form-control" path="fax" id="fax" placeholder="Espace disque"/>
+				<label for="poe">Gère le PoE</label>
+                <form:checkbox class="form-control" path="poe" id="poe" placeholder="Espace disque"/>
                 </div>
                 <div class="form-control">
-                <label for="scanner">Gère le scanner</label>      
-                <form:checkbox class="form-control" path="scanner" id="scanner"/>
+                <label for="sip">Gère le SIP</label>      
+                <form:checkbox class="form-control" path="sip" id="sip"/>
                 </div>
-                <div class="form-control">
-                <label for="couleurs" >Gère les couleurs</label>                  
-                <form:checkbox class="form-control col" path="couleurs" id="couleurs" />
-                </div>
-                <div class="form-control">   
-                <form:input class="form-control" path="vitesse_impression" id="vitesse_impression" placeholder="Vitesse d'impression"/>
-                <form:errors path="vitesse_impression" cssClass="error"/>
-                </div>
-				<div class="form-control">   
-                <form:input class="form-control" path="format_papier" id="format_papier" placeholder="Format papier"/>
-                <form:errors path="format_papier" cssClass="error"/>
-                </div>
+
+
+
                 <div class="form-control">   
                 <form:input class="form-control" path="serieMateriel" id="serieMateriel" placeholder="Serie du materiel"/>
                 <form:errors path="serieMateriel" cssClass="error"/>

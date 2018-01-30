@@ -1,5 +1,7 @@
 package com.support.informatique.service;
 
+import java.util.List;
+
 import com.support.informatique.entities.User;
 
 public interface UserService {
@@ -10,7 +12,13 @@ public interface UserService {
 
 	boolean exists(Integer id);
 
+	Iterable<User> findTech(String type);
+
 	Iterable<User> findAll();
+
+	List<String> findByType(String type);
+
+	User findByConfirmationToken(String token);
 
 	long count();
 
@@ -18,15 +26,14 @@ public interface UserService {
 
 	User findByEmail(String name);
 
+	String getEmail(String email);
+
 	User findById(Integer id);
 
 	void deletebyId(Integer id);
-	
+
 	String findName(String name);
-	
+
 	User findByUsername(String username);
-	Iterable<User> findTech(String type);
-	User findByConfirmationToken(String confirmationToken);
-	String getEmail(String email);
 
 }

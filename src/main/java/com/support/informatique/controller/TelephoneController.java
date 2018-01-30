@@ -25,17 +25,6 @@ public class TelephoneController {
 	@Autowired
 	private MarqueService marqueService;
 	
-	
-	@RequestMapping("/telephones")
-	public String telephones(ModelMap model) {
-		
-		model.addAttribute("telephones",telephoneService.findAll() );
-		model.addAttribute("marques",marqueService.findAll() );
-		
-		
-	
-		return "tests/telephones";
-	}
 
     @RequestMapping(value = { "/newTelephone" }, method = RequestMethod.GET)
     public String newProduit(ModelMap model,HttpServletRequest request) {
@@ -91,35 +80,76 @@ public class TelephoneController {
     
 
     @RequestMapping(value = { "/edit-{idMateriel}-Telephone" }, method = RequestMethod.GET)
-    public String editTicket(@PathVariable int idMateriel, ModelMap model) {
+    public String editTicket(@PathVariable int idMateriel, ModelMap model,HttpServletRequest request) {
         Telephone telephone = telephoneService.findOne(idMateriel);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Marque selecteMarque = marqueService.findOne(idMateriel);
         model.addAttribute("telephone", telephone);
         model.addAttribute("edit", true);
         model.addAttribute("marque", selecteMarque);
         model.addAttribute("marques",marqueService.findAll() );
         
-        return "tests/telephone";
+    	if (request.isUserInRole("ADMIN"))
+		  {	
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());	
+			  return "admin/telephone"; 
+			  
+		  }
+		  else if (request.isUserInRole("TECH"))
+		  {
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());
+			  return "tech/telephone"; 
+			  	
+		  }
+		return "/403";
     }
      
     @RequestMapping(value = { "/edit-{idMateriel}-Telephone" }, method = RequestMethod.POST)
     public String updateTicket(@Valid Telephone telephone, BindingResult result,
-            ModelMap model, @PathVariable int idMateriel) {
- 
-        if (result.hasErrors()) {
-            return "tests/telephone";
-        }
- 
-       
- 
+            ModelMap model, @PathVariable int idMateriel,HttpServletRequest request) {
         telephoneService.save(telephone);
- 
+    	if (result.hasErrors()) {
+            return "telephone";
+        }
+        telephoneService.save(telephone);
         
-        return "redirect:/tests/telephones";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	if (request.isUserInRole("ADMIN"))
+		  {	
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());	
+			  return "redirect:/admin/parcs"; 
+			  
+		  }
+		  else if (request.isUserInRole("TECH"))
+		  {
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());
+			  return "redirect:/tech/parcs"; 
+			  	
+		  }
+		return "/403";  
     }
     @RequestMapping(value = {"delete-{idMateriel}-Telephone"}, method = RequestMethod.GET)
-    public String deleteTicket(@Valid Telephone telephone,@PathVariable int idMateriel) {
+    public String deleteTicket(@Valid Telephone telephone,ModelMap model,@PathVariable int idMateriel,HttpServletRequest request) {
     	telephoneService.delete(idMateriel);
-    	return "redirect:/tests/telephones";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	if (request.isUserInRole("ADMIN"))
+		  {	
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());	
+			  return "redirect:/admin/parcs"; 
+			  
+		  }
+		  else if (request.isUserInRole("TECH"))
+		  {
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());
+			  return "redirect:/tech/parcs"; 
+			  	
+		  }
+		return "/403";  
     }
 }

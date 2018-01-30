@@ -8,11 +8,19 @@
    <head>
  	<title>NewsLetter</title>
 	<jsp:include page="../includes/adminhead.jsp" />
+	<style>
+#myInput{
+display:none;
+}
+.justify-content-end{
+margin-right:2%;
+}
+</style>
 </head>
  
 <body>
  <jsp:include page="../includes/adminnav.jsp" />
-     
+<div class="container">
 <div class="form-group">
     	<form:form method="POST" modelAttribute="ticket">
     		<div class="form-control">
@@ -36,13 +44,12 @@
 	        <form:textarea path="contTicket" id="contTicket" rows="5" class="form-control" placeholder="Contenu du ticket" required="true"/>
 	        <form:errors path="contTicket" cssClass="error"/>
 	        </div>
-	        <div class="form-control ">
-	        <input type="submit" value="Envoyer" class="btn btn-success"/>
-	        </div>
+			<br>
+	        <input style="float:right;" type="submit" value="Envoyer" class="btn btn-success"/>
+
         </form:form>
     </div>
-    <br/>
-    <br/>
-    Revenir <a href="<c:url value='/admin/ticket' />">Liste de tous les tickets</a>
+</div>
+<jsp:include page="../includes/footer.jsp" />
 </body>
 </html>

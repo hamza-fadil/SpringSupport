@@ -85,7 +85,7 @@ public class OrdinateurController {
 }
 
     @RequestMapping(value = { "/edit-{idMateriel}-Ordinateur" }, method = RequestMethod.GET)
-    public String editTicket(@PathVariable int idMateriel, ModelMap model) {
+    public String editTicket(@PathVariable int idMateriel, ModelMap model,HttpServletRequest request) {
         Ordinateur ordinateur = ordinateurService.findOne(idMateriel);
         Marque selecteMarque = marqueService.findOne(idMateriel);
         model.addAttribute("ordinateur", ordinateur);
@@ -93,18 +93,41 @@ public class OrdinateurController {
         model.addAttribute("marque", selecteMarque);
         model.addAttribute("marques",marqueService.findAll() );
         
-        return "ordinateur";
+	    if (request.isUserInRole("ADMIN"))
+		  {	
+		        return "admin/ordinateur";   
+			  
+		  }
+		  else if (request.isUserInRole("TECH"))
+		  {		  
+
+		        return "tech/ordinateur";   
+		  }
+		return "/403";	
     }
      
     @RequestMapping(value = { "/edit-{idMateriel}-Ordinateur" }, method = RequestMethod.POST)
     public String updateTicket(@Valid Ordinateur ordinateur, BindingResult result,
-            ModelMap model, @PathVariable int idMateriel) {
- 
-        if (result.hasErrors()) {
-            return "ordinateur";
-        }
-        ordinateurService.save(ordinateur);
-        return "redirect:/ordinateurs";
+            ModelMap model, @PathVariable int idMateriel,HttpServletRequest request) {
+	    if (request.isUserInRole("ADMIN"))
+		  {	
+		        if (result.hasErrors()) {
+		            return "admin/ordinateur";
+		        }     
+		        ordinateurService.save(ordinateur);
+		        
+		        return "redirect:admin/parcs";   
+			  
+		  }
+		  else if (request.isUserInRole("TECH"))
+		  {		  
+		        if (result.hasErrors()) {
+		            return "tech/ordinateur";
+		        }
+				ordinateurService.save(ordinateur);
+		        return "redirect:tech/parcs";   
+		  	
+		  }
+		return "/403";	
     }
-   
 }

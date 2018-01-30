@@ -5,40 +5,51 @@
  
 <html>
  
- <head>
-<title>${ticket.titreTicket}</title>
-<jsp:include page="../includes/userhead.jsp" />
+   <head>
+ 	<title>NewsLetter</title>
+	<jsp:include page="../includes/userhead.jsp" />
+	<style>
+#myInput{
+display:none;
+}
+.justify-content-end{
+margin-right:2%;
+}
+</style>
 </head>
  
 <body>
  <jsp:include page="../includes/usernav.jsp" />
-	<div class="form-group">
+<div class="container">
+<div class="form-group">
     	<form:form method="POST" modelAttribute="ticket">
     		<div class="form-control">
-			<form:input path="titreTicket" id="titreTicket" class="form-control" placeholder="Titre" />
+			<form:input path="titreTicket" id="titreTicket" class="form-control" placeholder="Titre" required="true" />
 	        <form:errors path="titreTicket" cssClass="error"/>
 	        </div>
 	        
 	        <div class="form-control" >
 	        <form:select path="typeTicket" class="form-control" required="true">
-	        		<option value="" disabled="true" selected="true">Type de ticket</option>      
+	        		<option value="" disabled selected>Type de ticket</option>      
 	           		<form:option value="M" >Materiel</form:option>
 	           		<form:option value="L">Logiciel</form:option>
             </form:select>
             </div>
-            
+			<div class="form-control" >
+	        <form:select path="etatTicket" class="form-control" required="true">
+	           		<form:option value="open" selected="true" >Ouvert</form:option>
+            </form:select>
+            </div>
 			<div class="form-control">
-	        <form:textarea path="contTicket" id="contTicket" rows="5" class="form-control" placeholder="Contenu du ticket"/>
+	        <form:textarea path="contTicket" id="contTicket" rows="5" class="form-control" placeholder="Contenu du ticket" required="true"/>
 	        <form:errors path="contTicket" cssClass="error"/>
 	        </div>
-	        <div class="form-control ">
-	        <input type="submit" value="Envoyer" class="btn btn-success"/>
-	        </div>
-	        
+			<br>
+	        <input style="float:right;" type="submit" value="Envoyer" class="btn btn-success"/>
+
         </form:form>
     </div>
-    <br/>
-    Revenir <a href="<c:url value='/user/ticket' />">Liste de tous les tickets</a>
-    <jsp:include page="../includes/footer.jsp" />
+</div>
+<jsp:include page="../includes/footer.jsp" />
 </body>
 </html>

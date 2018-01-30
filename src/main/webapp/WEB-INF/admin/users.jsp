@@ -17,7 +17,7 @@
 	   <thead>
         <tr class="font-weight-bold">
         
-            <th>Email</th><th>Nom d'utilisateur</th><th>Type d'utilisateur</th><th>Actif</th><th>Date de création</th><th class="no-sort">Editer</th><th class="no-sort">Supprimer</th>
+            <th>Email</th><th>Nom d'utilisateur</th><th>Type d'utilisateur</th><th>Actif</th><th>Date de création</th><th class="no-sort">Editer</th><th class="no-sort">Désactiver/Activer</th>
         </tr>
         </thead>
         <tbody id="myTable">
@@ -25,11 +25,11 @@
             <tr>
             <td>${p.email}</td>
             <td>${p.username}</td>
-            <td>${p.typeUser}</td>
+            <td><c:if test="${p.typeUser =='ROLE_USER'}">Utilisateur</c:if><c:if test="${p.typeUser == 'ROLE_ADMIN'}">Administrateur</c:if><c:if test="${p.typeUser == 'ROLE_TECH'}">Technicien</c:if></td>
             <td><c:if test="${p.enabled ==1}">Oui</c:if><c:if test="${p.enabled ==0}">Non</c:if></td>
             <td>${p.createTime}</td>
           <td><a class="btn btn-warning" href="<c:url value='/edit-${p.idUser}-User' />">Modifier</a></td>
-            <td><a class="btn btn-danger" href="<c:url value='/delete-${p.idUser}-User' />">Supprimer</a></td>
+            <td><a class="btn btn-danger" href="<c:url value='/enable-${p.idUser}-User' />">Désactiver</a></td>
             </tr>
         </c:forEach>
         </tbody>

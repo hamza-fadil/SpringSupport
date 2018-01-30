@@ -5,9 +5,17 @@
  <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <html>
  
-  <head>
+<head>
  	<title>NewsLetter</title>
 	<jsp:include page="../includes/adminhead.jsp" />
+	<style>
+#myInput{
+display:none;
+}
+.justify-content-end{
+margin-right:2%;
+}
+</style>
 </head>
  
 <body>

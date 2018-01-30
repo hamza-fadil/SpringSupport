@@ -5,32 +5,37 @@
 
 
 <head>
- 	<title>Page d'acceuil</title>
+<style>
+div.container {
+background-color: #ffffff;
+}
+div.container p {
+font-family: Arial;
+font-size: 16px;
+font-style: normal;
+font-weight: normal;
+text-decoration: none;
+text-transform: none;
+color: #000000;
+background-color: #ffffff;
+}
+</style>
+ 	<title>A propos</title>
 	<jsp:include page="includes/head.jsp" />
 </head>
 <body>
 <jsp:include page="includes/nav.jsp" />
-	<br><br>
-<table width="100%" border="1">
-  <tbody>
-    <tr>
-      <td><p>&nbsp;</p>
-        <h1>A propos</h1>
-        <p class="description">L'application permet de remonter l'information vers le département informatique le plus rapidement possible, en permettant à l'utilisateurs d'avoir accès a un suivi des tickets.</p>
-        <p>Plus de détails pour l'utilisation du site <a href="howto.html">ici</a>.</p>
-      <p>Pour s'inscrire cliquez <a href="inscription">ici</a>, la connexion c'est par <a href="/login">ici</a>.</p>
-      <p>Cordialement, le département informatique.</p></td>
-    </tr>
-  </tbody>
-</table>
 
-<table width="100%" border="1">
-  <tbody>
-    <tr>
-      <td> © 2017 Département des Systèmes de l'Information</td>
-    </tr>
-  </tbody>
-</table>
 
+
+
+<div class="container">
+<h1>A propos</h1><br>
+<p>Cette application à été faite pendant la session <i>Automne 2017</i> sous la tutelle du professeur <strong>FASSALI Tarik</strong>, par <strong>FADIL Hamza</strong>.</p>
+<p><i>Spring MVC</i>, <i>Hibernate</i>, <i>HTML5</i> et <i>Bootstrap</i> ont tous été utilisé pour générer le résultat suivant.</p>
+<p>Le rapport fourni avec le projet permet de voir plus en détails le fonctionnement du site.</p>
+<p>Cordialement, FADIL Hamza</p>
+</div>
+<jsp:include page="includes/footer.jsp" />
 </body>
 </html>

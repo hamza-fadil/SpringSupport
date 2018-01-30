@@ -33,7 +33,7 @@ public class User implements java.io.Serializable {
 	private Set<Ticket> tickets = new HashSet<Ticket>(0);
 	private Set<Taches> taches = new HashSet<Taches>(0);
 	private Set<Rapport> rapports = new HashSet<Rapport>(0);
-
+	private Set<Conversation> conversations = new HashSet<Conversation>(0);
 	private Set<Reparation> reparations = new HashSet<Reparation>(0);
 	public User() {
 	}
@@ -51,7 +51,7 @@ public class User implements java.io.Serializable {
 		this.enabled = enabled;
 	}
 	public User(Date createTime, String email, String password, String typeUser, String username, Set<Ticket> tickets,
-			Set<Reparation> reparations,Set<Taches> taches,Set<Rapport> rapports) {
+			Set<Reparation> reparations,Set<Taches> taches,Set<Rapport> rapports,Set<Conversation> conversations) {
 		this.createTime = createTime;
 		this.email = email;
 		this.password = password;
@@ -61,6 +61,7 @@ public class User implements java.io.Serializable {
 		this.reparations = reparations;
 		this.taches = taches;
 		this.rapports = rapports;
+		this.conversations = conversations;
 	}
 	@Id
 	@GeneratedValue(strategy=IDENTITY)
@@ -127,7 +128,14 @@ public class User implements java.io.Serializable {
 	public void setTickets(Set<Ticket> tickets) {
 		this.tickets = tickets;
 	}
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<Conversation> getConversation() {
+		return this.conversations;
+	}
 
+	public void setConversation(Set<Conversation> conversations) {
+		this.conversations = conversations;
+	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	public Set<Taches> getTaches() {

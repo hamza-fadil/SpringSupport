@@ -3,6 +3,8 @@ package com.support.informatique.util;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,4 +37,16 @@ public class Util {
 	         e.printStackTrace();
 	      }
 	   }
+	 public static <E> List<E> toList(Iterable<E> iterable) {
+		    if(iterable instanceof List) {
+		      return (List<E>) iterable;
+		    }
+		    ArrayList<E> list = new ArrayList<E>();
+		    if(iterable != null) {
+		      for(E e: iterable) {
+		        list.add(e);
+		      }
+		    }
+		    return list;
+		  }
 }

@@ -63,7 +63,7 @@ public class TestSpringApplication implements CommandLineRunner {
 //	@Autowired
 //	private OrdinateurService ordinateurMetierImpl;
 	@Autowired
-	private TicketService ticketService;
+//	private TicketService ticketService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(TestSpringApplication.class, args);

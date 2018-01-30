@@ -7,30 +7,35 @@
  
    <head>
  	<title>Ajouter un rapport</title>
-	<jsp:include page="../includes/techhead.jsp" />
+	<jsp:include page="../includes/adminhead.jsp" />
+		<style>
+#myInput{
+display:none;
+}
+.justify-content-end{
+margin-right:2%;
+}
+</style>
 </head>
  
 <body>
  <jsp:include page="../includes/technav.jsp" />
      
-<div class="form-group">
+<div class="form-group container">
     	<form:form method="POST" modelAttribute="rapport">
-    		<div class="form-control">
+    		<div class="mt-2 mb-2" >
 			<form:input path="nomRapport" id="nomRapport" class="form-control" placeholder="Nom Rapport" />
 	        <form:errors path="nomRapport" cssClass="error"/>
 	        </div>
-	        <div class="form-control">
+	        <div class="mt-2 mb-2">
 			<form:textarea path="descRapport" id="descRapport" class="form-control" placeholder="Description Rapport" />
 	        <form:errors path="descRapport" cssClass="error"/>
 	        </div>
-	        <div class="form-control">
+	        <div class="mt-2 mb-2" style="float:right;">
 	        <input type="submit" value="Envoyer" class="btn btn-success"/>
 	        </div>
 	        
         </form:form>
     </div>
-    <br/>
-    <br/>
-    Revenir <a href="<c:url value='/admin/report' />">Liste de tous les rapport</a>
 </body>
 </html>

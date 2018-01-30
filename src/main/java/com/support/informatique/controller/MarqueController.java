@@ -67,27 +67,42 @@ public class MarqueController {
 		return "/403";	
 }
 
- 
-    /*
-     * This method will provide the medium to update an existing Marque.
-     */
     @RequestMapping(value = { "/edit-{idMarque}-Marque" }, method = RequestMethod.GET)
-    public String editMarque(@PathVariable int idMarque, ModelMap model) {
+    public String editMarque(@PathVariable int idMarque, ModelMap model,HttpServletRequest request) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Marque marque = marqueService.findOne(idMarque);
         model.addAttribute("marque", marque);
         model.addAttribute("edit", true);
-        return "tests/marque";
+        if (request.isUserInRole("ADMIN"))
+		  {	
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());	
+			  return "/admin/marque"; 
+			  
+		  }
+		  else if (request.isUserInRole("TECH"))
+		  {
+			  UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				model.addAttribute("username", userDetail.getUsername());
+			  return "/tech/marque"; 
+			  	
+		  }
+		return "/403";
     }
      
     @RequestMapping(value = { "/edit-{idMarque}-Marque" }, method = RequestMethod.POST)
     public String updateMarque(@Valid Marque marque, BindingResult result,
-            ModelMap model, @PathVariable int idMarque) {
- 
-        if (result.hasErrors()) {
-            return "tests/marque";
-        }
-        marqueService.save(marque);
-        return "redirect:/tests/marques";
+            ModelMap model, @PathVariable int idMarque,HttpServletRequest request) {
+    	marqueService.save(marque);
+    	if (request.isUserInRole("ADMIN"))
+	  {	
+        return "redirect:admin/marques";
+	  }
+	  else if (request.isUserInRole("TECH"))
+	  {		  
+		  return "redirect:tech/marques";
+	  }
+	    return "/403";
     }
     @RequestMapping(value = {"delete-{idMarque}-Marque"}, method = RequestMethod.GET)
     public String deleteTicket(@Valid Marque marque,@PathVariable int idMarque,HttpServletRequest request) {

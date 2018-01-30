@@ -1,7 +1,6 @@
 package com.support.informatique.controller;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.support.informatique.entities.Conversation;
-import com.support.informatique.entities.Fichier;
+import com.support.informatique.entities.Rapport;
 import com.support.informatique.entities.Ticket;
 import com.support.informatique.entities.User;
 import com.support.informatique.service.TicketService;
@@ -116,10 +114,7 @@ import com.support.informatique.service.UserService;
 			  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 				UserDetails userDetail = (UserDetails) auth.getPrincipal();
 				model.addAttribute("username", userDetail.getUsername());	
-			    if (request.isUserInRole("USER")) {
-			            return "user/ticket";
-				  } 
-			    else if (request.isUserInRole("ADMIN"))
+			     if (request.isUserInRole("ADMIN"))
 				  {	
 				            return "admin/ticket";
 				  }
@@ -132,15 +127,7 @@ import com.support.informatique.service.UserService;
 	    @RequestMapping(value = { "/edit-{idTicket}-Ticket" }, method = RequestMethod.POST)
 	    public String updateTicket(@Valid Ticket ticket, BindingResult result,
 	            ModelMap model, @PathVariable int idTicket,HttpServletRequest request) {
-		    if (request.isUserInRole("USER")) {
-		        if (result.hasErrors()) {
-		            return "/user/ticket";
-		        }
-		        ticket.setUser(ticket.getUser());
-		        ticketService.save(ticket);
-		        return "/edit-{idTicket}-Ticket";
-			  } 
-		    else if (request.isUserInRole("ADMIN"))
+	    	if (request.isUserInRole("ADMIN"))
 			  {	
 		        if (result.hasErrors()) {
 		            return "/admin/ticket";
@@ -156,8 +143,9 @@ import com.support.informatique.service.UserService;
 			        if (result.hasErrors()) {
 			            return "/edit-{idTicket}-Ticket";
 			        }
-			        
-			        ticket.setUser(ticket.getUser());
+			        Ticket oldTicket = ticketService.findOne(idTicket);
+			        ticket.setUser(oldTicket.getUser());
+			        ticket.setCreateTime(oldTicket.getCreateTime());
 			        ticketService.save(ticket);
 			        return "redirect:tech/ticket";
 			  }
@@ -213,7 +201,7 @@ import com.support.informatique.service.UserService;
 				model.addAttribute("username", userDetail.getUsername());
 				model.addAttribute("conversation",conversation);
 			    if (request.isUserInRole("USER")) {
-			            return "user/ticket";
+			            return "user/rticket";
 				  } 
 			    else if (request.isUserInRole("ADMIN"))
 				  {	

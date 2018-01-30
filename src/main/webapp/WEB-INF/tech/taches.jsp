@@ -5,30 +5,52 @@
 <html lang="en">
   <head>
  	<title>NewsLetter</title>
-	<jsp:include page="../includes/techhead.jsp" />
+	<jsp:include page="../includes/adminhead.jsp" />
 </head>
 <body>
 <jsp:include page="../includes/technav.jsp" />
-
-<br>
-	   <table class="table table-hover table-dark table-striped ">
-        <tr>
-            <td><strong>Nom Taches</strong></td><td><strong>Attribué à</strong></td><td><strong>Description</strong></td><td><strong>Fait</strong></td><td style="text-align:center;"><strong>Editer</strong></td>
+<div class="container">
+	   <table id="page" class="table table-hover table-dark table-striped " >
+	   <thead>
+        <tr class="font-weight-bold">
+            <th>Nom Taches</th><th>Attribué à</th><th>Description</th><th>Fait</th><th class="no-sort">Editer</th><th class="no-sort">Supprimer</th>
         </tr>
+        <tbody id="myTable">
         <c:forEach items="${taches}" var="p">
             <tr>
             <td>${p.nomTaches}</td>
             <td>${p.user.username}</td>
             <td>${p.descTaches}</td>
-            <td id="btn"><c:if test="${p.faitTaches ==1}">Oui</c:if><c:if test="${p.faitTaches ==0}">Non</c:if></td>
-          <td style="text-align:center;"><a class="btn btn-success " href="<c:url value='/edit-${p.idTaches}-Tache' />">Modifier</a></td>
+            <td><c:if test="${p.faitTaches ==1}">Oui</c:if><c:if test="${p.faitTaches ==0}">Non</c:if></td>
+          <td><a class="btn btn-warning" href="<c:url value='/edit-${p.idTaches}-Tache' />">Modifier</a></td>
+            <td><a class="btn btn-danger" href="<c:url value='/delete-${p.idTaches}-Tache' />">delete</a></td>
             </tr>
         </c:forEach>
+        </tbody>
     </table>
-	<p><a class="btn btn-success float-right mx-5 " href="<c:url value='/newTaches' />">Ajouter une nouvelle tache</a></p>
+</div>
 
-	<br>
-	
+	<script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+		</script>
+		<script>
+		$.noConflict();
+		$(document).ready(function () {
+		    $('#page').DataTable({
+		    	"language": {
+		    		"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+		        }
+		    });
+	        
+		});
+		</script>
 </body>
 
 </html>

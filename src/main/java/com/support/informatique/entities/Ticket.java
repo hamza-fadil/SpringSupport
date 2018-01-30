@@ -20,6 +20,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @SuppressWarnings("serial")
 @Entity
@@ -56,11 +57,6 @@ public class Ticket implements java.io.Serializable {
 		this.rapport = rapport;
 		this.createTime = createTime;
 	}
-
-
-
-
-
 	@Override
 	public String toString() {
 		return "Ticket [idTicket=" + idTicket + ", contTicket=" + contTicket + ", titreTicket=" + titreTicket
@@ -107,7 +103,7 @@ public class Ticket implements java.io.Serializable {
 		this.contTicket = contTicket;
 	}
 
-	@Column(name = "titre_ticket", length = 45)
+	@Column(name = "titre_ticket", length = 255)
 	public String getTitreTicket() {
 		return this.titreTicket;
 	}
@@ -158,6 +154,16 @@ public class Ticket implements java.io.Serializable {
 	public void setEtatTicket(String etatTicket) {
 		this.etatTicket = etatTicket;
 	}
-	
+    @UpdateTimestamp
+    private Date lastModified;
+
+	public Date getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(Date lastModified) {
+		this.lastModified = lastModified;
+	}
+
 
 }

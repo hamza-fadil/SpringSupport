@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.support.informatique.entities.Ticket;
 import com.support.informatique.entities.User;
@@ -56,8 +57,19 @@ public class UtilisateurController {
 	    	Ticket ticket = ticketService.findById(idTicket);
 	        	model.addAttribute("tickets", ticket);
 	        	return "user/tickets";
-			
-
-	    	
 	    }
+	 
+	 
+		@RequestMapping("/user/changemdp")
+		public String changeMdp(ModelMap model) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			model.addAttribute("username", userDetail.getUsername());	
+			model.addAttribute("user",userService.findByUsername(userDetail.getUsername()));
+			return "user/changemdp";
+		}
+
+	 
+	 //END
+	 
 }

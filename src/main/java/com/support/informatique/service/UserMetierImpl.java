@@ -1,5 +1,7 @@
 package com.support.informatique.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +37,16 @@ public class UserMetierImpl implements UserService {
 		return userRepository.findAll();
 	}
 
-	public User findByConfirmationToken(String confirmationToken) {
-		return userRepository.findByConfirmationToken(confirmationToken);
+
+
+	@Override
+	public List<String> findByType(String type) {
+		return userRepository.findByType(type);
+	}
+
+	@Override
+	public User findByConfirmationToken(String token) {
+		return userRepository.findByConfirmationToken(token);
 	}
 
 	@Override
@@ -54,6 +64,7 @@ public class UserMetierImpl implements UserService {
 		return userRepository.findByEmail(name);
 	}
 
+	@Override
 	public String getEmail(String email) {
 		return userRepository.getEmail(email);
 	}

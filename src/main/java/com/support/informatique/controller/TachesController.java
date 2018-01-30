@@ -10,9 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 	import org.springframework.ui.ModelMap;
 	import org.springframework.validation.BindingResult;
-	import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 	import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.support.informatique.entities.Conversation;
 import com.support.informatique.entities.Taches;
 import com.support.informatique.entities.User;
 import com.support.informatique.service.TachesService;
@@ -78,7 +80,25 @@ import com.support.informatique.service.UserService;
 			        return "redirect:tech/taches";   
 			  }
 			return "/403";
-
-		
 	}
+	    @RequestMapping(value = {"delete-{idTache}-Tache"}, method = RequestMethod.GET)
+	    public String deleteTicket(@Valid Taches tache,@PathVariable int idTache,HttpServletRequest request, BindingResult result) {
+	    	tachesService.deletebyId(idTache);
+		     if (request.isUserInRole("ADMIN"))
+			  {	
+			        if (result.hasErrors()) {
+			            return "admin/tache";
+			        }
+			        return "redirect:admin/taches";   
+				  
+			  }
+			  else if (request.isUserInRole("TECH"))
+			  {		  
+			        if (result.hasErrors()) {
+			            return "tech/tache";
+			        }
+			        return "redirect:tech/taches";   
+			  }
+			return "/403";
+	    }
 	}
